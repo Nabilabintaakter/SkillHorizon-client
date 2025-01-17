@@ -1,5 +1,6 @@
 import { AiOutlineMenuFold } from 'react-icons/ai';
-import logo from '../../assets/Logo .png';
+import logo from '../../assets/l-1.png';
+import text from '../../assets/l-2.png';
 import { Link, NavLink } from 'react-router-dom';
 import Container from '../Container/Container';
 
@@ -8,29 +9,40 @@ const Navbar = () => {
         <li>
             <NavLink
                 to="/"
-                className={({ isActive }) => (isActive ? 'text-[#F66962] font-medium' : '')}>
+                className={({ isActive }) =>
+                    `hover:text-lg hover:text-[#139196] transition-all duration-500 ${isActive ? 'text-[#139196] font-bold' : 'font-semibold'
+                    }`
+                }
+            >
                 Home
             </NavLink>
+
         </li>
         <li>
             <NavLink
                 to="/allClasses"
-                className={({ isActive }) => (isActive ? 'text-[#F66962] font-medium' : '')}>
+                className={({ isActive }) =>
+                    `hover:text-lg hover:text-[#139196] transition-all duration-500 ${isActive ? 'text-[#139196] font-bold' : 'font-semibold'
+                    }`
+                }>
                 All Classes
             </NavLink>
         </li>
         <li>
             <NavLink
                 to="/techOnSkillHorizon"
-                className={({ isActive }) => (isActive ? 'text-[#F66962] font-medium' : '')}>
-                Tech on SkillHorizon
+                className={({ isActive }) =>
+                    `hover:text-lg hover:text-[#139196] transition-all duration-500 ${isActive ? 'text-[#139196] font-bold' : 'font-semibold'
+                    }`
+                }>
+                Teach on SkillHorizon
             </NavLink>
         </li>
     </>
     return (
-        <div className='bg-[#023e8a]'>
+        <div className='bg-white'>
             <Container>
-                <div className="navbar text-white p-0">
+                <div className="navbar text-black p-0">
                     <div className="navbar-start">
                         <div className="dropdown">
                             <div tabIndex={0} role="button" className="bg-white p-1 mr-2 lg:hidden">
@@ -38,19 +50,22 @@ const Navbar = () => {
                             </div>
                             <ul
                                 tabIndex={0}
-                                className="menu menu-sm dropdown-content bg-[#023e8a] text-white rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                                className="menu menu-sm dropdown-content bg-white text-black rounded-box z-[1] mt-4 w-52 p-2 shadow">
                                 {links}
                             </ul>
                         </div>
-                        <img className='w-36' src={logo} alt="" />
+                        <div className='flex'>
+                            <img className=' h-10 md:h-14' src={logo} alt="" />
+                            <img className='w-20 md:w-28 h-10 md:h-14' src={text} alt="" />
+                        </div>
                     </div>
                     <div className="navbar-center hidden lg:flex">
-                        <ul className="flex items-center gap-6">
+                        <ul className="flex items-center gap-10">
                             {links}
                         </ul>
                     </div>
                     <div className="navbar-end">
-                        <Link to='/login' className="px-5 py-2 bg-[#F66962]  font-medium hover:bg-[#F66962] cursor-pointer rounded-sm">Login</Link>
+                        <Link to='/login' className=" text-white rounded-[5px] bg-gradient-to-br from-[#66BE80] to-[#139196]  font-medium hover:bg-[#F66962] cursor-pointer px-5 md:px-8 py-2 md:py-[14px] flex justify-center items-center">Login Now</Link>
                     </div>
                 </div>
             </Container>

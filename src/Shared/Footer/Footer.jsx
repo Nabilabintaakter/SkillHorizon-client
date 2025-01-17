@@ -4,7 +4,7 @@ import Container from '../Container/Container';
 
 const Footer = () => {
     return (
-        <footer className="bg-[#282834] py-10 text-white">
+        <footer className="bg-[#282834] pt-10 pb-5 text-white">
             <Container>
                 <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-6">
                     {/* Logo and Description */}
