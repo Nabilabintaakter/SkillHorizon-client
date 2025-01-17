@@ -8,21 +8,21 @@ const Navbar = () => {
         <li>
             <NavLink
                 to="/"
-                className={({ isActive }) => (isActive ? 'text-[#90e0ef] font-medium border-b-2 border-b-[#90e0ef]' : '')}>
+                className={({ isActive }) => (isActive ? 'text-[#F66962] font-medium' : '')}>
                 Home
             </NavLink>
         </li>
         <li>
             <NavLink
                 to="/allClasses"
-                className={({ isActive }) => (isActive ? 'text-[#90e0ef] font-medium' : '')}>
+                className={({ isActive }) => (isActive ? 'text-[#F66962] font-medium' : '')}>
                 All Classes
             </NavLink>
         </li>
         <li>
             <NavLink
                 to="/techOnSkillHorizon"
-                className={({ isActive }) => (isActive ? 'text-[#90e0ef] font-medium' : '')}>
+                className={({ isActive }) => (isActive ? 'text-[#F66962] font-medium' : '')}>
                 Tech on SkillHorizon
             </NavLink>
         </li>
@@ -50,7 +50,7 @@ const Navbar = () => {
                         </ul>
                     </div>
                     <div className="navbar-end">
-                        <Link to={'/signIn'} className="px-5 py-2 bg-gradient-to-tr from-green-600 to-green-400  font-medium hover:bg-gradient-to-tr hover:from-green-700 hover:to-green-500 cursor-pointer">Sign In</Link>
+                        <Link to='/login' className="px-5 py-2 bg-[#F66962]  font-medium hover:bg-[#F66962] cursor-pointer rounded-sm">Login</Link>
                     </div>
                 </div>
             </Container>
