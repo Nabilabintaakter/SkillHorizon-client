@@ -30,7 +30,7 @@ const Navbar = () => {
         </li>
         <li>
             <NavLink
-                to="/techOnSkillHorizon"
+                to="/teachOnSkill"
                 className={({ isActive }) =>
                     `hover:text-lg hover:text-[#139196] transition-all duration-500 ${isActive ? 'text-[#139196] font-bold' : 'font-semibold'
                     }`
