@@ -49,10 +49,10 @@ const Collaborators = () => {
     ];
 
     return (
-        <div className="my-8 md:my-16">
+        <div className="my-12 md:my-16">
             <Container>
                 <div className=" text-center">
-                    <Heading></Heading>
+                    <Heading subtitle={'Trusted Partners'} title={'Empowering Learning Together with Renowned Platforms'}></Heading>
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4">
                         {collaborators.map((collaborator, index) => (
                             <div
