@@ -6,7 +6,7 @@ const Footer = () => {
     return (
         <footer className="bg-[#282834] pt-10 pb-5 text-white">
             <Container>
-                <div className="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {/* Logo and Description */}
                     <div>
                         <img className="w-48" src={logo} alt="SkillHorizon Logo" />

@@ -21,7 +21,7 @@ const categories = [
 
 const Categories = () => {
     return (
-        <div className="my-16 md:my-20">
+        <div className="my-12 md:my-16">
             <Container>
                 <Heading subtitle={'Top Categories'} title={'Our Top Categories'}></Heading>
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5 ">

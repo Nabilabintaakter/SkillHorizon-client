@@ -4,6 +4,7 @@ import Collaborators from '../Collaborators/Collaborators';
 import StatsSection from '../StatsSection/StatsSection';
 import JoinAsInstructor from '../JoinAsInstructor/JoinAsInstructor';
 import Categories from '../Categories/Categories';
+import FeaturesSection from '../FeaturesSection/FeaturesSection';
 
 const Home = () => {
     return (
@@ -12,6 +13,7 @@ const Home = () => {
             <Collaborators></Collaborators>
             <StatsSection></StatsSection>
             <Categories></Categories>
+            <FeaturesSection></FeaturesSection>
             <JoinAsInstructor></JoinAsInstructor>
         </div>
     );
