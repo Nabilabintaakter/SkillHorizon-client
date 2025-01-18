@@ -28,7 +28,7 @@ const FeaturesSection = () => {
     ];
 
     return (
-        <div className="bg-gray-100 py-10 md:pb-16">
+        <div className="bg-[#F1EFEE] py-10 md:pb-16">
             <Container>
                 <Heading subtitle={'Our Features'} title={'Why You Should Choose Our Platform'}></Heading>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-8 lg:gap-5">

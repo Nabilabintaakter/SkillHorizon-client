@@ -65,7 +65,7 @@ const Navbar = () => {
                         </ul>
                     </div>
                     <div className="navbar-end">
-                        <Link to='/login' className=" text-white rounded-[5px] bg-gradient-to-br from-[#66BE80] to-[#139196]  font-medium hover:bg-bg-gradient-to-br hover:from-[#139196] hover:to-[#139196] cursor-pointer px-5 md:px-8 py-2 md:py-[14px] flex justify-center items-center duration-1000 ease-in-out transition-all">Login Now</Link>
+                        <Link to='/login' className=" text-white rounded-[5px] bg-gradient-to-br from-[#66BE80] to-[#139196]  font-medium hover:bg-gradient-to-br hover:from-[#139196] hover:to-[#139196] cursor-pointer px-5 md:px-8 py-2 md:py-[14px] flex justify-center items-center duration-1000 ease-in-out transition-all">Login Now</Link>
                     </div>
                 </div>
             </Container>

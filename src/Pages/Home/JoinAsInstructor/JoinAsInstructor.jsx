@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const JoinAsInstructor = () => {
     return (
-        <div className="mt-16 md:mt-20 mb-12 md:mb-16">
+        <div className="my-16 md:my-20 ">
             <Container>
                 <div className="flex flex-col md:flex-row items-center gap-6 md:gap-10">
                     {/* Left Section */}
