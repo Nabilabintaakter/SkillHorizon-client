@@ -64,14 +64,14 @@ const Collaborators = () => {
                                     <img
                                         src={collaborator.logo}
                                         alt={collaborator.name}
-                                        className="w-20 h-20 object-contain"
+                                        className="w-12 h-12 md:w-20 md:h-20 object-contain"
                                     />
                                 </div>
                                 {/* Card Hover Content */}
                                 <div
-                                    className={`absolute  inset-0 ${collaborator.bgColor} bg-opacity-80 opacity-0 group-hover:opacity-100 transition duration-500 flex flex-col justify-center items-center text-white text-sm px-4 cursor-pointer`}
+                                    className={`absolute  inset-0 ${collaborator.bgColor} bg-opacity-80 opacity-0 group-hover:opacity-100 transition duration-500 flex flex-col justify-center items-center text-white text-sm px-2 md:px-4 `}
                                 >
-                                    <h3 className="font-semibold text-xl md:text-2xl mb-2">{collaborator.name}</h3>
+                                    <h3 className="font-semibold text-xl md:text-2xl md:mb-2">{collaborator.name}</h3>
                                     <p className="text-center text-sm md:text-lg">{collaborator.description}</p>
                                 </div>
                             </div>

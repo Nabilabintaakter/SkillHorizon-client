@@ -46,7 +46,7 @@ const Navbar = () => {
                     <div className="navbar-start">
                         <div className="dropdown">
                             <div tabIndex={0} role="button" className="bg-white p-1 mr-2 lg:hidden">
-                                <AiOutlineMenuFold className='text-3xl text-[#023e8a]' />
+                                <AiOutlineMenuFold className='text-3xl text-[#128F9D]' />
                             </div>
                             <ul
                                 tabIndex={0}
@@ -54,10 +54,10 @@ const Navbar = () => {
                                 {links}
                             </ul>
                         </div>
-                        <div className='flex'>
+                        <Link to={'/'} className='flex'>
                             <img className=' h-10 md:h-14' src={logo} alt="" />
                             <img className='w-20 md:w-28 h-10 md:h-14' src={text} alt="" />
-                        </div>
+                        </Link>
                     </div>
                     <div className="navbar-center hidden lg:flex">
                         <ul className="flex items-center gap-10">

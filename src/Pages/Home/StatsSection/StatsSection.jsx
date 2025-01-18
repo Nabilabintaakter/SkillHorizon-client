@@ -33,7 +33,7 @@ const StatsSection = () => {
                             {stats.map((stat, index) => (
                                 <div
                                     key={index}
-                                    className="bg-white p-3 md:p-5 rounded-lg border border-gray-300 hover:shadow-2xl transition duration-300 hover:border-blue-400 hover:-translate-y-1 cursor-pointer"
+                                    className="bg-white p-3 md:p-5 rounded-lg border border-gray-300 hover:shadow-2xl transition duration-300 hover:border-blue-400 hover:-translate-y-1 "
                                 >
                                     <h3 className="text-xl lg:text-2xl font-semibold text-gray-700 md:mb-2">
                                         {stat.title}
@@ -46,11 +46,11 @@ const StatsSection = () => {
                         </div>
 
                         {/* Right Section */}
-                        <div className=" bg-gradient-to-br from-[#66BE80] to-[#139196] rounded-3xl shadow-md">
+                        <div className=" bg-gradient-to-br from-[#66BE80] to-[#139196] rounded-lg md:rounded-3xl shadow-md">
                             <img
                                 src={relevantImage}
                                 alt="Education Platform"
-                                className="rounded-3xl shadow-lg w-[350px] md:w-[500px]"
+                                className="rounded-lg md:rounded-3xl shadow-lg w-[350px] md:w-[500px]"
                             />
                         </div>
                     </div>

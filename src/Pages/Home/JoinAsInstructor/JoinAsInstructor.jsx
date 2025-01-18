@@ -11,8 +11,8 @@ const JoinAsInstructor = () => {
                     {/* Left Section */}
                     <div className="md:w-1/2">
                         <div className="relative">
-                            <div className="absolute -top-2 md:-top-5 -left-2 md:-left-5 bg-[#66BE80] rounded-full w-8 h-8 md:w-16 md:h-16"></div>
-                            <div className="absolute -bottom-2 md:-bottom-5 -right-2 md:-right-5 bg-[#139196] rounded-full w-8 h-8 md:w-16 md:h-16"></div>
+                            <div className="absolute -top-3 md:-top-5 -left-3 md:-left-5 bg-[#66BE80] rounded-full w-8 h-8 md:w-16 md:h-16"></div>
+                            <div className="absolute -bottom-3 md:-bottom-5 -right-3 md:-right-5 bg-[#139196] rounded-full w-8 h-8 md:w-16 md:h-16"></div>
                             <img
                                 src={instructorImage}
                                 alt="Inspire as an Instructor"
