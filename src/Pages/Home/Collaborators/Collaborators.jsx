@@ -69,7 +69,7 @@ const Collaborators = () => {
                                 </div>
                                 {/* Card Hover Content */}
                                 <div
-                                    className={`absolute inset-0 ${collaborator.bgColor} bg-opacity-70 opacity-0 group-hover:opacity-100 transition duration-500 flex flex-col justify-center items-center text-white text-sm px-4 cursor-pointer`}
+                                    className={`absolute  inset-0 ${collaborator.bgColor} bg-opacity-80 opacity-0 group-hover:opacity-100 transition duration-500 flex flex-col justify-center items-center text-white text-sm px-4 cursor-pointer`}
                                 >
                                     <h3 className="font-semibold text-xl md:text-2xl mb-2">{collaborator.name}</h3>
                                     <p className="text-center text-sm md:text-lg">{collaborator.description}</p>
