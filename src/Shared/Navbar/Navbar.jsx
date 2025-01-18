@@ -40,9 +40,9 @@ const Navbar = () => {
         </li>
     </>
     return (
-        <div className='bg-white'>
+        <div className='bg-white text-black fixed top-0 bg-white/70 backdrop-blur-md z-50 w-full'>
             <Container>
-                <div className="navbar text-black p-0">
+            <div className="navbar mx-auto w-full p-0 ">
                     <div className="navbar-start">
                         <div className="dropdown">
                             <div tabIndex={0} role="button" className="bg-white p-1 mr-2 lg:hidden">

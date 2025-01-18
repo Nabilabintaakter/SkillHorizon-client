@@ -6,7 +6,7 @@ import { Outlet } from 'react-router-dom';
 const MainLayout = () => {
     return (
         <div className='font-josefin'>
-           <Navbar></Navbar>
+           <div className='h-[64px]'><Navbar></Navbar></div>
            <div className='min-h-[calc(100vh-839px)] md:min-h-[calc(100vh-389px)]'>
             <Outlet></Outlet>
            </div>
