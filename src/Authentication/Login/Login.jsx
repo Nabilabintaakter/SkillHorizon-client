@@ -3,18 +3,19 @@ import image2 from '../../assets/plant.png';
 import Container from '../../Shared/Container/Container';
 import { useForm } from 'react-hook-form';
 import { FcGoogle } from 'react-icons/fc';
-import { useContext, useState } from 'react';
+import {useState } from 'react';
 import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
 import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../Providers/AuthProvider';
+
 import toast from 'react-hot-toast';
 import LoadingSpinner from '../../Shared/LoadingSpinner/LoadingSpinner';
 import { ImSpinner9 } from 'react-icons/im';
+import useAuth from '../../hooks/useAuth';
 
 const Login = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const [showPassword, setShowPassword] = useState(false);
-    const { handleLogin, loading, user,setUser, signInWithGoogle } = useContext(AuthContext);
+    const { handleLogin, loading, user,setUser, signInWithGoogle ,setLoading} = useAuth();
     const navigate = useNavigate()
     const location = useLocation()
     const from = location?.state?.from?.pathname || '/'
@@ -24,17 +25,17 @@ const Login = () => {
     const onSubmit = data => {
         handleLogin(data.email, data.password)
             .then(() => {
+                setLoading(false)
                 reset()
                 toast.success('Successfully logged in!')
                 navigate(from, { replace: true })
             })
             .catch(err => {
+                setLoading(false)
                 reset()
                 toast.error(err?.message.slice(10))
             })
     };
-
-
     // Handle Google Signin
     const handleGoogleSignIn = () => {
         signInWithGoogle()
@@ -42,7 +43,6 @@ const Login = () => {
                 setUser(res.user)
                 toast.success('Successfully logged in!')
                 navigate(from, { replace: true })
-
             })
             .catch(err => {
                 toast.error(err?.message)

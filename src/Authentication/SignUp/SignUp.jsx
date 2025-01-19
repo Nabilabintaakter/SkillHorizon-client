@@ -8,12 +8,13 @@ import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
 import { Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import useAuth from '../../hooks/useAuth';
+import { ImSpinner9 } from 'react-icons/im';
 
 const SignUp = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
-    const { setUser, setLoading, createUser, handleUpdateProfile,signInWithGoogle } = useAuth();
+    const { setUser, setLoading, createUser, handleUpdateProfile, signInWithGoogle,loading } = useAuth();
 
     const onSubmit = data => {
         createUser(data.email, data.password)
@@ -148,7 +149,11 @@ const SignUp = () => {
 
                         {/* Submit Button */}
                         <button type='submit' className="text-white rounded-[5px] bg-gradient-to-r from-[#66BE80] to-[#139196] font-medium hover:bg-gradient-to-r hover:from-[#139196] hover:to-[#139196] cursor-pointer w-full py-2 flex justify-center items-center duration-1000 ease-in-out transition-all">
-                            Sign Up
+                            {loading ? (
+                                <ImSpinner9 className='animate-spin m-auto' />
+                            ) : (
+                                'Sign Up'
+                            )}
                         </button>
 
                         {/* Divider */}
