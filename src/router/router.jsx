@@ -7,6 +7,7 @@ import Home from "../Pages/Home/Home/Home";
 import AllClasses from "../Pages/AllClasses/AllClasses/AllClasses";
 import TeachOnSkill from "../Pages/TeachOnSkill/TeachOnSkill/TeachOnSkill";
 import SignUp from "../Authentication/SignUp/SignUp";
+import PrivateRoute from "./PrivateRoute";
 
   const router = createBrowserRouter([
     {
@@ -23,7 +24,7 @@ import SignUp from "../Authentication/SignUp/SignUp";
         },
         {
           path: "/teachOnSkill",
-          element:<TeachOnSkill></TeachOnSkill>,
+          element:<PrivateRoute><TeachOnSkill></TeachOnSkill></PrivateRoute>,
         },
         {
           path: "/login",

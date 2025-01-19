@@ -5,30 +5,50 @@ import { useForm } from 'react-hook-form';
 import { FcGoogle } from 'react-icons/fc';
 import { useContext, useState } from 'react';
 import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Providers/AuthProvider';
 import toast from 'react-hot-toast';
+import LoadingSpinner from '../../Shared/LoadingSpinner/LoadingSpinner';
+import { ImSpinner9 } from 'react-icons/im';
 
 const Login = () => {
-    const { register, handleSubmit,reset, formState: { errors } } = useForm();
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const [showPassword, setShowPassword] = useState(false);
-    const {handleLogin} = useContext(AuthContext);
+    const { handleLogin, loading, user,setUser, signInWithGoogle } = useContext(AuthContext);
+    const navigate = useNavigate()
+    const location = useLocation()
+    const from = location?.state?.from?.pathname || '/'
+    if (loading) return <LoadingSpinner></LoadingSpinner>
+    if (user) return <Navigate to={from} replace={true} />
 
     const onSubmit = data => {
-        console.log(data)
         handleLogin(data.email, data.password)
-        .then(res=>{
-            reset()
-            const user = res.user
-            console.log(user);
-            toast.success('Successfully logged in!')
-        })
-        .catch(err=>{
-            reset()
-            toast.error(err.message.slice(10))
-        })
+            .then(() => {
+                reset()
+                toast.success('Successfully logged in!')
+                navigate(from, { replace: true })
+            })
+            .catch(err => {
+                reset()
+                toast.error(err?.message.slice(10))
+            })
     };
 
+
+    // Handle Google Signin
+    const handleGoogleSignIn = () => {
+        signInWithGoogle()
+            .then(res => {
+                setUser(res.user)
+                toast.success('Successfully logged in!')
+                navigate(from, { replace: true })
+
+            })
+            .catch(err => {
+                toast.error(err?.message)
+                setUser(null)
+            })
+    }
     return (
         <Container>
             <div className='flex flex-col md:flex-row'>
@@ -39,7 +59,7 @@ const Login = () => {
                     <p className='text-sm sm:text-base text-white text-center'>Choose from over 50+ online courses</p>
                 </div>
                 {/* right side */}
-                <div className="w-full md:w-1/2 mt-8 md:mt-2 px-5 sm:px-10 md:pl-8 lg:px-20 flex flex-col justify-center items-center sm:justify-start sm:items-start mb-5 md:mb-0">
+                <div className="w-full md:w-1/2 mt-8 md:mt-5 px-5 sm:px-10 md:pl-8 lg:px-20 flex flex-col justify-center items-center sm:justify-start sm:items-start mb-5 md:mb-0">
                     <h2 className="text-center md:text-left text-2xl md:text-3xl font-semibold mb-2 text-gray-800">Welcome Back, Nabila!</h2>
                     <p className="text-gray-500 mb-4 text-center md:text-left md:text-lg">Login with your data that you entered during your Registration.</p>
                     <form className='w-full' onSubmit={handleSubmit(onSubmit)}>
@@ -81,13 +101,19 @@ const Login = () => {
                             </span>
                             {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>}
                         </div>
-                        <button type='submit' className=" text-white rounded-[5px] bg-gradient-to-r from-[#66BE80] to-[#139196]  font-medium hover:bg-gradient-to-r hover:from-[#139196] hover:to-[#139196]  cursor-pointer w-full py-2 md:py-[14px] flex justify-center items-center duration-1000 ease-in-out transition-all">Login</button>
-                        <div className="divider">OR</div>
-                        <button className="w-full mt-4 py-3 rounded-md border border-gray-300 hover:bg-gray-100 transition duration-300 flex items-center justify-center gap-2">
-                            <FcGoogle className='text-2xl'/> Sign with Google
+                        <button type='submit' className=" text-white rounded-[5px] bg-gradient-to-r from-[#66BE80] to-[#139196]  font-medium hover:bg-gradient-to-r hover:from-[#139196] hover:to-[#139196]  cursor-pointer w-full py-2 md:py-[14px] flex justify-center items-center duration-1000 ease-in-out transition-all">
+                            {loading ? (
+                                <ImSpinner9 className='animate-spin m-auto' />
+                            ) : (
+                                'Login'
+                            )}
                         </button>
-                        <p className='mt-5 text-center'>Don't have an account? <Link className='text-[#30A18E]' to={'/signUp'}>Sign Up</Link></p>
+                        <div className="divider">OR</div>
                     </form>
+                    <button onClick={handleGoogleSignIn} className="w-full py-3 rounded-md border border-gray-300 hover:bg-gray-100 transition duration-300 flex items-center justify-center gap-2">
+                        <FcGoogle className='text-2xl' /> Sign with Google
+                    </button>
+                    <p className='mt-5 text-center'>Don't have an account? <Link className='text-[#30A18E]' to={'/signUp'}>Sign Up</Link></p>
                 </div>
             </div>
         </Container>

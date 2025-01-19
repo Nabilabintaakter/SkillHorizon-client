@@ -13,7 +13,7 @@ const SignUp = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
-    const { setUser, setLoading, createUser, handleUpdateProfile } = useContext(AuthContext);
+    const { setUser, setLoading, createUser, handleUpdateProfile,signInWithGoogle } = useContext(AuthContext);
 
     const onSubmit = data => {
         createUser(data.email, data.password)
@@ -26,9 +26,7 @@ const SignUp = () => {
                     .then((res) => {
                         setLoading(false);
                         toast.success('Successfully Registered!')
-                        setTimeout(() => {
-                            navigate('/');
-                        }, 2000);
+                        navigate('/')
                     })
                     .catch(err => {
                         toast.error(err.message)
@@ -36,7 +34,20 @@ const SignUp = () => {
                     });
             })
     };
+    // Handle Google Signin
+    const handleGoogleSignIn = () => {
+        signInWithGoogle()
+            .then(res => {
+                setUser(res.user)
+                toast.success('Successfully logged in!')
+                navigate('/')
 
+            })
+            .catch(err => {
+                toast.error(err?.message)
+                setUser(null)
+            })
+    }
     return (
         <Container>
             <div className='flex flex-col md:flex-row'>
@@ -47,7 +58,7 @@ const SignUp = () => {
                     <p className='text-sm sm:text-base text-white text-center'>Choose from over 50+ online courses</p>
                 </div>
                 {/* right side */}
-                <div className="w-full md:w-1/2 mt-8 md:mt-2 px-5 sm:px-10 md:pl-8 lg:px-20 flex flex-col justify-center items-center sm:justify-start sm:items-start mb-5 md:mb-0">
+                <div className="w-full md:w-1/2 mt-8 md:mt-5 px-5 sm:px-10 md:pl-8 lg:px-20 flex flex-col justify-center items-center sm:justify-start sm:items-start mb-5 md:mb-0">
                     <h2 className="text-center md:text-left text-2xl md:text-3xl font-semibold mb-2 text-gray-800">Create your free account!</h2>
                     <p className="text-gray-500 mb-4 text-center md:text-left md:text-lg">See how the world's best user experiences are created.</p>
                     <form className='w-full' onSubmit={handleSubmit(onSubmit)}>
@@ -98,8 +109,8 @@ const SignUp = () => {
                                     pattern: { value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/, message: "Password must have at least one uppercase, one lowercase, one number and one special character." }
                                 })}
                             />
-                            <span className="absolute right-3 top-10 cursor-pointer" onClick={() => setShowPassword(!showPassword)}>
-                                {showPassword ? <IoMdEye className='text-xl' /> : <IoMdEyeOff className='text-xl' />}
+                            <span className="absolute right-3 top-9 cursor-pointer" onClick={() => setShowPassword(!showPassword)}>
+                                {showPassword ? <IoMdEye className='text-lg' /> : <IoMdEyeOff className='text-lg' />}
                             </span>
                             {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>}
                         </div>
@@ -142,16 +153,14 @@ const SignUp = () => {
 
                         {/* Divider */}
                         <div className="divider">OR</div>
-
-                        {/* Google Sign-In */}
-                        <button className="w-full mt-4 py-2 rounded-md border border-gray-300 hover:bg-gray-100 transition duration-300 flex items-center justify-center gap-2">
-                            <FcGoogle className='text-2xl' /> Sign with Google
-                        </button>
-
-                        {/* Redirect to Login */}
-                        <p className='mt-5 text-center'>Already have an account? <Link className='text-[#30A18E]' to={'/login'}>Login</Link></p>
                     </form>
+                    {/* Google Sign-In */}
+                    <button onClick={handleGoogleSignIn} className="w-full py-2 rounded-md border border-gray-300 hover:bg-gray-100 transition duration-300 flex items-center justify-center gap-2">
+                        <FcGoogle className='text-2xl' /> Sign with Google
+                    </button>
 
+                    {/* Redirect to Login */}
+                    <p className='mt-5 text-center'>Already have an account? <Link className='text-[#30A18E]' to={'/login'}>Login</Link></p>
                 </div>
             </div>
         </Container>
