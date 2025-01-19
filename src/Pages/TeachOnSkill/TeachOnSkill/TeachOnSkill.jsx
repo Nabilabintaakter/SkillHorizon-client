@@ -1,9 +1,9 @@
-import React from 'react';
+import image from '../../../assets/become-a-teacher.png';
 
 const TeachOnSkill = () => {
     return (
         <div>
-            <h1 className="text-4xl">teach on skill horizon</h1>
+            
         </div>
     );
 };
