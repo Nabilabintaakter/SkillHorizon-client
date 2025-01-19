@@ -3,15 +3,24 @@ import image2 from '../../assets/plant.png';
 import Container from '../../Shared/Container/Container';
 import { useForm } from 'react-hook-form';
 import { FcGoogle } from 'react-icons/fc';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../Providers/AuthProvider';
 
 const Login = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [showPassword, setShowPassword] = useState(false);
+    const {handleLogin} = useContext(AuthContext);
 
-    const onSubmit = data => console.log(data);
+    const onSubmit = data => {
+        console.log(data)
+        handleLogin(data.email, data.password)
+        .then(res=>{
+            const user = res.user
+            console.log(user);
+        })
+    };
 
     return (
         <Container>

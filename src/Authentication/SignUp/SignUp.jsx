@@ -3,15 +3,24 @@ import image2 from '../../assets/plant.png';
 import Container from '../../Shared/Container/Container';
 import { useForm } from 'react-hook-form';
 import { FcGoogle } from 'react-icons/fc';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../Providers/AuthProvider';
 
 const SignUp = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, reset,formState: { errors } } = useForm();
     const [showPassword, setShowPassword] = useState(false);
+    const {createUser} = useContext(AuthContext);
 
-    const onSubmit = data => console.log(data);
+    const onSubmit = data => {
+        console.log(data)
+        createUser(data.email, data.password)
+        .then(res=>{
+            reset()
+            console.log(res.user);
+        })
+    };
 
     return (
         <Container>
@@ -69,7 +78,9 @@ const SignUp = () => {
                                 className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#66BE80] placeholder:text-gray-300 placeholder:font-normal"
                                 {...register("password", {
                                     required: "Password is required",
-                                    minLength: { value: 6, message: "Password must be at least 6 characters" }
+                                    minLength: { value: 6, message: "Password must be at least 6 characters" },
+                                    maxLength: { value: 20, message: "Password must be less than 20 characters" },
+                                    pattern: { value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/, message: "Password must have at least one uppercase, one lowercase, one number and one special character."}
                                 })}
                             />
                             <span className="absolute right-3 top-10 cursor-pointer" onClick={() => setShowPassword(!showPassword)}>
