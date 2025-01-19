@@ -6,6 +6,7 @@ import Login from "../Authentication/Login/Login";
 import Home from "../Pages/Home/Home/Home";
 import AllClasses from "../Pages/AllClasses/AllClasses/AllClasses";
 import TeachOnSkill from "../Pages/TeachOnSkill/TeachOnSkill/TeachOnSkill";
+import SignUp from "../Authentication/SignUp/SignUp";
 
   const router = createBrowserRouter([
     {
@@ -27,7 +28,11 @@ import TeachOnSkill from "../Pages/TeachOnSkill/TeachOnSkill/TeachOnSkill";
         {
           path: "/login",
           element:<Login></Login>,
-        }
+        },
+        {
+          path: "/signUp",
+          element:<SignUp></SignUp>,
+        },
       ]
     },
   ]);
