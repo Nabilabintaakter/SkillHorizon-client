@@ -90,7 +90,7 @@ const Navbar = () => {
                                     </div>
                                     <ul
                                         tabIndex={0}
-                                        className="menu menu-sm dropdown-content bg-gradient-to-tr from-green-100 to-green-50 rounded-md z-[1] mt-48 w-40 md:w-52 p-2 lg:p-3 shadow">
+                                        className="menu menu-sm dropdown-content bg-green-50 rounded-md z-[1] mt-48 w-40 md:w-52 p-2 lg:p-3 shadow">
                                         
                                             <p className='text-blue-950 md:text-lg font-bold text-center mb-3'>{user?.displayName}</p>
                                         

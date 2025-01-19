@@ -9,32 +9,40 @@ import { Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import useAuth from '../../hooks/useAuth';
 import { ImSpinner9 } from 'react-icons/im';
+import { imageUpload } from '../../api/utils';
 
 const SignUp = () => {
-    const { register, handleSubmit, reset, formState: { errors } } = useForm();
+    const { register, handleSubmit, reset, formState: { errors }, watch, setValue } = useForm();
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
-    const { setUser, setLoading, createUser, handleUpdateProfile, signInWithGoogle,loading } = useAuth();
+    const { setUser, setLoading, createUser, handleUpdateProfile, signInWithGoogle, loading } = useAuth();
 
-    const onSubmit = data => {
-        createUser(data.email, data.password)
-            .then(res => {
-                reset()
-                setUser(res.user);
+    const onSubmit = async (data) => {
+        const file = data.image;
+        if (file) {
+            try {
+                const imgData = await imageUpload(file);
+                if (imgData) {
+                    await createUser(data.email, data.password)
+                        .then(async (res) => {
+                            reset();
+                            setUser(res.user);
+                            await handleUpdateProfile(data.name, imgData);
+                            toast.success('Successfully Registered!');
+                            navigate('/');
+                        })
+                        .catch((err) => {
+                            toast.error(err.message);
+                        });
+                }
+            } catch (error) {
+                toast.error("Image upload failed. Please try again.");
+            } finally {
                 setLoading(false);
-                // update profile
-                handleUpdateProfile(data.name, data.photoURL)
-                    .then((res) => {
-                        setLoading(false);
-                        toast.success('Successfully Registered!')
-                        navigate('/')
-                    })
-                    .catch(err => {
-                        toast.error(err.message)
-                        setUser(null);
-                    });
-            })
+            }
+        }
     };
+
     // Handle Google Signin
     const handleGoogleSignIn = () => {
         signInWithGoogle()
@@ -75,6 +83,20 @@ const SignUp = () => {
                             />
                             {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
                         </div>
+                        {/* imgbb */}
+                        <div className='mb-4 w-full'>
+                            <label htmlFor='image' className='block mb-2 text-sm'>
+                                Select Image:
+                            </label>
+                            <input
+                                type="file"
+                                id='image'
+                                accept='image/*'
+                                className="focus:ring-2 focus:ring-[#66BE80] file-input file-input-bordered w-full"
+                                onChange={(e) => setValue('image', e.target.files[0])} // Update file input value
+                            />
+                        </div>
+
 
                         {/* Email Field */}
                         <div className="mb-3">
@@ -114,19 +136,6 @@ const SignUp = () => {
                                 {showPassword ? <IoMdEye className='text-lg' /> : <IoMdEyeOff className='text-lg' />}
                             </span>
                             {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>}
-                        </div>
-
-                        {/* Photo URL Field */}
-                        <div className="mb-4">
-                            <label htmlFor="photoURL" className="block text-base md:text-sm font-medium text-gray-700 mb-1">Photo URL</label>
-                            <input
-                                id="photoURL"
-                                type="url"
-                                placeholder="Enter your photo URL"
-                                className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#66BE80] placeholder:text-gray-300 placeholder:font-normal"
-                                {...register("photoURL", { required: "Photo URL is required" })}
-                            />
-                            {errors.photoURL && <p className="text-red-500 text-sm mt-1">{errors.photoURL.message}</p>}
                         </div>
                         {/* Phone Number Field */}
                         <div className="mb-4">
