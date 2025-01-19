@@ -7,9 +7,10 @@ import { useContext, useState } from 'react';
 import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Providers/AuthProvider';
+import toast from 'react-hot-toast';
 
 const Login = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit,reset, formState: { errors } } = useForm();
     const [showPassword, setShowPassword] = useState(false);
     const {handleLogin} = useContext(AuthContext);
 
@@ -17,8 +18,14 @@ const Login = () => {
         console.log(data)
         handleLogin(data.email, data.password)
         .then(res=>{
+            reset()
             const user = res.user
             console.log(user);
+            toast.success('Successfully logged in!')
+        })
+        .catch(err=>{
+            reset()
+            toast.error(err.message.slice(10))
         })
     };
 

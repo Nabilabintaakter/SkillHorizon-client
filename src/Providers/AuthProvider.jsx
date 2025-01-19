@@ -19,7 +19,7 @@ const AuthProvider = ({children}) => {
         setLoading(true)
         return signInWithEmailAndPassword(auth, email, password)
     }
-    const handleSignOut = () => {
+    const signingOut = () => {
         setLoading(true)
         return signOut(auth)
     }
@@ -52,7 +52,7 @@ const AuthProvider = ({children}) => {
         setLoading,
         createUser,
         handleUpdateProfile,
-        handleSignOut,
+        signingOut,
         handleLogin,
         handleGoogleSignIn
     }

@@ -5,27 +5,42 @@ import { useForm } from 'react-hook-form';
 import { FcGoogle } from 'react-icons/fc';
 import { useContext, useState } from 'react';
 import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Providers/AuthProvider';
+import toast from 'react-hot-toast';
 
 const SignUp = () => {
-    const { register, handleSubmit, reset,formState: { errors } } = useForm();
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const [showPassword, setShowPassword] = useState(false);
-    const {createUser} = useContext(AuthContext);
+    const navigate = useNavigate();
+    const { setUser, setLoading, createUser, handleUpdateProfile } = useContext(AuthContext);
 
     const onSubmit = data => {
-        console.log(data)
         createUser(data.email, data.password)
-        .then(res=>{
-            reset()
-            console.log(res.user);
-        })
+            .then(res => {
+                reset()
+                setUser(res.user);
+                setLoading(false);
+                // update profile
+                handleUpdateProfile(data.name, data.photoURL)
+                    .then((res) => {
+                        setLoading(false);
+                        toast.success('Successfully Registered!')
+                        setTimeout(() => {
+                            navigate('/');
+                        }, 2000);
+                    })
+                    .catch(err => {
+                        toast.error(err.message)
+                        setUser(null);
+                    });
+            })
     };
 
     return (
         <Container>
             <div className='flex flex-col md:flex-row'>
-                <div className='w-full md:w-1/2 bg-gradient-to-r from-[#95D3A2] to-[#36A0AD] h-[260px] sm:h-[400px] md:h-[820px] xl:h-[760px] flex flex-col items-center justify-center md:justify-normal relative md:pt-20 lg:pt-10'>
+                <div className='w-full md:w-1/2 bg-gradient-to-r from-[#95D3A2] to-[#36A0AD] h-[260px] sm:h-[400px] md:h-[870px] lg:h-[820px]  flex flex-col items-center justify-center md:justify-normal relative md:pt-20 lg:pt-10'>
                     <img className='w-[30%] md:w-[70%] lg:w-[50%] h-fit animate-pulse z-10' src={image} alt="" />
                     <img className='absolute left-[120px] sm:left-[200px] md:left-10 lg:left-[105px] top-[40px] sm:top-20 md:top-[36px] lg:top-0 w-[30%] md:w-[70%] lg:w-[60%] h-fit' src={image2} alt="" />
                     <h1 className='text-white text-center text-2xl sm:text-3xl lg:text-[40px] font-bold w-[90%] sm:w-[70%] md:w-[90%] lg:w-[70%] leading-none mt-2 sm:mt-0 mb-2 sm:mb-3'>Turn your ambition into a success history</h1>
@@ -43,7 +58,7 @@ const SignUp = () => {
                                 id="name"
                                 type="text"
                                 placeholder="Enter your name"
-                                className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#66BE80] placeholder:text-gray-300 placeholder:font-normal"
+                                className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#66BE80] placeholder:text-gray-300 placeholder:font-normal"
                                 {...register("name", { required: "Name is required" })}
                             />
                             {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>}
@@ -56,7 +71,7 @@ const SignUp = () => {
                                 id="email"
                                 type="email"
                                 placeholder="Enter your email"
-                                className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#66BE80] placeholder:text-gray-300 placeholder:font-normal"
+                                className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#66BE80] placeholder:text-gray-300 placeholder:font-normal"
                                 {...register("email", {
                                     required: "Email is required",
                                     pattern: {
@@ -75,12 +90,12 @@ const SignUp = () => {
                                 id="password"
                                 type={showPassword ? "text" : "password"}
                                 placeholder="Enter your password"
-                                className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#66BE80] placeholder:text-gray-300 placeholder:font-normal"
+                                className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#66BE80] placeholder:text-gray-300 placeholder:font-normal"
                                 {...register("password", {
                                     required: "Password is required",
                                     minLength: { value: 6, message: "Password must be at least 6 characters" },
                                     maxLength: { value: 20, message: "Password must be less than 20 characters" },
-                                    pattern: { value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/, message: "Password must have at least one uppercase, one lowercase, one number and one special character."}
+                                    pattern: { value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/, message: "Password must have at least one uppercase, one lowercase, one number and one special character." }
                                 })}
                             />
                             <span className="absolute right-3 top-10 cursor-pointer" onClick={() => setShowPassword(!showPassword)}>
@@ -96,14 +111,32 @@ const SignUp = () => {
                                 id="photoURL"
                                 type="url"
                                 placeholder="Enter your photo URL"
-                                className="w-full px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#66BE80] placeholder:text-gray-300 placeholder:font-normal"
+                                className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#66BE80] placeholder:text-gray-300 placeholder:font-normal"
                                 {...register("photoURL", { required: "Photo URL is required" })}
                             />
                             {errors.photoURL && <p className="text-red-500 text-sm mt-1">{errors.photoURL.message}</p>}
                         </div>
+                        {/* Phone Number Field */}
+                        <div className="mb-4">
+                            <label htmlFor="phoneNumber" className="block text-base md:text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                            <input
+                                id="phoneNumber"
+                                type="number"
+                                placeholder="Enter your phone number"
+                                className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#66BE80] placeholder:text-gray-300 placeholder:font-normal"
+                                {...register("phoneNumber", {
+                                    required: "Phone number is required",
+                                    pattern: {
+                                        value: /^[0-9]{0,4}$/,
+                                        message: "Phone number must be 4 digits"
+                                    }
+                                })}
+                            />
+                            {errors.phoneNumber && <p className="text-red-500 text-sm mt-1">{errors.phoneNumber.message}</p>}
+                        </div>
 
                         {/* Submit Button */}
-                        <button type='submit' className="text-white rounded-[5px] bg-gradient-to-r from-[#66BE80] to-[#139196] font-medium hover:bg-gradient-to-r hover:from-[#139196] hover:to-[#139196] cursor-pointer w-full py-2 md:py-[14px] flex justify-center items-center duration-1000 ease-in-out transition-all">
+                        <button type='submit' className="text-white rounded-[5px] bg-gradient-to-r from-[#66BE80] to-[#139196] font-medium hover:bg-gradient-to-r hover:from-[#139196] hover:to-[#139196] cursor-pointer w-full py-2 flex justify-center items-center duration-1000 ease-in-out transition-all">
                             Sign Up
                         </button>
 
@@ -111,7 +144,7 @@ const SignUp = () => {
                         <div className="divider">OR</div>
 
                         {/* Google Sign-In */}
-                        <button className="w-full mt-4 py-3 rounded-md border border-gray-300 hover:bg-gray-100 transition duration-300 flex items-center justify-center gap-2">
+                        <button className="w-full mt-4 py-2 rounded-md border border-gray-300 hover:bg-gray-100 transition duration-300 flex items-center justify-center gap-2">
                             <FcGoogle className='text-2xl' /> Sign with Google
                         </button>
 
