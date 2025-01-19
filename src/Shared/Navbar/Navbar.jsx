@@ -3,12 +3,11 @@ import logo from '../../assets/l-1.png';
 import text from '../../assets/l-2.png';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import Container from '../Container/Container';
-import { useContext } from 'react';
-import { AuthContext } from '../../Providers/AuthProvider';
 import { MdOutlineLogout } from 'react-icons/md';
+import useAuth from '../../hooks/useAuth';
 
 const Navbar = () => {
-    const { user, signingOut } = useContext(AuthContext);
+    const { user, signingOut } = useAuth();
     const navigate = useNavigate();
     const handleSignOut = () => {
         signingOut()
@@ -82,7 +81,7 @@ const Navbar = () => {
                             user ?
                                 <div className="dropdown dropdown-end flex justify-end items-center">
                                     <div tabIndex={0} role="button" className=" avatar">
-                                        <div className="w-10 rounded-full bg-[#128F9D] p-[2px]">
+                                        <div className="w-10 rounded-full bg-[#128F9D] p-[1px]">
                                             <img
                                             className='rounded-full'
                                                 alt="User"

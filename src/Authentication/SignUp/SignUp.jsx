@@ -3,17 +3,17 @@ import image2 from '../../assets/plant.png';
 import Container from '../../Shared/Container/Container';
 import { useForm } from 'react-hook-form';
 import { FcGoogle } from 'react-icons/fc';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
 import { Link, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../Providers/AuthProvider';
 import toast from 'react-hot-toast';
+import useAuth from '../../hooks/useAuth';
 
 const SignUp = () => {
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
-    const { setUser, setLoading, createUser, handleUpdateProfile,signInWithGoogle } = useContext(AuthContext);
+    const { setUser, setLoading, createUser, handleUpdateProfile,signInWithGoogle } = useAuth();
 
     const onSubmit = data => {
         createUser(data.email, data.password)
