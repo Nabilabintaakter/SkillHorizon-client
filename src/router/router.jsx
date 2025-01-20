@@ -11,6 +11,7 @@ import PrivateRoute from "./PrivateRoute";
 
 import MyEnrollClass from "../Pages/DashboardPages/Student/MyEnrollClass";
 import DashboardLayout from "../Layout/DashboardLayout/DashboardLayout";
+import AddClass from "../Pages/DashboardPages/Teacher/AddClass";
 
 const router = createBrowserRouter([
   {
@@ -56,6 +57,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <MyEnrollClass></MyEnrollClass>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: 'add-class',
+        element: (
+          <PrivateRoute>
+            <AddClass></AddClass>
           </PrivateRoute>
         ),
       },

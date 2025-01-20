@@ -159,7 +159,7 @@ const SignUp = () => {
                         {/* Submit Button */}
                         <button type='submit' className="text-white rounded-[5px] bg-gradient-to-r from-[#66BE80] to-[#139196] font-medium hover:bg-gradient-to-r hover:from-[#139196] hover:to-[#139196] cursor-pointer w-full py-2 flex justify-center items-center duration-1000 ease-in-out transition-all">
                             {loading ? (
-                                <ImSpinner9 className='animate-spin m-auto' />
+                               <p className="flex items-center gap-2">Sign Up<ImSpinner9 className='animate-spin m-auto text-sm' /></p>
                             ) : (
                                 'Sign Up'
                             )}

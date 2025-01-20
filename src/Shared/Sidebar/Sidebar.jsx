@@ -26,14 +26,14 @@ const Sidebar = () => {
             <div className="bg-gradient-to-r from-[#95D3A2] to-[#36A0AD] text-white flex justify-between md:hidden">
                 <div>
                     <div className="block cursor-pointer p-4 font-bold">
-                    <Link to={'/'} className="flex">
-                                <img className="h-10 md:h-14" src={logo} alt="" />
-                                <img
-                                    className="w-20 h-10"
-                                    src={text}
-                                    alt=""
-                                />
-                            </Link>
+                        <Link to={'/'} className="flex">
+                            <img className="h-10 md:h-14" src={logo} alt="" />
+                            <img
+                                className="w-20 h-10"
+                                src={text}
+                                alt=""
+                            />
+                        </Link>
                     </div>
                 </div>
 
@@ -47,24 +47,25 @@ const Sidebar = () => {
 
             {/* Sidebar */}
             <div
-                className={`z-10 md:fixed flex flex-col justify-between overflow-x-hidden bg-[#e6f8e9] text-gray-800 w-60 md:w-64 space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform ${
-                    isActive ? '-translate-x-full' : ''
-                } md:translate-x-0 transition duration-300 ease-in-out shadow-lg`}
+                className={`z-10 md:fixed flex flex-col justify-between overflow-x-hidden bg-[#D7F5EB] text-[#009478] w-60 md:w-64 space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform ${isActive ? '-translate-x-full' : ''
+                    } md:translate-x-0 transition duration-300 ease-in-out shadow-lg`}
             >
                 <div>
-                    <div>
-                        <div className="w-full hidden md:flex px-4 py-2 shadow-lg rounded-lg justify-center items-center bg-white mx-auto">
-                            <Link to={'/'} className="flex">
-                                <img className="h-10 md:h-14" src={logo} alt="" />
-                                <img
-                                    className="w-20 md:w-28 h-10 md:h-14 ml-2"
-                                    src={text}
-                                    alt=""
-                                />
-                            </Link>
-                        </div>
+                    <div
+                        className="w-full hidden md:flex px-4 py-2 rounded-lg justify-center items-center bg-white mx-auto"
+                        style={{
+                            boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.3), 0px 4px 4px rgba(255, 255, 255, 0.2)',
+                        }}
+                    >
+                        <Link to={'/'} className="flex">
+                            <img className="h-10 md:h-14" src={logo} alt="" />
+                            <img
+                                className="w-20 md:w-28 h-10 md:h-14 ml-2"
+                                src={text}
+                                alt=""
+                            />
+                        </Link>
                     </div>
-
                     {/* Nav Items */}
                     <div className="flex flex-col justify-between flex-1 mt-9 md:mt-5">
                         <nav>
@@ -86,7 +87,7 @@ const Sidebar = () => {
                     />
                     <button
                         onClick={signingOut}
-                        className="flex w-full items-center px-4 py-2 mt-5 text-red-500 hover:bg-red-100 hover:text-red-600 transition-colors duration-300 transform rounded-lg"
+                        className="flex w-full items-center px-4 py-2 mt-5 text-red-600 hover:bg-red-100 hover:text-red-600 transition-colors duration-300 transform rounded-lg"
                     >
                         <GrLogout className="w-5 h-5" />
                         <span className="mx-4 font-medium">Logout</span>
