@@ -93,7 +93,8 @@ const SignUp = () => {
                                 id='image'
                                 accept='image/*'
                                 className="focus:ring-2 focus:ring-[#66BE80] file-input file-input-bordered w-full"
-                                onChange={(e) => setValue('image', e.target.files[0])} // Update file input value
+                                onChange={(e) => setValue('image', e.target.files[0])} 
+                                required
                             />
                         </div>
 
@@ -159,7 +160,7 @@ const SignUp = () => {
                         {/* Submit Button */}
                         <button type='submit' className="text-white rounded-[5px] bg-gradient-to-r from-[#66BE80] to-[#139196] font-medium hover:bg-gradient-to-r hover:from-[#139196] hover:to-[#139196] cursor-pointer w-full py-2 flex justify-center items-center duration-1000 ease-in-out transition-all">
                             {loading ? (
-                               <p className="flex items-center gap-2">Sign Up<ImSpinner9 className='animate-spin m-auto text-sm' /></p>
+                                <p className="flex items-center gap-2">Please wait...<ImSpinner9 className='animate-spin m-auto text-sm' /></p>
                             ) : (
                                 'Sign Up'
                             )}

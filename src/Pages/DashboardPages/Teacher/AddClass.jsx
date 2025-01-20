@@ -2,25 +2,66 @@ import { useForm } from 'react-hook-form';
 import bg from '../../../assets/add-class.jpg';
 import useAuth from '../../../hooks/useAuth';
 import { useState } from 'react';
-import { shortImageName } from '../../../api/utils';
+import { imageUpload, shortImageName } from '../../../api/utils';
+import toast from 'react-hot-toast';
+import { ImSpinner9 } from 'react-icons/im';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import { useMutation } from '@tanstack/react-query';
 
 const AddClass = () => {
     const { user } = useAuth();
-    const {
-        register,
-        handleSubmit,
-        reset,
-        formState: { errors },
-    } = useForm();
+    const { register, handleSubmit, reset, formState: { errors }, } = useForm();
     const [uploadImage, setUploadImage] = useState({
         image: { name: 'Choose Image' },
-    })
-    const [loading, setLoading] = useState(false)
+    });
 
-    const onSubmit = (data) => {
-        console.log(data);
-        alert('Class added successfully!');
-        reset(); // Reset form after submission
+    // useMutation hook
+    // const queryClient = useQueryClient()
+    // const navigate = useNavigate()
+    const axiosSecure = useAxiosSecure()
+    const { isPending, mutateAsync } = useMutation({
+        mutationFn: async classData => {
+            await axiosSecure.post(`/classes`, classData)
+        },
+        onSuccess: () => {
+            console.log('class data saved')
+            // queryClient.invalidateQueries({ queryKey: ['classes'] })
+        },
+        onError: err => {
+            console.log(err.message)
+        },
+    })
+
+    const onSubmit = async (data) => {
+        if (!data.image || data.image.size > 5 * 1024 * 1024) {
+            toast.error('Please upload a valid image under 5MB!');
+            return;
+        }
+        // console.log(data.image[0]);
+        const imgData = await imageUpload(data.image[0]);
+        console.log(imgData);
+
+        const classInfo = {
+            ...data,
+            name: user?.displayName,
+            email: user?.email,
+            image: imgData,
+            status: 'Pending',
+            price: parseInt(data?.price, 10) // Parse the price to an integer
+        }        
+        try {
+            // 1. make a post request using useMutation hook
+            await mutateAsync(classInfo)
+            // 2. Reset form
+            reset();
+            setUploadImage({ image: { name: 'Choose Image' } });
+            // 3. Show toast and navigate
+            console.log(classInfo);
+            toast.success('Class added successfully!');
+            // navigate('/my-posted-jobs')
+        } catch (err) {
+            toast.error(err.message)
+        }
     };
 
     return (
@@ -116,7 +157,7 @@ const AddClass = () => {
                             <textarea
                                 id="description"
                                 rows="5"
-                                placeholder="Enter class description here..."
+                                placeholder="Write a detailed description about your class..."
                                 className="text-sm w-full p-3 rounded-md"
                                 {...register('description', { required: 'Description is required' })}
                             ></textarea>
@@ -128,34 +169,40 @@ const AddClass = () => {
                         </div>
 
                         {/* Image */}
-                        <div className='  w-full  m-auto rounded-lg flex-grow'>
-                            <div className='file_upload p-2 md:px-5 md:py-3 relative border-2 border-dotted border-gray-300 rounded-lg'>
-                                <div className='flex flex-col w-max mx-auto text-center'>
+                        <div className="w-full m-auto rounded-lg flex-grow">
+                            <div className="file_upload p-2 md:px-5 md:py-3 relative border-2 border-dotted border-gray-300 rounded-lg">
+                                <div className="flex flex-col w-max mx-auto text-center">
                                     <label>
                                         <input
-                                            onChange={e =>
-                                                setUploadImage({
-                                                    image: e.target.files[0],
-                                                    url: URL.createObjectURL(e.target.files[0]),
-                                                })
-                                            }
-                                            className='text-sm cursor-pointer w-36 hidden'
-                                            type='file'
-                                            name='image'
-                                            id='image'
-                                            accept='image/*'
-                                            hidden
+                                            type="file"
+                                            name="image"
+                                            id="image"
+                                            accept="image/*"
+                                            className="text-sm cursor-pointer w-36 hidden"
+                                            {...register('image', {
+                                                required: 'Image is required',
+                                                onChange: (e) =>
+                                                    setUploadImage({
+                                                        image: e.target.files[0],
+                                                        url: URL.createObjectURL(e.target.files[0]),
+                                                    }),
+                                            })}
                                         />
-                                        <div className='bg-[#009478] text-white rounded font-semibold cursor-pointer p-1 px-3 hover:bg-[#009478] text-sm'>
-                                            {/* {uploadImage?.image?.name} */}
+                                        <div className="bg-[#009478] text-white rounded font-semibold cursor-pointer p-1 px-3 hover:bg-[#009478] text-sm">
                                             {shortImageName(uploadImage?.image)}
                                         </div>
                                     </label>
                                 </div>
                                 {uploadImage && uploadImage?.image?.size && (
-                                    <div className='flex gap-2 md:gap-5 items-center mt-5'>
-                                        <img className='w-20 h-16 object-cover border border-gray-300' src={uploadImage?.url} alt='' />
-                                        <p className='text-sm'>Image Size: {uploadImage?.image?.size} Bytes</p>
+                                    <div className="flex gap-2 md:gap-5 items-center mt-5">
+                                        <img
+                                            className="w-20 h-16 object-cover border border-gray-300"
+                                            src={uploadImage?.url}
+                                            alt=""
+                                        />
+                                        <p className="text-sm">
+                                            Image Size: {uploadImage?.image?.size} Bytes
+                                        </p>
                                     </div>
                                 )}
                             </div>
@@ -165,14 +212,19 @@ const AddClass = () => {
                         <div className="col-span-2">
                             <button
                                 type="submit"
-                                className="w-full px-5 md:px-8 py-2  bg-gradient-to-r from-[#66BE80] to-[#139196]  font-medium hover:bg-gradient-to-r hover:from-[#139196] hover:to-[#139196] text-white rounded  transition-all duration-300"
+                                className="w-full px-5 md:px-8 py-2 bg-gradient-to-r from-[#66BE80] to-[#139196] font-medium hover:bg-gradient-to-r hover:from-[#139196] hover:to-[#139196] text-white rounded transition-all duration-300"
                             >
-                                {/* {isPending ? <p className="flex items-center gap-1">Submitting...<ImSpinner9 className='animate-spin m-auto' /></p> : 'Submit for Review'} */}
-                                Add Class
+                                {isPending ? (
+                                    <p className="flex items-center gap-1">
+                                        Saving...
+                                        <ImSpinner9 className="animate-spin m-auto" />
+                                    </p>
+                                ) : (
+                                    'Add Class'
+                                )}
                             </button>
                         </div>
                     </form>
-
                 </div>
             </div>
         </div>

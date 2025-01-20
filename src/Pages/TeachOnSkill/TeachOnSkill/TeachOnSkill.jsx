@@ -43,11 +43,9 @@ const TeachOnSkill = () => {
             // 2. Reset form
             reset();
             // 3. Show toast and navigate
-            console.log(teacherInfo);
             toast.success("Application submitted successfully!");
             // navigate('/my-posted-jobs')
         } catch (err) {
-            console.log(err.message)
             toast.error(err.message)
         }
 
