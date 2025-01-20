@@ -7,6 +7,7 @@ import {
 import router from './router/router.jsx';
 import { Toaster } from 'react-hot-toast';
 import AuthProvider from './providers/AuthProvider.jsx';
+import { PrimeReactProvider, PrimeReactContext } from 'primereact/api';
 import {
   QueryClient,
   QueryClientProvider,
@@ -15,11 +16,13 @@ const queryClient = new QueryClient()
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <RouterProvider router={router} />
-        <Toaster position='top-right' reverseOrder={false} />
-      </AuthProvider>
-    </QueryClientProvider>
+    <PrimeReactProvider>
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+          <RouterProvider router={router} />
+          <Toaster position='top-right' reverseOrder={false} />
+        </AuthProvider>
+      </QueryClientProvider>
+    </PrimeReactProvider>
   </StrictMode>,
 )
