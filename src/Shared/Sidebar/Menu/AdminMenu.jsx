@@ -9,7 +9,7 @@ const AdminMenu = () => {
     <>
       <MenuItem icon={AiOutlineUsergroupAdd} label='Teacher Request' address='teacher-request' />
       <MenuItem icon={FaUserCog} label='Users' address='users' />
-      <MenuItem icon={FaChalkboardTeacher} label='All Classes' address='all-classes' />
+      <MenuItem icon={FaChalkboardTeacher} label='All Classes' address='all-classes-admin' />
     </>
   )
 }

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { GrLogout } from 'react-icons/gr';
-import { FcSettings } from 'react-icons/fc';
+import { IoMdSettings } from "react-icons/io";
 import { AiOutlineBars } from 'react-icons/ai';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/l-1.png';
@@ -81,7 +81,7 @@ const Sidebar = () => {
                     <hr className="border-gray-300 my-4" />
 
                     <MenuItem
-                        icon={FcSettings}
+                        icon={IoMdSettings}
                         label="Profile"
                         address="/dashboard/profile"
                     />
