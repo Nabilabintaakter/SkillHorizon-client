@@ -68,7 +68,7 @@ const AddClass = () => {
 
     return (
         <div
-            className="hero min-h-screen"
+            className="hero md:min-h-screen"
             style={{
                 backgroundImage: `url(${bg})`,
                 backgroundSize: 'cover',
@@ -159,7 +159,7 @@ const AddClass = () => {
                             <textarea
                                 id="description"
                                 rows="5"
-                                placeholder="Write a detailed description about your class..."
+                                placeholder="Write a short description about your class..."
                                 className="text-sm w-full p-3 rounded-md"
                                 {...register('description', { required: 'Description is required' })}
                             ></textarea>

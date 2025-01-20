@@ -12,8 +12,8 @@ const Profile = () => {
         <div className="bg-gradient-to-r from-blue-50 to-blue-100 min-h-screen py-8">
             <div className="container mx-auto px-4">
                 <div className="text-center mb-8">
-                    <p className='text-[#0886A0] mb-3 font-medium'>Your Personalized Profile Overview</p>
-                    <h1 className='text-black text-2xl md:text-3xl lg:text-4xl font-bold w-full mx-auto'>Welcome to Your Dashboard</h1>
+                    <h1 className='text-black text-2xl mb-3 md:text-3xl lg:text-4xl font-bold w-full mx-auto'>Welcome to Your Dashboard</h1>
+                    <p className='text-[#0886A0]  font-medium'>Your Personalized Profile Overview</p>
                 </div>
 
                 <div className="bg-white rounded-xl shadow-lg mx-auto max-w-lg overflow-hidden relative">
@@ -23,7 +23,7 @@ const Profile = () => {
                             alt="Cover"
                             className="w-full h-44 object-cover"
                         />
-                        <div className="absolute left-6 -bottom-9 z-10">
+                        <div className="absolute left-3 md:left-6 -bottom-9 z-1">
                             <div className="w-36 h-36 rounded-full overflow-hidden p-1 bg-white">
                                 <img
                                     src={user?.photoURL || userImg}
@@ -54,9 +54,9 @@ const Profile = () => {
                         </div>
                         <div className="mt-6 absolute bottom-[112px] right-2">
                             <button className="flex items-center px-4 py-1 bg-gradient-to-r from-[#95D3A2] to-[#36A0AD] text-white rounded-full text-sm font-medium shadow-lg">
-                                <MdWork className="text-white mr-2" />
+                                <MdWork className="text-white mr-1" />
                                 <span> 
-                                    Role: Student
+                                    Student
                                 </span>
                             </button>
                         </div>
