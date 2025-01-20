@@ -7,8 +7,10 @@ import toast from 'react-hot-toast';
 import { ImSpinner9 } from 'react-icons/im';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { useMutation } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
 
 const AddClass = () => {
+    const navigate = useNavigate();
     const { user } = useAuth();
     const { register, handleSubmit, reset, formState: { errors }, } = useForm();
     const [uploadImage, setUploadImage] = useState({
@@ -48,7 +50,7 @@ const AddClass = () => {
             image: imgData,
             status: 'Pending',
             price: parseInt(data?.price, 10) // Parse the price to an integer
-        }        
+        }
         try {
             // 1. make a post request using useMutation hook
             await mutateAsync(classInfo)
@@ -58,7 +60,7 @@ const AddClass = () => {
             // 3. Show toast and navigate
             console.log(classInfo);
             toast.success('Class added successfully!');
-            // navigate('/my-posted-jobs')
+            navigate('/dashboard/my-class')
         } catch (err) {
             toast.error(err.message)
         }
@@ -211,13 +213,12 @@ const AddClass = () => {
                         {/* Submit Button */}
                         <div className="col-span-2">
                             <button
-                                type="submit"
-                                className="w-full px-5 md:px-8 py-2 bg-gradient-to-r from-[#66BE80] to-[#139196] font-medium hover:bg-gradient-to-r hover:from-[#139196] hover:to-[#139196] text-white rounded transition-all duration-300"
+                                type='submit' className="text-white rounded-[5px] bg-gradient-to-r from-[#66BE80] to-[#139196] font-medium hover:bg-gradient-to-r hover:from-[#139196] hover:to-[#139196] cursor-pointer w-full py-2 flex justify-center items-center duration-1000 ease-in-out transition-all"
                             >
                                 {isPending ? (
-                                    <p className="flex items-center gap-1">
+                                    <p className="flex items-center gap-2">
                                         Saving...
-                                        <ImSpinner9 className="animate-spin m-auto" />
+                                        <ImSpinner9 className="animate-spin m-auto text-sm" />
                                     </p>
                                 ) : (
                                     'Add Class'
