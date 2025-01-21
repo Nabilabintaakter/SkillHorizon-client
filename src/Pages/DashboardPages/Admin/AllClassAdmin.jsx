@@ -28,7 +28,21 @@ const AllClassAdmin = () => {
             toast.error("Failed to approve class. Please try again.");
         },
     });
-
+    // Mutation to reject a class
+    const { mutate: makeRejectClass } = useMutation({
+        mutationFn: async (classData) => {
+            const response = await axiosSecure.patch(`/admin/reject-class/${classData._id}`);
+            return response.data;
+        },
+        onSuccess: () => {
+            toast.success("Successfully rejected class!");
+            refetch();
+        },
+        onError: (error) => {
+            console.error(error);
+            toast.error("Failed to reject class. Please try again.");
+        },
+    });
 
     // approve
     const handleClassApprove = (classData) => {
@@ -37,6 +51,14 @@ const AllClassAdmin = () => {
             return;
         }
         makeApproveClass(classData);
+    };
+    // reject
+    const handleClassReject = (classData) => {
+        if (classData.status === "Rejected") {
+            toast.error("This class is already rejected.");
+            return;
+        }
+        makeRejectClass(classData);
     };
     if (isLoading) return <LoadingSpinner></LoadingSpinner>
 
@@ -111,7 +133,7 @@ const AllClassAdmin = () => {
                                 <td className="px-4">
                                     <button
                                         className="border-none btn btn-sm rounded-md  bg-yellow-500 hover:bg-white text-xs text-white hover:text-yellow-500 transition-all duration-500"
-                                        disabled={classItem.status === "Pending"}
+                                        disabled={classItem.status === "Pending" || classItem.status === "Rejected"}
                                     >
                                         Progress
                                     </button>
