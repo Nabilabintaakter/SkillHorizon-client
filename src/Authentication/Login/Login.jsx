@@ -126,7 +126,7 @@ const Login = () => {
                             </span>
                             {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password.message}</p>}
                         </div>
-                        <button type='submit' className=" text-white rounded-[5px] bg-gradient-to-r from-[#66BE80] to-[#139196]  font-medium hover:bg-gradient-to-r hover:from-[#139196] hover:to-[#139196]  cursor-pointer w-full py-2 md:py-[14px] flex justify-center items-center duration-1000 ease-in-out transition-all">
+                        <button type='submit' className=" text-white rounded-[5px] bg-gradient-to-r from-[#66BE80] to-[#139196]  font-medium hover:bg-gradient-to-r hover:from-[#139196] hover:to-[#139196]  cursor-pointer w-full py-2 md:py-3 flex justify-center items-center duration-1000 ease-in-out transition-all">
                             {loading ? (
                                 <p className="flex items-center gap-2">Logging in...<ImSpinner9 className='animate-spin m-auto text-sm' /></p>
                             ) : (
@@ -135,7 +135,7 @@ const Login = () => {
                         </button>
                         <div className="divider">OR</div>
                     </form>
-                    <button onClick={handleGoogleSignIn} className="w-full py-3 rounded-full border border-gray-300 hover:bg-gray-100 transition duration-300 flex items-center justify-center gap-2">
+                    <button onClick={handleGoogleSignIn} className="w-full py-3 rounded-full border border-gray-300 hover:bg-gray-100 transition duration-300 flex items-center justify-center gap-2 btn bg-white text-base">
                         <FcGoogle className='text-2xl' /> Continue with Google
                     </button>
                     <p className='mt-5 text-center'>Don't have an account? <Link className='text-[#30A18E]' to={'/signUp'}>Sign Up</Link></p>

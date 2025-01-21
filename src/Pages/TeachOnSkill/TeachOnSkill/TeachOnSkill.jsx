@@ -12,7 +12,7 @@ import { ImSpinner9 } from "react-icons/im";
 
 const TeachOnSkill = () => {
     const { user } = useAuth();
-    const { register, handleSubmit, formState: { errors }, reset, } = useForm();
+    const { register, handleSubmit, formState: { errors }, reset} = useForm();
 
     // useMutation hook
     // const queryClient = useQueryClient()
@@ -38,11 +38,8 @@ const TeachOnSkill = () => {
             status: 'Pending'
         }
         try {
-            // 1. make a post request using useMutation hook
             await mutateAsync(teacherInfo)
-            // 2. Reset form
             reset();
-            // 3. Show toast and navigate
             toast.success("Application submitted successfully!");
             // navigate('/my-posted-jobs')
         } catch (err) {

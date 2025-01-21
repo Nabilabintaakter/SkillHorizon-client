@@ -208,7 +208,7 @@ const SignUp = () => {
                         <div className="divider">OR</div>
                     </form>
                     {/* Google Sign-In */}
-                    <button onClick={handleGoogleSignIn} className="w-full py-2 rounded-full border border-gray-300 hover:bg-gray-100 transition duration-300 flex items-center justify-center gap-2">
+                    <button onClick={handleGoogleSignIn} className="w-full py-2 rounded-full border border-gray-300 hover:bg-gray-100 transition duration-300 flex items-center justify-center gap-2 btn bg-white text-base">
                         <FcGoogle className='text-2xl' /> Sign up with Google
                     </button>
 
