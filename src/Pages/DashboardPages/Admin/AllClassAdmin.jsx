@@ -51,31 +51,30 @@ const AllClassAdmin = () => {
                                     <div className="w-12 h-12 ">
                                         <img src={classItem.image} alt={classItem.title} className="rounded-md object-cover w-full h-full " />
                                     </div>
-
                                 </td>
-                                {/* Email */}
-                                <td className="px-4 py-6 text-gray-600 "><p className="font-semibold">{classItem.title}</p></td>
+                                {/* title */}
+                                <td className="px-4 py-6 text-sm text-gray-800 "><p className="font-semibold">{classItem.title}</p></td>
                                 
                                 {/* Email */}
-                                <td className="px-4  text-sm text-gray-600 ">{classItem.email}</td>
+                                <td className="px-4 text-sm text-gray-600 ">{classItem.email}</td>
 
                                 {/* Description */}
-                                <td className="px-4  text-sm hidden md:table-cell">
+                                <td className="px-4 text-sm hidden md:table-cell text-gray-600">
                                     {classItem.description.length > 50
-                                        ? `${classItem.description.slice(0, 50)}...`
+                                        ? `${classItem.description.slice(0, 25)}...`
                                         : classItem.description}
                                 </td>
 
                                 {/* Actions */}
                                 <td className="mt-3 flex flex-col md:flex-row items-center gap-1">
                                     <button
-                                        className="btn btn-sm md:btn-md bg-green-500 text-white hover:bg-white hover:text-green-500 transition-all duration-300"
+                                        className="border-none btn btn-sm md:btn-md bg-green-500 text-white hover:bg-white hover:text-green-500 transition-all duration-500"
                                         onClick={() => handleApprove(classItem._id)}
                                     >
                                         Approve
                                     </button>
                                     <button
-                                        className="btn btn-sm md:btn-md bg-red-500 hover:bg-white text-white hover:text-red-500 transition-all duration-300"
+                                        className="border-none btn btn-sm md:btn-md bg-red-500 hover:bg-white text-white hover:text-red-500 transition-all duration-500"
                                         onClick={() => handleReject(classItem._id)}
                                     >
                                         Reject
@@ -85,7 +84,7 @@ const AllClassAdmin = () => {
                                 {/* More Info */}
                                 <td className="px-4">
                                     <button
-                                        className="btn btn-md  bg-yellow-500 hover:bg-white text-white hover:text-yellow-500 transition-all duration-300"
+                                        className="border-none btn btn-md  bg-yellow-500 hover:bg-white text-white hover:text-yellow-500 transition-all duration-500"
                                     >
                                         View Progress
                                     </button>

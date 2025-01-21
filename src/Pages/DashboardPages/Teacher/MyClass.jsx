@@ -50,7 +50,7 @@ const MyClass = () => {
                                 <div className="p-3 flex-grow">
                                     {/* Title & Price */}
                                     <div className="flex items-center justify-between mb-2">
-                                        <h3 className="text-xl md:text-2xl font-semibold text-gray-800">
+                                        <h3 className="text-xl font-semibold text-gray-800">
                                             {classItem.title}
                                         </h3>
                                         <p className="text-2xl font-semibold text-green-500">
