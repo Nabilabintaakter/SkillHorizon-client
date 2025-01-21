@@ -1,7 +1,8 @@
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import LoadingSpinner from "../../../Shared/LoadingSpinner/LoadingSpinner";
+
 import { useMutation, useQuery } from "@tanstack/react-query";
+import LoadingSpinner from "../../../Shared/LoadingSpinner/LoadingSpinner";
 
 const Users = () => {
     const axiosSecure = useAxiosSecure();
@@ -23,7 +24,7 @@ const Users = () => {
         },
         onSuccess: () => {
             toast.success("User successfully made admin!");
-            refetch(); // Refetch users to update the table
+            refetch(); 
         },
         onError: (error) => {
             console.error(error);
@@ -39,7 +40,7 @@ const Users = () => {
         makeAdmin(userData);
     };
 
-    if (isLoading) return <LoadingSpinner />;
+    if (isLoading) return <LoadingSpinner></LoadingSpinner>
 
     return (
         <div className="container mx-auto py-4 md:py-8 px-4 lg:px-5 xl:px-9">

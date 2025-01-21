@@ -1,6 +1,7 @@
+import toast from "react-hot-toast";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import LoadingSpinner from "../../../Shared/LoadingSpinner/LoadingSpinner";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 const TeacherRequest = () => {
     const axiosSecure = useAxiosSecure()
@@ -11,7 +12,55 @@ const TeacherRequest = () => {
             return data
         },
     })
-    console.log(teachers)
+
+
+    // Mutation to approve a user an teacher
+    const { mutate: makeTeacher, isLoading: isMutating } = useMutation({
+        mutationFn: async (teacherData) => {
+            const response = await axiosSecure.patch(`/users/teacher-approve/${teacherData.email}`);
+            return response.data;
+        },
+        onSuccess: () => {
+            toast.success("User successfully made teacher!");
+            refetch();
+        },
+        onError: (error) => {
+            console.error(error);
+            toast.error("Failed to make user teacher. Please try again.");
+        },
+    });
+    // Mutation to reject a user an teacher
+    const { mutate: rejectTeacher } = useMutation({
+        mutationFn: async (teacherData) => {
+            const response = await axiosSecure.patch(`/users/teacher-reject/${teacherData.email}`);
+            return response.data;
+        },
+        onSuccess: () => {
+            toast.success("User is rejected to be an instructor!");
+            refetch();
+        },
+        onError: (error) => {
+            console.error(error);
+            toast.error("Failed. Please try again.");
+        },
+    });
+
+    // approve
+    const handleApprove = (teacherData) => {
+        if (teacherData.status === "Accepted") {
+            toast.error("This user is already a teacher.");
+            return;
+        }
+        makeTeacher(teacherData);
+    };
+    // reject
+    const handleReject = (teacherData) => {
+        if (teacherData.status === "Rejected") {
+            toast.error("This user is already a student.");
+            return;
+        }
+        rejectTeacher(teacherData);
+    };
     if (isLoading) return <LoadingSpinner></LoadingSpinner>
 
     return (
@@ -68,14 +117,17 @@ const TeacherRequest = () => {
                                 {/* Actions */}
                                 <td className="mt-5 flex flex-col md:flex-row items-center gap-1">
                                     <button
-                                        className="border-none text-sm px-4 py-[2px] rounded-md bg-green-500 text-white hover:bg-white hover:text-green-500 transition-all duration-500"
-                                        onClick={() => handleApprove(teacher._id)}
+                                        className="border-none btn btn-sm text-sm rounded-md bg-green-500 text-white hover:bg-white hover:text-green-500 transition-all duration-500"
+                                        onClick={() => handleApprove(teacher)}
+                                        disabled={teacher.status === "Rejected"}
                                     >
                                         Approve
                                     </button>
+
                                     <button
-                                        className="border-none text-sm px-4 py-[2px] rounded-md bg-red-500 hover:bg-white text-white hover:text-red-500 transition-all duration-500"
-                                        onClick={() => handleReject(teacher._id)}
+                                        className="border-none btn btn-sm text-sm  rounded-md bg-red-500 hover:bg-white text-white hover:text-red-500 transition-all duration-500"
+                                        onClick={() => handleReject(teacher)}
+                                        disabled={teacher.status === "Rejected"}
                                     >
                                         Reject
                                     </button>
@@ -84,7 +136,12 @@ const TeacherRequest = () => {
                                 {/* Status */}
                                 <td className="px-4">
                                     <button
-                                        className=" px-4 py-[2px] text-sm cursor-default rounded-2xl  bg-yellow-200  text-yellow-600 border-[1px] border-yellow-400"
+                                        className={`px-4 py-[2px] text-sm cursor-default rounded-2xl border-[1px] ${teacher.status === "Accepted"
+                                                ? "bg-green-200 text-green-600 border-green-400"
+                                                : teacher.status === "Rejected"
+                                                    ? "bg-red-200 text-red-600 border-red-400"
+                                                    : "bg-yellow-200 text-yellow-600 border-yellow-400"
+                                            }`}
                                     >
                                         {teacher.status}
                                     </button>
