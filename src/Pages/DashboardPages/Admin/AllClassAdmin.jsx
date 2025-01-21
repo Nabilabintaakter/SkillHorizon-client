@@ -44,7 +44,7 @@ const AllClassAdmin = () => {
                                 className={`relative border-b ${index % 2 === 0 ? 'bg-[#95D3A2] bg-opacity-10' : 'bg-[#95D3A2] bg-opacity-20'} hover:bg-[#95D3A2] hover:bg-opacity-30`}
                             >
                                 {/* Serial Number */}
-                                <td className="px-4  font-bold">{index + 1}.</td>
+                                <td className="px-4  font-medium">{index + 1}.</td>
 
                                 {/* Class Image */}
                                 <td className="absolute mt-3 px-4  flex items-center gap-2">
@@ -66,15 +66,15 @@ const AllClassAdmin = () => {
                                 </td>
 
                                 {/* Actions */}
-                                <td className="mt-3 flex flex-col md:flex-row items-center gap-1">
+                                <td className="mt-4 flex flex-col md:flex-row items-center gap-1">
                                     <button
-                                        className="border-none btn btn-sm md:btn-md bg-green-500 text-white hover:bg-white hover:text-green-500 transition-all duration-500"
+                                        className="text-sm border-none px-4 py-[6px] rounded-md bg-green-500 text-white hover:bg-white hover:text-green-500 transition-all duration-500"
                                         onClick={() => handleApprove(classItem._id)}
                                     >
                                         Approve
                                     </button>
                                     <button
-                                        className="border-none btn btn-sm md:btn-md bg-red-500 hover:bg-white text-white hover:text-red-500 transition-all duration-500"
+                                        className="border-none px-4 py-[6px] rounded-md bg-red-500 hover:bg-white text-sm text-white hover:text-red-500 transition-all duration-500"
                                         onClick={() => handleReject(classItem._id)}
                                     >
                                         Reject
@@ -84,7 +84,7 @@ const AllClassAdmin = () => {
                                 {/* More Info */}
                                 <td className="px-4">
                                     <button
-                                        className="border-none btn btn-md  bg-yellow-500 hover:bg-white text-white hover:text-yellow-500 transition-all duration-500"
+                                        className="border-none px-4 py-[2px] 2xl:py-[6px] rounded-md  bg-yellow-500 hover:bg-white text-xs text-white hover:text-yellow-500 transition-all duration-500"
                                     >
                                         View Progress
                                     </button>
