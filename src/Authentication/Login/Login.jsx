@@ -11,16 +11,33 @@ import toast from 'react-hot-toast';
 import LoadingSpinner from '../../Shared/LoadingSpinner/LoadingSpinner';
 import { ImSpinner9 } from 'react-icons/im';
 import useAuth from '../../hooks/useAuth';
+import { useMutation } from '@tanstack/react-query';
+import useAxiosPublic from '../../hooks/useAxiosPublic';
 
 const Login = () => {
+    const axiosPublic = useAxiosPublic();
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const [showPassword, setShowPassword] = useState(false);
-    const { handleLogin, loading, user,setUser, signInWithGoogle ,setLoading} = useAuth();
+    const { handleLogin, loading,setUser, signInWithGoogle ,setLoading} = useAuth();
     const navigate = useNavigate()
     const location = useLocation()
     const from = location?.state?.from?.pathname || '/'
-    if (loading) return <LoadingSpinner></LoadingSpinner>
-    if (user) return <Navigate to={from} replace={true} />
+
+        // useMutation hook
+    // const queryClient = useQueryClient()
+    // const navigate = useNavigate()
+    const { mutateAsync } = useMutation({
+        mutationFn: async userData => {
+            await axiosPublic.post(`/users`, userData)
+        },
+        onSuccess: () => {
+            console.log('user data saved')
+            // queryClient.invalidateQueries({ queryKey: ['classes'] })
+        },
+        onError: err => {
+            console.log(err.message)
+        },
+    })
 
     const onSubmit = data => {
         handleLogin(data.email, data.password)
@@ -39,11 +56,18 @@ const Login = () => {
     // Handle Google Signin
     const handleGoogleSignIn = () => {
         signInWithGoogle()
-            .then(res => {
-                setUser(res.user)
-                toast.success('Successfully logged in!')
-                navigate(from, { replace: true })
-            })
+        .then(async(res) => {
+            setUser(res.user)
+            await mutateAsync(
+                {
+                    name: res?.user?.displayName,
+                    email: res?.user?.email,
+                    photo: res?.user?.photoURL,
+                }
+            )
+            toast.success('Successfully logged in!')
+            navigate(from, { replace: true })
+        })
             .catch(err => {
                 toast.error(err?.message)
                 setUser(null)
@@ -110,8 +134,8 @@ const Login = () => {
                         </button>
                         <div className="divider">OR</div>
                     </form>
-                    <button onClick={handleGoogleSignIn} className="w-full py-3 rounded-md border border-gray-300 hover:bg-gray-100 transition duration-300 flex items-center justify-center gap-2">
-                        <FcGoogle className='text-2xl' /> Sign with Google
+                    <button onClick={handleGoogleSignIn} className="w-full py-3 rounded-full border border-gray-300 hover:bg-gray-100 transition duration-300 flex items-center justify-center gap-2">
+                        <FcGoogle className='text-2xl' /> Continue with Google
                     </button>
                     <p className='mt-5 text-center'>Don't have an account? <Link className='text-[#30A18E]' to={'/signUp'}>Sign Up</Link></p>
                 </div>

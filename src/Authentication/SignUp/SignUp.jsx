@@ -5,19 +5,42 @@ import { useForm } from 'react-hook-form';
 import { FcGoogle } from 'react-icons/fc';
 import { useState } from 'react';
 import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import useAuth from '../../hooks/useAuth';
 import { ImSpinner9 } from 'react-icons/im';
 import { imageUpload } from '../../api/utils';
+import useAxiosPublic from '../../hooks/useAxiosPublic';
+import { useMutation } from '@tanstack/react-query';
 
 const SignUp = () => {
+    const axiosPublic = useAxiosPublic();
     const { register, handleSubmit, reset, formState: { errors }, watch, setValue } = useForm();
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
     const { setUser, setLoading, createUser, handleUpdateProfile, signInWithGoogle, loading } = useAuth();
+    const location = useLocation()
+    const from = location?.state?.from?.pathname || '/'
+
+    // useMutation hook
+    // const queryClient = useQueryClient()
+    // const navigate = useNavigate()
+    const { mutateAsync } = useMutation({
+        mutationFn: async userData => {
+            await axiosPublic.post(`/users`, userData)
+        },
+        onSuccess: () => {
+            console.log('user data saved')
+            // queryClient.invalidateQueries({ queryKey: ['classes'] })
+        },
+        onError: err => {
+            console.log(err.message)
+        },
+    })
 
     const onSubmit = async (data) => {
+        const phone = parseInt(data?.phoneNumber, 10)
+        console.log(phone);
         const file = data.image;
         if (file) {
             try {
@@ -25,9 +48,16 @@ const SignUp = () => {
                 if (imgData) {
                     await createUser(data.email, data.password)
                         .then(async (res) => {
-                            reset();
                             setUser(res.user);
-                            await handleUpdateProfile(data.name, imgData);
+                            await handleUpdateProfile(data.name, imgData, phone);
+                            const userData = {
+                                name: data.name,
+                                email: data.email,
+                                image: imgData,
+                                phone: phone
+                            }
+                            await mutateAsync(userData)
+                            reset();
                             toast.success('Successfully Registered!');
                             navigate('/');
                         })
@@ -46,11 +76,17 @@ const SignUp = () => {
     // Handle Google Signin
     const handleGoogleSignIn = () => {
         signInWithGoogle()
-            .then(res => {
+            .then(async(res) => {
                 setUser(res.user)
+                await mutateAsync(
+                    {
+                        name: res?.user?.displayName,
+                        email: res?.user?.email,
+                        photo: res?.user?.photoURL,
+                    }
+                )
                 toast.success('Successfully logged in!')
-                navigate('/')
-
+                navigate(from, { replace: true })
             })
             .catch(err => {
                 toast.error(err?.message)
@@ -93,7 +129,7 @@ const SignUp = () => {
                                 id='image'
                                 accept='image/*'
                                 className="focus:ring-2 focus:ring-[#66BE80] file-input file-input-bordered w-full"
-                                onChange={(e) => setValue('image', e.target.files[0])} 
+                                onChange={(e) => setValue('image', e.target.files[0])}
                                 required
                             />
                         </div>
@@ -170,8 +206,8 @@ const SignUp = () => {
                         <div className="divider">OR</div>
                     </form>
                     {/* Google Sign-In */}
-                    <button onClick={handleGoogleSignIn} className="w-full py-2 rounded-md border border-gray-300 hover:bg-gray-100 transition duration-300 flex items-center justify-center gap-2">
-                        <FcGoogle className='text-2xl' /> Sign with Google
+                    <button onClick={handleGoogleSignIn} className="w-full py-2 rounded-full border border-gray-300 hover:bg-gray-100 transition duration-300 flex items-center justify-center gap-2">
+                        <FcGoogle className='text-2xl' /> Sign up with Google
                     </button>
 
                     {/* Redirect to Login */}
