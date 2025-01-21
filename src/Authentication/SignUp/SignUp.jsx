@@ -54,7 +54,8 @@ const SignUp = () => {
                                 name: data.name,
                                 email: data.email,
                                 image: imgData,
-                                phone: phone
+                                phone: phone,
+                                role: "Student"
                             }
                             await mutateAsync(userData)
                             reset();
@@ -82,7 +83,8 @@ const SignUp = () => {
                     {
                         name: res?.user?.displayName,
                         email: res?.user?.email,
-                        photo: res?.user?.photoURL,
+                        image: res?.user?.photoURL,
+                        role: "Student"
                     }
                 )
                 toast.success('Successfully logged in!')

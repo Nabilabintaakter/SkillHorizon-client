@@ -3,7 +3,7 @@ import image2 from '../../assets/plant.png';
 import Container from '../../Shared/Container/Container';
 import { useForm } from 'react-hook-form';
 import { FcGoogle } from 'react-icons/fc';
-import {useState } from 'react';
+import { useState } from 'react';
 import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
 import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 
@@ -18,12 +18,12 @@ const Login = () => {
     const axiosPublic = useAxiosPublic();
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const [showPassword, setShowPassword] = useState(false);
-    const { handleLogin, loading,setUser, signInWithGoogle ,setLoading} = useAuth();
+    const { handleLogin, loading, setUser, signInWithGoogle, setLoading } = useAuth();
     const navigate = useNavigate()
     const location = useLocation()
     const from = location?.state?.from?.pathname || '/'
 
-        // useMutation hook
+    // useMutation hook
     // const queryClient = useQueryClient()
     // const navigate = useNavigate()
     const { mutateAsync } = useMutation({
@@ -56,18 +56,19 @@ const Login = () => {
     // Handle Google Signin
     const handleGoogleSignIn = () => {
         signInWithGoogle()
-        .then(async(res) => {
-            setUser(res.user)
-            await mutateAsync(
-                {
-                    name: res?.user?.displayName,
-                    email: res?.user?.email,
-                    photo: res?.user?.photoURL,
-                }
-            )
-            toast.success('Successfully logged in!')
-            navigate(from, { replace: true })
-        })
+            .then(async (res) => {
+                setUser(res.user)
+                await mutateAsync(
+                    {
+                        name: res?.user?.displayName,
+                        email: res?.user?.email,
+                        image: res?.user?.photoURL,
+                        role: "Student"
+                    }
+                )
+                toast.success('Successfully logged in!')
+                navigate(from, { replace: true })
+            })
             .catch(err => {
                 toast.error(err?.message)
                 setUser(null)
@@ -127,7 +128,7 @@ const Login = () => {
                         </div>
                         <button type='submit' className=" text-white rounded-[5px] bg-gradient-to-r from-[#66BE80] to-[#139196]  font-medium hover:bg-gradient-to-r hover:from-[#139196] hover:to-[#139196]  cursor-pointer w-full py-2 md:py-[14px] flex justify-center items-center duration-1000 ease-in-out transition-all">
                             {loading ? (
-                                <ImSpinner9 className='animate-spin m-auto' />
+                                <p className="flex items-center gap-2">Logging in...<ImSpinner9 className='animate-spin m-auto text-sm' /></p>
                             ) : (
                                 'Login'
                             )}
