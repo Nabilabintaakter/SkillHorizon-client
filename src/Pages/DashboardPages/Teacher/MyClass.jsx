@@ -33,12 +33,15 @@ const MyClass = () => {
                             <div key={index} className="relative bg-white drop-shadow-lg rounded-lg overflow-hidden flex flex-col justify-between">
                                 {/* Status Badge */}
                                 <span
-                                    className={`absolute top-2 right-2 px-3 py-1 text-sm font-semibold rounded-lg ${classItem.status === "Pending" ? "bg-yellow-100 text-yellow-600" : "bg-green-100 text-green-600"
+                                    className={`absolute top-2 right-2 px-3 py-1 text-sm font-semibold rounded-lg ${classItem.status === "Accepted"
+                                            ? "bg-green-100 text-green-600"
+                                            : classItem.status === "Rejected"
+                                                ? "bg-red-100 text-red-600"
+                                                : "bg-yellow-100 text-yellow-600"
                                         }`}
                                 >
                                     {classItem.status}
                                 </span>
-
                                 {/* Image */}
                                 <img
                                     src={classItem.image}
