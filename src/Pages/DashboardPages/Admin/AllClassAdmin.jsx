@@ -1,17 +1,43 @@
+import toast from "react-hot-toast";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import LoadingSpinner from "../../../Shared/LoadingSpinner/LoadingSpinner";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 const AllClassAdmin = () => {
     const axiosSecure = useAxiosSecure()
-    const { data: classes = [], isLoading, refetch, } = useQuery({
+    const { data: classes = [], isLoading, refetch } = useQuery({
         queryKey: ['allClasses'],
         queryFn: async () => {
             const { data } = await axiosSecure(`/classes`)
             return data
         },
     })
-    console.log(classes)
+
+    // Mutation to approve a class
+    const { mutate: makeApproveClass, isLoading: isMutating } = useMutation({
+        mutationFn: async (classData) => {
+            const response = await axiosSecure.patch(`/admin/approve-class/${classData._id}`);
+            return response.data;
+        },
+        onSuccess: () => {
+            toast.success("Successfully approved class!");
+            refetch();
+        },
+        onError: (error) => {
+            console.error(error);
+            toast.error("Failed to approve class. Please try again.");
+        },
+    });
+
+
+    // approve
+    const handleClassApprove = (classData) => {
+        if (classData.status === "Accepted") {
+            toast.error("This class is already approved.");
+            return;
+        }
+        makeApproveClass(classData);
+    };
     if (isLoading) return <LoadingSpinner></LoadingSpinner>
 
     return (
@@ -54,7 +80,7 @@ const AllClassAdmin = () => {
                                 </td>
                                 {/* title */}
                                 <td className="px-4 py-6 text-sm text-gray-800 "><p className="font-semibold">{classItem.title}</p></td>
-                                
+
                                 {/* Email */}
                                 <td className="px-4 text-sm text-gray-600 ">{classItem.email}</td>
 
@@ -69,13 +95,13 @@ const AllClassAdmin = () => {
                                 <td className="mt-4 flex flex-col md:flex-row items-center gap-1">
                                     <button
                                         className="text-sm border-none px-4 py-[6px] rounded-md bg-green-500 text-white hover:bg-white hover:text-green-500 transition-all duration-500"
-                                        onClick={() => handleApprove(classItem._id)}
+                                        onClick={() => handleClassApprove(classItem)}
                                     >
                                         Approve
                                     </button>
                                     <button
                                         className="border-none px-4 py-[6px] rounded-md bg-red-500 hover:bg-white text-sm text-white hover:text-red-500 transition-all duration-500"
-                                        onClick={() => handleReject(classItem._id)}
+                                        onClick={() => handleClassReject(classItem)}
                                     >
                                         Reject
                                     </button>
@@ -84,9 +110,10 @@ const AllClassAdmin = () => {
                                 {/* More Info */}
                                 <td className="px-4">
                                     <button
-                                        className="border-none px-4 py-[2px] 2xl:py-[6px] rounded-md  bg-yellow-500 hover:bg-white text-xs text-white hover:text-yellow-500 transition-all duration-500"
+                                        className="border-none btn btn-sm rounded-md  bg-yellow-500 hover:bg-white text-xs text-white hover:text-yellow-500 transition-all duration-500"
+                                        disabled={classItem.status === "Pending"}
                                     >
-                                        View Progress
+                                        Progress
                                     </button>
                                 </td>
                             </tr>
