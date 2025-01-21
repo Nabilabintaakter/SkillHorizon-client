@@ -33,7 +33,7 @@ const MyClass = () => {
                             <div key={index} className="relative bg-white drop-shadow-lg rounded-lg overflow-hidden flex flex-col justify-between">
                                 {/* Status Badge */}
                                 <span
-                                    className={`absolute top-2 right-2 px-3 py-1 text-sm font-semibold rounded-lg ${classItem.status === "Accepted"
+                                    className={`absolute top-2 right-2 px-3 py-1 text-sm font-medium rounded-full ${classItem.status === "Accepted"
                                             ? "bg-green-100 text-green-600"
                                             : classItem.status === "Rejected"
                                                 ? "bg-red-100 text-red-600"
@@ -90,7 +90,7 @@ const MyClass = () => {
                                             Delete
                                         </button>
                                     </div>
-                                    <button className="bg-[#2196F3] text-white btn btn-sm border-none py-1 w-full rounded-md hover:bg-[#1976D2] transition">
+                                    <button disabled={classItem.status === "Pending" || classItem.status === "Rejected"} className="bg-[#2196F3] text-white btn btn-sm border-none py-1 w-full rounded-md hover:bg-[#1976D2] transition">
                                         See Details
                                     </button>
                                 </div>
