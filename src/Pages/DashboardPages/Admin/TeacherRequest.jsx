@@ -15,7 +15,7 @@ const TeacherRequest = () => {
     if (isLoading) return <LoadingSpinner></LoadingSpinner>
 
     return (
-        <div className="container mx-auto py-8 px-4 lg:px-5 xl:px-9">
+        <div className="container mx-auto py-4 md:py-8 px-4 lg:px-5 xl:px-9">
             <div className="text-center mb-8">
                 <h1 className='text-black mb-3 text-2xl md:text-3xl lg:text-4xl font-bold w-full mx-auto'>
                     Manage Teacher Requests
@@ -29,7 +29,7 @@ const TeacherRequest = () => {
                 <table className="table-auto w-full border-collapse bg-white shadow-md rounded-lg">
                     {/* Table Header */}
                     <thead>
-                        <tr className="bg-[#36A0AD] text-left">
+                        <tr className="bg-[#009478] text-left">
                             <th className="px-4 py-2 text-white hidden md:table-cell"></th>
                             <th className="px-4 py-2 text-white">Image</th>
                             <th className="px-4 py-2 text-white">Name</th>
@@ -47,7 +47,7 @@ const TeacherRequest = () => {
                                 className={`relative border-b ${index % 2 === 0 ? 'bg-[#95D3A2] bg-opacity-10' : 'bg-[#95D3A2] bg-opacity-20'} hover:bg-[#95D3A2] hover:bg-opacity-30`}
                             >
                                 {/* Serial Number */}
-                                <td className="px-4  font-medium hidden md:table-cell">{index + 1}.</td>
+                                <td className="px-4  font-medium hidden md:table-cell">{index + 1}</td>
 
                                 {/* Image */}
                                 <td className="absolute mt-3 px-4  flex items-center gap-2">

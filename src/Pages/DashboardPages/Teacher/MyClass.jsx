@@ -18,7 +18,7 @@ const MyClass = () => {
     if (isLoading) return <LoadingSpinner></LoadingSpinner>
 
     return (
-        <div className="container mx-auto py-8 px-4 lg:px-5 xl:px-9">
+        <div className="container mx-auto py-4 md:py-8 px-4 lg:px-5 xl:px-9 ">
             <div className="text-center mb-8">
                 <h1 className='text-black mb-3 text-2xl md:text-3xl lg:text-4xl font-bold w-full mx-auto'>Manage Your Classes</h1>
                 <p className='text-[#0886A0]  font-medium'>View, Update, and Delete Your Added Classes Seamlessly</p>
@@ -30,7 +30,7 @@ const MyClass = () => {
                         classes.map((classItem, index) => (
 
 
-                            <div key={index} className="relative bg-white shadow-lg rounded-lg overflow-hidden flex flex-col justify-between">
+                            <div key={index} className="relative bg-white drop-shadow-lg rounded-lg overflow-hidden flex flex-col justify-between">
                                 {/* Status Badge */}
                                 <span
                                     className={`absolute top-2 right-2 px-3 py-1 text-sm font-semibold rounded-lg ${classItem.status === "Pending" ? "bg-yellow-100 text-yellow-600" : "bg-green-100 text-green-600"

@@ -23,26 +23,28 @@ const Sidebar = () => {
     return (
         <>
             {/* Small Screen Navbar */}
-            <div className="bg-gradient-to-r from-[#95D3A2] to-[#36A0AD] text-white flex justify-between md:hidden">
-                <div>
-                    <div className="block cursor-pointer p-4 font-bold">
-                        <Link to={'/'} className="flex">
-                            <img className="h-10 md:h-14" src={logo} alt="" />
-                            <img
-                                className="w-20 h-10"
-                                src={text}
-                                alt=""
-                            />
-                        </Link>
+            <div className='h-[64px]'>
+                <div className="bg-gradient-to-r from-[#95D3A2] to-[#36A0AD] text-white flex justify-between md:hidden fixed top-0 bg-white/70 backdrop-blur-md z-50 w-full h-[64px]">
+                    <div>
+                        <div className="block cursor-pointer p-4 font-bold">
+                            <Link to={'/'} className="flex">
+                                <img className="h-10" src={logo} alt="" />
+                                <img
+                                    className="w-20 h-10"
+                                    src={text}
+                                    alt=""
+                                />
+                            </Link>
+                        </div>
                     </div>
-                </div>
 
-                <button
-                    onClick={handleToggle}
-                    className="mobile-menu-button p-6 focus:outline-none hover:bg-white hover:text-[#36A0AD] rounded-full"
-                >
-                    <AiOutlineBars className="h-7 w-7" />
-                </button>
+                    <button
+                        onClick={handleToggle}
+                        className="mobile-menu-button p-5 focus:outline-none hover:bg-white hover:text-[#36A0AD] rounded-full"
+                    >
+                        <AiOutlineBars className="h-5 w-5" />
+                    </button>
+                </div>
             </div>
 
             {/* Sidebar */}

@@ -57,6 +57,7 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+      // Student route
       {
         path: 'my-enroll-class',
         element: (
@@ -65,6 +66,7 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+      // Teacher routes
       {
         path: 'add-class',
         element: (
@@ -81,6 +83,7 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+      // Admin routes
       {
         path: 'teacher-request',
         element: (
@@ -105,6 +108,7 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+      // Common route
       {
         path: 'profile',
         element: (
