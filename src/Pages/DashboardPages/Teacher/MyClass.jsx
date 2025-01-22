@@ -7,7 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 const MyClass = () => {
     const axiosSecure = useAxiosSecure()
     const { user } = useAuth();
-    const { data: classes = [], isLoading, refetch, } = useQuery({
+    const { data: classes = [], isLoading } = useQuery({
         queryKey: ['classes'],
         queryFn: async () => {
             const { data } = await axiosSecure(`/classes/${user?.email}`)
@@ -25,7 +25,7 @@ const MyClass = () => {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4">
                 {
-                    classes.length > 0 ?
+                    classes?.length > 0 ?
 
                         classes.map((classItem, index) => (
 
@@ -56,7 +56,7 @@ const MyClass = () => {
                                         <h3 className="text-xl font-semibold text-gray-800">
                                             {classItem.title}
                                         </h3>
-                                        <p className="text-2xl font-semibold text-green-500">
+                                        <p className="text-2xl font-bold text-[#139196]">
                                             ${classItem.price}
                                         </p>
                                     </div>
@@ -114,10 +114,7 @@ const MyClass = () => {
                                 </p>
                             </div>
                         )
-
                 }
-
-
             </div>
         </div>
     );

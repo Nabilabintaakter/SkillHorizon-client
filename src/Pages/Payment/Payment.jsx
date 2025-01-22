@@ -22,7 +22,7 @@ const Payment = () => {
             <div className='bg-[#FFFFFF] flex justify-center items-center min-h-screen -mt-[64px]'>
                 <div className='w-full sm:w-[70%] md:w-[50%] lg:w-[40%] mx-aut0'>
                     <h2 className="text-center text-xl md:text-2xl font-semibold text-gray-800 mb-4">Complete Your Payment</h2>
-                    <div className='bg-[#f1fbf45c] rounded-md border-[1px] border-green-300 p-3 md:p-4'>
+                    <div className='bg-[#f1fbf45c] rounded-md border-[1px] border-[#139196] p-3 md:p-4'>
                         <div className='flex justify-between items-center md:text-xl lg:text-2xl font-black'>
                             <p>Total</p>
                             <p className=" text-[#139196]">

@@ -25,7 +25,6 @@ const Login = () => {
 
     // useMutation hook
     // const queryClient = useQueryClient()
-    // const navigate = useNavigate()
     const { mutateAsync } = useMutation({
         mutationFn: async userData => {
             await axiosPublic.post(`/users`, userData)
