@@ -29,7 +29,7 @@ const AllClasses = () => {
                 <div className='-mt-5 mb-5'>
                     <p className='text-gray-600'>Discover All <span className='text-black text-xl'>{classes.length}</span> Classes Available for You</p>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-5">
                     {
                         classes.length > 0 ?
 
@@ -38,25 +38,25 @@ const AllClasses = () => {
 
                                 <div
                                     key={index}
-                                    className="relative bg-white rounded-lg overflow-hidden flex flex-col justify-between group hover:bg-gradient-to-br hover:from-[#66BE80] hover:to-[#139196] transition duration-500 ease-out"
+                                    className="relative bg-white rounded-md overflow-hidden flex flex-col justify-between group hover:bg-gradient-to-br hover:from-[#66BE80] hover:to-[#139196] transition duration-500 ease-out h-[335px] md:h-[330px]"
                                 >
                                     {/* Image */}
                                     <img
                                         src={classItem.image}
                                         alt={classItem.title}
-                                        className="w-full h-52 md:h-44  object-cover rounded-lg group-hover:opacity-0 transition duration-300"
+                                        className="w-full h-52 md:h-44  object-cover rounded-md group-hover:opacity-0 transition duration-300"
                                     />
 
                                     {/* Content */}
-                                    <div className="py-3 group-hover:p-5 flex-grow">
+                                    <div className="py-3 mt-2 group-hover:p-5 flex-grow">
                                         {/* Title & Description */}
-                                        <div className="group-hover:text-white transition duration-300 group-hover:absolute group-hover:top-24 ">
-                                            <h3 className="text-lg font-medium group-hover:font-bold text-black group-hover:text-white group-hover:leading-loose">
+                                        <div className="group-hover:text-white transition duration-300 group-hover:absolute md:group-hover:top-20 group-hover:top-24 ">
+                                            <h3 className="group-hover:leading-loose md:group-hover:leading-tight group-hover:pr-5 text-lg font-medium group-hover:font-bold text-black group-hover:text-white ">
                                                 {classItem.title}
                                             </h3>
                                         </div>
 
-                                        <p className="text-gray-100 text-sm font-semibold group-hover:font-normal group-hover:opacity-100 opacity-0  group-hover:block absolute top-32 group-hover:w-auto group-hover:leading-loose">
+                                        <p className="text-gray-100 text-sm font-semibold group-hover:font-normal group-hover:opacity-100 opacity-0  group-hover:block absolute group-hover:top-32 md:group-hover:top-32 group-hover:w-auto group-hover:leading-loose md:group-hover:leading-tight lg:group-hover:leading-loose group-hover:pr-5">
                                             {classItem.description}
                                         </p>
 
@@ -76,17 +76,17 @@ const AllClasses = () => {
 
                                     {/* Enrollments */}
                                     <span
-                                        className={`absolute top-2 right-2 px-3 py-1 text-sm font-medium bg-green-100 text-green-600 rounded-lg border-[1px] border-green-600 group-hover:hidden`}
+                                        className={`absolute top-3 right-3 px-3 py-1 text-sm backdrop-blur-md text-green-200 rounded-lg border-[1px] border-green-200 group-hover:hidden`}
                                     >
                                         {classItem.totalEnrollment > 0
                                             ? `${classItem.totalEnrollment} Enrollments`
-                                            : "Be the first to enroll!"}
+                                            : "Be the first to enroll !"}
                                     </span>
 
                                     {/* Enroll Now Button */}
                                     <Link
                                         to={`/class/${classItem._id}`}
-                                        className="p-5 flex items-center gap-1 group-hover:opacity-100 opacity-0 transition duration-500 group-hover:block absolute bottom-4 text-lg"
+                                        className="p-5 flex items-center gap-1 group-hover:opacity-100 opacity-0 transition duration-500 group-hover:block absolute bottom-3 text-lg"
                                     >
                                         <button
                                             disabled={

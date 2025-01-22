@@ -81,7 +81,7 @@ const Navbar = () => {
                             user ?
                                 <div className="dropdown dropdown-end flex justify-end items-center">
                                     <div tabIndex={0} role="button" className=" avatar">
-                                        <div className="w-10 rounded-full bg-[#128F9D] p-[1.5px]">
+                                        <div className="w-10 rounded-full bg-[#128F9D] p-[1px]">
                                             <img
                                             className='rounded-full object-cover'
                                                 alt="User"
