@@ -3,8 +3,10 @@ import Container from '../../../Shared/Container/Container';
 import useAxiosPublic from '../../../hooks/useAxiosPublic';
 import { useQuery } from '@tanstack/react-query';
 import LoadingSpinner from '../../../Shared/LoadingSpinner/LoadingSpinner';
-import { FaEnvelope, FaInfoCircle, FaThList, FaUser } from 'react-icons/fa';
-import { MdOutlineJoinFull } from 'react-icons/md';
+import { FaEnvelope, FaThList, FaUserCircle } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import Heading from '../../../Shared/Heading/Heading';
+import { FaChalkboardUser } from 'react-icons/fa6';
 
 const AllClasses = () => {
     const axiosPublic = useAxiosPublic();
@@ -21,11 +23,11 @@ const AllClasses = () => {
 
 
     return (
-        <div className='bg-gray-50 py-5 min-h-screen md:pb-10'>
+        <div className=' py-5 min-h-screen md:pb-10'>
             <Container>
-                <div className='mb-5 md:mb-6'>
-                    <h2 className="text-center text-2xl lg:text-3xl font-semibold mb-2 text-gray-800">Discover All Classes</h2>
-                    <p className="text-gray-500 mb-4 w-[90%] md:w-[45%] mx-auto text-center lg:text-lg">Browse through a wide range of classes with details on instructors, pricing, and enrollments. Enroll today!</p>
+                <Heading subtitle={'All  Classes'} title={'Unlock New Possibilities with Our Expert-Led Classes'}></Heading>
+                <div className='-mt-5 mb-5'>
+                    <p className='text-gray-600'>Discover All <span className='text-black text-xl'>{classes.length}</span> Classes Available for You</p>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-4">
                     {
@@ -34,55 +36,70 @@ const AllClasses = () => {
                             classes.map((classItem, index) => (
 
 
-                                <div key={index} className=" bg-white drop-shadow-lg rounded-lg overflow-hidden flex flex-col justify-between">
-
+                                <div
+                                    key={index}
+                                    className="relative bg-white rounded-lg overflow-hidden flex flex-col justify-between group hover:bg-gradient-to-br hover:from-[#66BE80] hover:to-[#139196] transition duration-500 ease-out"
+                                >
                                     {/* Image */}
                                     <img
                                         src={classItem.image}
                                         alt={classItem.title}
-                                        className="w-full h-52 md:h-44 lg:h-36 object-cover"
+                                        className="w-full h-52 md:h-44  object-cover rounded-lg group-hover:opacity-0 transition duration-300"
                                     />
 
                                     {/* Content */}
-                                    <div className="p-3 flex-grow">
-                                        {/* Title & Price */}
-                                        <div className="flex items-center justify-between mb-2">
-                                            <h3 className="text-xl font-semibold text-gray-800">
+                                    <div className="py-3 group-hover:p-5 flex-grow">
+                                        {/* Title & Description */}
+                                        <div className="group-hover:text-white transition duration-300 group-hover:absolute group-hover:top-24 ">
+                                            <h3 className="text-lg font-medium group-hover:font-bold text-black group-hover:text-white group-hover:leading-loose">
                                                 {classItem.title}
                                             </h3>
-                                            <p className="text-2xl font-semibold text-green-500">
-                                                ${classItem.price}
-                                            </p>
                                         </div>
 
-                                        {/* Description */}
-                                        <p className="text-gray-500 flex items-start gap-2 mb-2">
-                                            <FaInfoCircle className="text-base text-[#fac927] flex-shrink-0 w-4 h-4 mt-[2px]" />
-                                            <span className="break-words">{classItem.description}</span>
+                                        <p className="text-gray-100 text-sm font-semibold group-hover:font-normal group-hover:opacity-100 opacity-0  group-hover:block absolute top-32 group-hover:w-auto group-hover:leading-loose">
+                                            {classItem.description}
                                         </p>
 
-                                        {/* Name */}
-                                        <p className="text-gray-800 flex items-center gap-2 ">
-                                            <FaUser className="text-base text-[#229df0] w-4 h-4" />
-                                            {classItem.name}
-                                        </p>
-
-                                        {/* total enrollment */}
-                                        <p className="text-gray-800 flex items-center gap-2">
-                                            <MdOutlineJoinFull className="text-base text-[#d85420] w-5 h-5" />
-                                            {classItem.totalEnrollment > 0
-                                                ? `${classItem.totalEnrollment} Enrollments`
-                                                : "Be the first to enroll!"}
-                                        </p>
+                                        {/* teacher, price */}
+                                        <div className="group-hover:hidden mt-3">
+                                            <div className="text-gray-700 flex items-center gap-3">
+                                                <FaUserCircle className="text-2xl text-[#229df0]" />
+                                                <p>By </p>
+                                                <span className='text-black'>{classItem.name}</span>
+                                            </div>
+                                            <div className="mt-3 text-2xl font-bold text-[#139196]">
+                                                <small className='text-gray-400 font-normal line-through mr-2 text-base'>$1000</small>
+                                                ${classItem.price}
+                                            </div>
+                                        </div>
                                     </div>
 
-                                    {/* Buttons */}
-                                    <div className="px-3 pb-3 flex items-center gap-1">
-                                        <button disabled={classItem.status === "Pending" || classItem.status === "Rejected"} className="bg-gradient-to-br from-[#66BE80] to-[#139196] text-white hover:bg-bg-gradient-to-br hover:from-[#139196] hover:to-[#139196] cursor-pointer btn btn-sm border-none py-1 w-full rounded-md transition ">
-                                        <FaEnvelope className="mb-[2px]" />  Enroll Now!
+                                    {/* Enrollments */}
+                                    <span
+                                        className={`absolute top-2 right-2 px-3 py-1 text-sm font-medium bg-green-100 text-green-600 rounded-lg border-[1px] border-green-600 group-hover:hidden`}
+                                    >
+                                        {classItem.totalEnrollment > 0
+                                            ? `${classItem.totalEnrollment} Enrollments`
+                                            : "Be the first to enroll!"}
+                                    </span>
+
+                                    {/* Enroll Now Button */}
+                                    <Link
+                                        to={`/class/${classItem._id}`}
+                                        className="p-5 flex items-center gap-1 group-hover:opacity-100 opacity-0 transition duration-500 group-hover:block absolute bottom-4 text-lg"
+                                    >
+                                        <button
+                                            disabled={
+                                                classItem.status === "Pending" || classItem.status === "Rejected"
+                                            }
+                                            className="bg-[#F0BF79] text-black hover:bg-[#139196] hover:text-white cursor-pointer btn btn-md border-none rounded-md transition text-base"
+                                        >
+                                            <FaEnvelope className="mb-[2px] text-base" /> Enroll Now !
                                         </button>
-                                    </div>
+                                    </Link>
                                 </div>
+
+
                             ))
 
                             :

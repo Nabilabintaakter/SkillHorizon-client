@@ -17,6 +17,7 @@ import TeacherRequest from "../Pages/DashboardPages/Admin/TeacherRequest";
 import Users from "../Pages/DashboardPages/Admin/Users";
 import Profile from "../Pages/DashboardPages/Common/Profile";
 import AllClassAdmin from "../Pages/DashboardPages/Admin/AllClassAdmin";
+import Details from "../Pages/Details/Details/Details";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "/allClasses",
         element: <AllClasses></AllClasses>,
+      },
+      {
+        path: "/class/:id",
+        element: <PrivateRoute><Details></Details></PrivateRoute>,
       },
       {
         path: "/teachOnSkill",
