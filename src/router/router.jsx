@@ -18,6 +18,7 @@ import Users from "../Pages/DashboardPages/Admin/Users";
 import Profile from "../Pages/DashboardPages/Common/Profile";
 import AllClassAdmin from "../Pages/DashboardPages/Admin/AllClassAdmin";
 import Details from "../Pages/Details/Details/Details";
+import Payment from "../Pages/Payment/Payment";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: "/class/:id",
         element: <PrivateRoute><Details></Details></PrivateRoute>,
+      },
+      {
+        path: "/payment/:id",
+        element: <PrivateRoute><Payment></Payment></PrivateRoute>,
       },
       {
         path: "/teachOnSkill",

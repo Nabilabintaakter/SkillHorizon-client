@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import Container from '../../../Shared/Container/Container';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
@@ -75,9 +75,9 @@ const Details = () => {
                         </div>
 
                         {/* Pay Button */}
-                        <button className='mt-6 py-3 px-6 bg-gradient-to-br from-[#66BE80] to-[#139196] text-white hover:bg-bg-gradient-to-br hover:from-[#139196] hover:to-[#139196] cursor-pointer rounded-md btn border-none transition duration-300 flex items-center justify-center gap-3 shadow-md'>
+                        <Link to={`/payment/${classData._id}`} className='mt-6 py-3 px-6 bg-gradient-to-br from-[#66BE80] to-[#139196] text-white hover:bg-bg-gradient-to-br hover:from-[#139196] hover:to-[#139196] cursor-pointer rounded-md btn border-none transition duration-300 flex items-center justify-center gap-3 shadow-md'>
                             <FaMoneyBillWave className="text-white text-xl" /> Pay Now
-                        </button>
+                        </Link>
                     </div>
                 </div>
 
