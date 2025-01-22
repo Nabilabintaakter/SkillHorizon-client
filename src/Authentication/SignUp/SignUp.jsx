@@ -77,7 +77,7 @@ const SignUp = () => {
     // Handle Google Signin
     const handleGoogleSignIn = () => {
         signInWithGoogle()
-            .then(async(res) => {
+            .then(async (res) => {
                 setUser(res.user)
                 await mutateAsync(
                     {
@@ -187,11 +187,12 @@ const SignUp = () => {
                                 {...register("phoneNumber", {
                                     required: "Phone number is required",
                                     pattern: {
-                                        value: /^[0-9]{0,4}$/,
-                                        message: "Phone number must be 4 digits"
+                                        value: /^[0-9]{11}$/,
+                                        message: "Phone number must be exactly 11 digits"
                                     }
                                 })}
                             />
+
                             {errors.phoneNumber && <p className="text-red-500 text-sm mt-1">{errors.phoneNumber.message}</p>}
                         </div>
 

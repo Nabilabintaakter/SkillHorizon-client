@@ -14,7 +14,6 @@ const MyClass = () => {
             return data
         },
     })
-    console.log(classes)
     if (isLoading) return <LoadingSpinner></LoadingSpinner>
 
     return (

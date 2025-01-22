@@ -10,10 +10,12 @@ import TeacherMenu from './Menu/TeacherMenu';
 import AdminMenu from './Menu/AdminMenu';
 import useAuth from '../../hooks/useAuth';
 import MenuItem from './Menu/MenuItem';
+import useRole from '../../hooks/useRole';
 
 const Sidebar = () => {
     const { signingOut } = useAuth();
     const [isActive, setActive] = useState(false);
+    const [role, isLoading] = useRole();
 
     // Sidebar Responsive Handler
     const handleToggle = () => {
@@ -72,9 +74,9 @@ const Sidebar = () => {
                     <div className="flex flex-col justify-between flex-1 mt-9 md:mt-5">
                         <nav>
                             {/* Menu Items */}
-                            <StudentMenu />
-                            <TeacherMenu />
-                            <AdminMenu />
+                            {role === 'Student' && <StudentMenu />}
+                            {role === 'Teacher' && <TeacherMenu />}
+                            {role === 'Admin' && <AdminMenu />}
                         </nav>
                     </div>
                 </div>

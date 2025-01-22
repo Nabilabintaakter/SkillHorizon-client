@@ -18,7 +18,6 @@ const Profile = () => {
             return data
         },
     })
-    console.log(userData[0])
     if (isLoading) return <LoadingSpinner></LoadingSpinner>
 
     return (
