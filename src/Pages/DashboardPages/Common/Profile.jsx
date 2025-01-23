@@ -11,7 +11,7 @@ import LoadingSpinner from '../../../Shared/LoadingSpinner/LoadingSpinner';
 const Profile = () => {
     const { user } = useAuth();
     const axiosSecure = useAxiosSecure()
-    const { data: userData = [], isLoading, refetch } = useQuery({
+    const { data: userData = [], isLoading } = useQuery({
         queryKey: ['userData'],
         queryFn: async () => {
             const { data } = await axiosSecure(`/users/${user?.email}`)

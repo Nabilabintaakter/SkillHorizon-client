@@ -19,6 +19,8 @@ import Profile from "../Pages/DashboardPages/Common/Profile";
 import AllClassAdmin from "../Pages/DashboardPages/Admin/AllClassAdmin";
 import Details from "../Pages/Details/Details/Details";
 import Payment from "../Pages/Payment/Payment";
+import TeacherRoute from "./TeacherRoute";
+import AdminRoute from "./AdminRoute";
 
 const router = createBrowserRouter([
   {
@@ -55,15 +57,15 @@ const router = createBrowserRouter([
       },
     ]
   },
-  {
+  { 
     path: '/dashboard',
     element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
-    children : [
+    children: [
       {
-        index: true,
+        index: true, 
         element: (
           <PrivateRoute>
-            <MyEnrollClass></MyEnrollClass>
+            <Profile></Profile>
           </PrivateRoute>
         ),
       },
@@ -81,7 +83,9 @@ const router = createBrowserRouter([
         path: 'add-class',
         element: (
           <PrivateRoute>
-            <AddClass></AddClass>
+            <TeacherRoute>
+              <AddClass></AddClass>
+            </TeacherRoute>
           </PrivateRoute>
         ),
       },
@@ -89,7 +93,9 @@ const router = createBrowserRouter([
         path: 'my-class',
         element: (
           <PrivateRoute>
-            <MyClass></MyClass>
+            <TeacherRoute>
+              <MyClass></MyClass>
+            </TeacherRoute>
           </PrivateRoute>
         ),
       },
@@ -98,7 +104,9 @@ const router = createBrowserRouter([
         path: 'teacher-request',
         element: (
           <PrivateRoute>
-            <TeacherRequest></TeacherRequest>
+            <AdminRoute>
+              <TeacherRequest></TeacherRequest>
+            </AdminRoute>
           </PrivateRoute>
         ),
       },
@@ -106,7 +114,9 @@ const router = createBrowserRouter([
         path: 'users',
         element: (
           <PrivateRoute>
-            <Users></Users>
+            <AdminRoute>
+              <Users></Users>
+            </AdminRoute>
           </PrivateRoute>
         ),
       },
@@ -114,7 +124,9 @@ const router = createBrowserRouter([
         path: 'all-classes-admin',
         element: (
           <PrivateRoute>
-            <AllClassAdmin></AllClassAdmin>
+            <AdminRoute>
+              <AllClassAdmin></AllClassAdmin>
+            </AdminRoute>
           </PrivateRoute>
         ),
       },
@@ -127,8 +139,9 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
-    ]
+    ],
   }
+
 ]);
 
 export default router;

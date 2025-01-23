@@ -6,8 +6,9 @@ const TeacherRoute = ({ children }) => {
     const [role, isLoading] = useRole()
   
     if (isLoading) return <LoadingSpinner />
-    if (role === 'seller') return children
-    return <Navigate to='/dashboard' replace='true' />
+    if (role === 'Teacher') return children
+    else if (role === 'Student') return <Navigate to='/dashboard/my-enroll-class' replace='true' />
+    return <Navigate to='/dashboard/teacher-request' replace='true' />
   }
   
   

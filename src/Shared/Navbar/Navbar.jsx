@@ -95,7 +95,7 @@ const Navbar = () => {
                                             <p className='text-blue-950 md:text-lg font-bold text-center mb-3'>{user?.displayName}</p>
                                         
                                         <li><NavLink
-                                            to="/dashboard"
+                                            to="/dashboard/profile"
                                             className={({ isActive }) =>
                                                 ` hover:text-[#139196] transition-all duration-500 bg-[#139196] bg-opacity-35 rounded-[5px] flex justify-center items-center ${isActive ? 'text-[#139196] font-bold' : 'font-semibold'
                                                 }`
