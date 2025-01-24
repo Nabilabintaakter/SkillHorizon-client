@@ -3,11 +3,25 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
 import LoadingSpinner from "../../../Shared/LoadingSpinner/LoadingSpinner";
 import { useQuery } from "@tanstack/react-query";
+import { Button } from '@headlessui/react'
+import { useState } from 'react'
+import UpdateClassModal from "../../../components/Modal/UpdateClassModal";
 
 const MyClass = () => {
+    let [isOpen, setIsOpen] = useState(false)
+    let [selectedClass, setSelectedClass] = useState(null)
+
+    function open(classItem) {
+        setSelectedClass(classItem)
+        setIsOpen(true)
+    }
+    function close() {
+        setIsOpen(false)
+    }
+
     const axiosSecure = useAxiosSecure()
     const { user } = useAuth();
-    const { data: classes = [], isLoading } = useQuery({
+    const { data: classes = [], isLoading ,refetch} = useQuery({
         queryKey: ['classes'],
         queryFn: async () => {
             const { data } = await axiosSecure(`/classes/${user?.email}`)
@@ -15,6 +29,7 @@ const MyClass = () => {
         },
     })
     if (isLoading) return <LoadingSpinner></LoadingSpinner>
+
 
     return (
         <div className="container mx-auto py-4 md:py-8 px-4 lg:px-5 xl:px-9 ">
@@ -24,19 +39,16 @@ const MyClass = () => {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4">
                 {
-                    classes?.length > 0 ?
-
+                    classes?.length > 0 ? 
                         classes.map((classItem, index) => (
-
-
                             <div key={index} className="relative bg-white drop-shadow-lg rounded-lg overflow-hidden flex flex-col justify-between">
                                 {/* Status Badge */}
                                 <span
                                     className={`absolute top-2 right-2 px-3 py-1 text-sm font-medium rounded-full ${classItem.status === "Accepted"
-                                            ? "bg-green-100 text-green-600"
-                                            : classItem.status === "Rejected"
-                                                ? "bg-red-100 text-red-600"
-                                                : "bg-yellow-100 text-yellow-600"
+                                        ? "bg-green-100 text-green-600"
+                                        : classItem.status === "Rejected"
+                                            ? "bg-red-100 text-red-600"
+                                            : "bg-yellow-100 text-yellow-600"
                                         }`}
                                 >
                                     {classItem.status}
@@ -47,11 +59,9 @@ const MyClass = () => {
                                     alt={classItem.title}
                                     className="w-full h-52 md:h-32 object-cover"
                                 />
-
                                 {/* Content */}
                                 <div className="p-3 flex-grow">
-                                    {/* Title & Price */}
-                                    <div className="flex items-center justify-between mb-2">
+                                    <div className="flex items-start justify-between mb-2">
                                         <h3 className="text-xl font-semibold text-gray-800">
                                             {classItem.title}
                                         </h3>
@@ -82,10 +92,22 @@ const MyClass = () => {
                                 {/* Buttons */}
                                 <div className="px-3 pb-3">
                                     <div className="flex gap-2 mb-2">
-                                        <button className="btn btn-sm border-none py-1 bg-[#4CAF50] text-white rounded-md hover:bg-[#388E3C] transition flex-grow">
+                                        <Button onClick={() => open(classItem)} className="btn btn-sm border-none py-1 bg-[#4CAF50] text-white rounded-md hover:bg-[#388E3C] transition flex-grow">
                                             Update
-                                        </button>
-                                        <button className="bg-[#F44336] py-1 text-white btn btn-sm border-none rounded-md hover:bg-[#D32F2F] transition flex-grow">
+                                        </Button>
+
+                                        {/* UPDATE MODAL */}
+                                        <UpdateClassModal
+                                            isOpen={isOpen}
+                                            close={close}
+                                            classItem={selectedClass}
+                                            refetch={refetch}
+                                        />
+
+                                        <button
+                                            onClick={() => console.log("Delete function needs to be implemented")}
+                                            className="bg-[#F44336] py-1 text-white btn btn-sm border-none rounded-md hover:bg-[#D32F2F] transition flex-grow"
+                                        >
                                             Delete
                                         </button>
                                     </div>
@@ -94,20 +116,13 @@ const MyClass = () => {
                                     </button>
                                 </div>
                             </div>
-                        ))
-
-                        :
+                        )) :
                         (
                             <div className="col-span-full text-center py-16 flex flex-col items-center bg-[#fef2f2] rounded-lg shadow-md">
-                                {/* Icon */}
                                 <FaThList className="text-6xl text-[#D32F2F] mb-6" />
-
-                                {/* Main Message */}
                                 <p className="text-red-600 text-2xl font-semibold mb-3">
                                     No Classes Available!
                                 </p>
-
-                                {/* Additional suggestion */}
                                 <p className="text-gray-500 text-md mb-6 xl:w-[40%] mx-auto px-5">
                                     It seems you haven't added any classes yet. Start adding your classes to manage them here.
                                 </p>
@@ -116,7 +131,6 @@ const MyClass = () => {
                 }
             </div>
         </div>
-    );
-};
-
+    )
+}
 export default MyClass;

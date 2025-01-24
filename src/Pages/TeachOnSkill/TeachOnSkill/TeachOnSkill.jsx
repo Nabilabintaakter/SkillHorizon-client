@@ -5,21 +5,21 @@ import useAuth from "../../../hooks/useAuth";
 import toast from "react-hot-toast";
 import Container from "../../../Shared/Container/Container";
 // import { useQueryClient } from "@tanstack/react-query";
-// import { useNavigate } from "react-router-dom";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
+// import { useNavigate } from "react-router-dom";;
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { ImSpinner9 } from "react-icons/im";
 import { MdPendingActions, MdVerified } from "react-icons/md";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
 
 const TeachOnSkill = () => {
     const { user } = useAuth();
-    const axiosSecure = useAxiosSecure()
+    const axiosPublic = useAxiosPublic()
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     // get my data
     const { data: teacher = [], refetch } = useQuery({
         queryKey: ['teacher'],
         queryFn: async () => {
-            const { data } = await axiosSecure(`/teachers/${user?.email}`)
+            const { data } = await axiosPublic(`/teachers/${user?.email}`)
             return data
         },
     })
@@ -106,8 +106,6 @@ const TeachOnSkill = () => {
                             </p>
                         </div>
                     )}
-
-
                     {teacher?.status === "Accepted" && (
                         <div className="flex flex-col items-center justify-center p-6 bg-green-100 border border-green-300 rounded-lg shadow-md">
                             <MdVerified className="w-12 h-12 text-green-500 mb-4" />
@@ -119,8 +117,6 @@ const TeachOnSkill = () => {
                             </p>
                         </div>
                     )}
-
-
                     {
                         teacher?.length === 0 ? (
                             <div>
