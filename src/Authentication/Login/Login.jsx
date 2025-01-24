@@ -84,7 +84,7 @@ const Login = () => {
                 </div>
                 {/* right side */}
                 <div className="w-full md:w-1/2 mt-8 md:mt-5 px-5 sm:px-10 md:pl-8 lg:px-20 flex flex-col justify-center items-center sm:justify-start sm:items-start mb-5 md:mb-0">
-                    <h2 className="text-center md:text-left text-2xl md:text-3xl font-semibold mb-2 text-gray-800">Welcome Back, Nabila!</h2>
+                    <h2 className="text-center md:text-left text-2xl md:text-3xl font-semibold mb-2 text-gray-800">Welcome Back!</h2>
                     <p className="text-gray-500 mb-4 text-center md:text-left md:text-lg">Login with your data that you entered during your Registration.</p>
                     <form className='w-full' onSubmit={handleSubmit(onSubmit)}>
                         <div className="mb-3">
