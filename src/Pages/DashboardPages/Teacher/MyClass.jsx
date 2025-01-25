@@ -7,6 +7,7 @@ import { Button } from '@headlessui/react'
 import { useState } from 'react'
 import UpdateClassModal from "../../../components/Modal/UpdateClassModal";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 const MyClass = () => {
     let [isOpen, setIsOpen] = useState(false)
@@ -138,9 +139,9 @@ const MyClass = () => {
                                             Delete
                                         </button>
                                     </div>
-                                    <button disabled={classItem.status === "Pending" || classItem.status === "Rejected"} className="bg-[#2196F3] text-white btn btn-sm border-none py-1 w-full rounded-md hover:bg-[#1976D2] transition">
+                                    <Link to={`/dashboard/my-class/${classItem._id}`} disabled={classItem.status === "Pending" || classItem.status === "Rejected"} className="bg-[#2196F3] text-white btn btn-sm border-none py-1 w-full rounded-md hover:bg-[#1976D2] transition">
                                         See Details
-                                    </button>
+                                    </Link>
                                 </div>
                             </div>
                         )) :

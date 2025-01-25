@@ -12,35 +12,41 @@ const useAxiosSecure = () => {
     const { signingOut, setLoading } = useAuth();
 
     useEffect(() => {
-        const requestInterceptor = axiosSecure.interceptors.request.use(
-            (config) => {
-                const token = localStorage.getItem('access-token');
-                if (token) {
-                    config.headers.authorization = `Bearer ${token}`;
+        const setupInterceptors = async () => {
+            const requestInterceptor = axiosSecure.interceptors.request.use(
+                (config) => {
+                    const token = localStorage.getItem('access-token');
+                    if (token) {
+                        config.headers.authorization = `Bearer ${token}`;
+                    }
+                    return config;
+                },
+                (error) => Promise.reject(error)
+            );
+    
+            const responseInterceptor = axiosSecure.interceptors.response.use(
+                (response) => response,
+                async (error) => {
+                    const status = error.response?.status;
+                    if (status === 401 || status === 403) {
+                        await signingOut();
+                        setLoading(false);
+                        navigate('/login');
+                        console.log('hayhay');
+                    }
+                    return Promise.reject(error);
                 }
-                return config;
-            },
-            (error) => Promise.reject(error)
-        );
-
-        const responseInterceptor = axiosSecure.interceptors.response.use(
-            (response) => response,
-            async (error) => {
-                const status = error.response?.status;
-                if (status === 401 || status === 403) {
-                    await signingOut();
-                    setLoading(false);
-                    navigate('/login'); // Navigate here is safe
-                }
-                return Promise.reject(error);
-            }
-        );
-
-        return () => {
-            axiosSecure.interceptors.request.eject(requestInterceptor);
-            axiosSecure.interceptors.response.eject(responseInterceptor);
+            );
+    
+            return () => {
+                axiosSecure.interceptors.request.eject(requestInterceptor);
+                axiosSecure.interceptors.response.eject(responseInterceptor);
+            };
         };
+    
+        setupInterceptors();
     }, [navigate, signingOut, setLoading]);
+    
 
     return axiosSecure;
 };

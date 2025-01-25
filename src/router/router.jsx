@@ -21,6 +21,7 @@ import Details from "../Pages/Details/Details/Details";
 import Payment from "../Pages/Payment/Payment";
 import TeacherRoute from "./TeacherRoute";
 import AdminRoute from "./AdminRoute";
+import MyClassAssignment from "../Pages/DashboardPages/Teacher/MyClassAssignment";
 
 const router = createBrowserRouter([
   {
@@ -95,6 +96,16 @@ const router = createBrowserRouter([
           <PrivateRoute>
             <TeacherRoute>
               <MyClass></MyClass>
+            </TeacherRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: 'my-class/:id',
+        element: (
+          <PrivateRoute>
+            <TeacherRoute>
+              <MyClassAssignment></MyClassAssignment>
             </TeacherRoute>
           </PrivateRoute>
         ),
