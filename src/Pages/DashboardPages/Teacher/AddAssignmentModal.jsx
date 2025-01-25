@@ -72,7 +72,7 @@ const AddAssignmentModal = ({ isOpen, close, classData,refetchAssignments,refetc
                             leaveFrom="opacity-100 scale-100"
                             leaveTo="opacity-0 scale-95"
                         >
-                            <Dialog.Panel className="w-full max-w-lg bg-gray-50  rounded-lg shadow-lg p-6">
+                            <Dialog.Panel className="w-full max-w-lg bg-gray-50  rounded-lg shadow-lg p-6 font-josefin">
                                 <Dialog.Title className="text-xl font-semibold text-gray-800">
                                     Create New Assignment
                                 </Dialog.Title>
