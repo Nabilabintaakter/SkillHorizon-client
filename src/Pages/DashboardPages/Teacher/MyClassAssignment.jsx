@@ -3,12 +3,11 @@ import { useParams } from 'react-router-dom';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import LoadingSpinner from '../../../Shared/LoadingSpinner/LoadingSpinner';
-import { FaUserFriends, FaTasks, FaClipboardList, FaPlusCircle, FaRegFrown, FaExclamationCircle } from 'react-icons/fa';
+import { FaUserFriends, FaTasks, FaClipboardList, FaPlusCircle } from 'react-icons/fa';
 import { Button } from '@headlessui/react';
 import AddAssignmentModal from './AddAssignmentModal';
 import useAuth from '../../../hooks/useAuth';
 import AssignmentTableRow from './AssignmentTableRow';
-import { BsExclamationOctagonFill } from 'react-icons/bs';
 import { AiOutlineFileExclamation } from 'react-icons/ai';
 
 const MyClassAssignment = () => {
@@ -28,7 +27,7 @@ const MyClassAssignment = () => {
             return data;
         },
     });
-
+    // assignment
     const { data: assignments = [], isLoading: isAssignmentsLoading, error, refetch: refetchAssignments } = useQuery({
         queryKey: ['assignments', id, user?.email],
         queryFn: async () => {
