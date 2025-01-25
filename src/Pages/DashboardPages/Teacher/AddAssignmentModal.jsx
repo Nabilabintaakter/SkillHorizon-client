@@ -8,7 +8,7 @@ import { useMutation } from "@tanstack/react-query";
 import { ImSpinner9 } from "react-icons/im";
 import toast from "react-hot-toast";
 
-const AddAssignmentModal = ({ isOpen, close, refetch, classData }) => {
+const AddAssignmentModal = ({ isOpen, close, classData,refetchAssignments,refetchClass }) => {
     const { register, handleSubmit, reset, formState: { errors }, } = useForm();
     // useMutation hook
     // const queryClient = useQueryClient()
@@ -35,7 +35,8 @@ const AddAssignmentModal = ({ isOpen, close, refetch, classData }) => {
         }
         try {
             await mutateAsync(assignmentInfo)
-            refetch();
+            refetchClass();
+            refetchAssignments();
             reset();
             close();
             toast.success('Assignment added successfully!');
