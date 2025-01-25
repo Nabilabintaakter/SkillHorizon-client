@@ -4,11 +4,7 @@ import MenuItem from './MenuItem'
 const TeacherMenu = () => {
   return (
     <>
-      <MenuItem
-        icon={FaPlusSquare}
-        label='Add Class'
-        address='add-class'
-      />
+      <MenuItem  icon={FaPlusSquare}  label='Add Class'  address='add-class'/>
       <MenuItem icon={BiBookAlt} label='My Class' address='my-class' />
     </>
   )
