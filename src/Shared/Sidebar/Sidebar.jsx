@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { GrLogout } from 'react-icons/gr';
 import { IoMdSettings } from "react-icons/io";
 import { AiOutlineBars } from 'react-icons/ai';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../assets/l-1.png';
 import text from '../../assets/l-2.png';
 import StudentMenu from './Menu/StudentMenu';
@@ -16,11 +16,19 @@ const Sidebar = () => {
     const { signingOut } = useAuth();
     const [isActive, setActive] = useState(false);
     const [role, isLoading] = useRole();
+    const navigate = useNavigate();
 
     // Sidebar Responsive Handler
     const handleToggle = () => {
         setActive(!isActive);
     };
+    const handleSignOutFromDashboard = () => {
+        signingOut()
+            .then(() => { 
+                navigate('/')
+            })
+            .catch(err => console.log(err))
+    }
 
     return (
         <>
@@ -90,7 +98,7 @@ const Sidebar = () => {
                         address="/dashboard/profile"
                     />
                     <button
-                        onClick={signingOut}
+                        onClick={handleSignOutFromDashboard}
                         className="flex w-full items-center px-4 py-2 mt-5 text-red-600 hover:bg-red-100 hover:text-red-600 transition-colors duration-300 transform rounded-lg"
                     >
                         <GrLogout className="w-5 h-5" />

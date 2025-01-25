@@ -76,7 +76,7 @@ const AllClasses = () => {
 
                                     {/* Enrollments */}
                                     <span
-                                        className={`absolute top-3 right-3 px-3 py-1 text-sm backdrop-blur-md text-green-200 rounded-lg border-[1px] border-green-200 group-hover:hidden`}
+                                        className={`absolute top-3 right-3 px-3 py-1 text-sm backdrop-blur-md text-green-500 bg-white/80 rounded-lg border-[1px] border-green-500 group-hover:hidden`}
                                     >
                                         {classItem.totalEnrollment > 0
                                             ? `${classItem.totalEnrollment} Enrollments`
