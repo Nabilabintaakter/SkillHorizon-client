@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Button } from '@headlessui/react'
 import { useState } from 'react'
 import UpdateClassModal from "../../../components/Modal/UpdateClassModal";
+import Swal from "sweetalert2";
 
 const MyClass = () => {
     let [isOpen, setIsOpen] = useState(false)
@@ -21,7 +22,7 @@ const MyClass = () => {
 
     const axiosSecure = useAxiosSecure()
     const { user } = useAuth();
-    const { data: classes = [], isLoading ,refetch} = useQuery({
+    const { data: classes = [], isLoading, refetch } = useQuery({
         queryKey: ['classes'],
         queryFn: async () => {
             const { data } = await axiosSecure(`/classes/${user?.email}`)
@@ -30,7 +31,32 @@ const MyClass = () => {
     })
     if (isLoading) return <LoadingSpinner></LoadingSpinner>
 
-
+    // DELETE
+    const handleDeleteClass = (id) => {
+        Swal.fire({
+            title: 'Are you sure to delete the class?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiosSecure
+                    .delete(`/my-class/${id}`)
+                    .then((response) => {
+                        if (response.status === 200) {
+                            Swal.fire('Deleted!', 'Your class has been deleted.', 'success');
+                        }
+                        refetch();
+                    })
+                    .catch((error) => {
+                        Swal.fire('Error!', 'Something went wrong. Please try again.', 'error');
+                    });
+            }
+        });
+    };
     return (
         <div className="container mx-auto py-4 md:py-8 px-4 lg:px-5 xl:px-9 ">
             <div className="text-center mb-8">
@@ -39,9 +65,10 @@ const MyClass = () => {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4">
                 {
-                    classes?.length > 0 ? 
+                    classes?.length > 0 ?
                         classes.map((classItem, index) => (
                             <div key={index} className="relative bg-white drop-shadow-lg rounded-lg overflow-hidden flex flex-col justify-between">
+
                                 {/* Status Badge */}
                                 <span
                                     className={`absolute top-2 right-2 px-3 py-1 text-sm font-medium rounded-full ${classItem.status === "Accepted"
@@ -105,7 +132,7 @@ const MyClass = () => {
                                         />
 
                                         <button
-                                            onClick={() => console.log("Delete function needs to be implemented")}
+                                            onClick={() => handleDeleteClass(classItem._id)}
                                             className="bg-[#F44336] py-1 text-white btn btn-sm border-none rounded-md hover:bg-[#D32F2F] transition flex-grow"
                                         >
                                             Delete

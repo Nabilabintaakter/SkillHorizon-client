@@ -51,7 +51,7 @@ const UpdateClassModal = ({ isOpen, close, classItem ,refetch}) => {
             toast.error(error.message || 'Error occurred during class update');
         },
     });
-    console.log("isPending:", isPending);
+
 
     const onSubmit = async (data) => {
         if (!data.image || data.image[0]?.size > 5 * 1024 * 1024) {
