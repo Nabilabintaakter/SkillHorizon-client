@@ -57,7 +57,7 @@ const MyEnrollClass = () => {
 
                                 {/* Buttons */}
                                 <div className="px-4 pb-4">
-                                    <Link to={`/dashboard/my-class/${classItem._id}`}
+                                    <Link to={`/dashboard/my-enroll-class/${classItem.id}`}
                                         disabled={classItem.status === "Pending" || classItem.status === "Rejected"}
                                         className="bg-[#2196F3] text-white btn btn-sm border-none py-2 w-full rounded-md hover:bg-[#1976D2] transition">
                                         Continue
