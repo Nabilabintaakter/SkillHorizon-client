@@ -29,8 +29,8 @@ const Payment = () => {
         if (classData?.price) {
             axiosSecure.post('/create-payment-intent', { price: classData?.price })
                 .then((res) => {
-                    console.log('Client Secret:', res.data.clientSecret); // ডিবাগের জন্য লগ
-                    setClientSecret(res.data.clientSecret); // সঠিকভাবে সেট হচ্ছে কিনা নিশ্চিত করুন
+                    console.log('Client Secret:', res.data.clientSecret); 
+                    setClientSecret(res.data.clientSecret); 
                 })
                 .catch((err) => {
                     console.error('Error fetching clientSecret:', err);
@@ -74,7 +74,7 @@ const Payment = () => {
                         <div>
                             {clientSecret ? (
                                 <Elements stripe={stripePromise} options={{ clientSecret }}>
-                                    <CheckoutForm price={price} clientSecret={clientSecret} />
+                                    <CheckoutForm classData={classData} clientSecret={clientSecret} />
                                 </Elements>
                             ) : (
                                 <p className="text-gray-500 text-center mt-4">

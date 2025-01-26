@@ -49,7 +49,8 @@ const AddClass = () => {
             email: user?.email,
             image: imgData,
             status: 'Pending',
-            price: parseInt(data?.price, 10) // Parse the price to an integer
+            price: parseInt(data?.price, 10) ,
+            totalEnrollment:0
         }
         try {
             // 1. make a post request using useMutation hook
