@@ -102,7 +102,7 @@ const MyClass = () => {
                                     {/* Description */}
                                     <p className="text-gray-500 flex items-start gap-2 mb-2">
                                         <FaInfoCircle className="text-base text-[#fac927] flex-shrink-0 w-4 h-4 mt-[2.5px]" />
-                                        <span className="break-words">{classItem.description}</span>
+                                        <span className="leading-tight">{classItem.description}</span>
                                     </p>
 
                                     {/* Name */}

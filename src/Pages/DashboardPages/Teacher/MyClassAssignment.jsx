@@ -58,7 +58,7 @@ const MyClassAssignment = () => {
                         <div className="bg-blue-50 p-2 shadow-md text-center rounded-lg">
                             <FaUserFriends className="text-blue-600 text-3xl mx-auto mb-2 mt-1" />
                             <h2 className="text-xl font-semibold text-gray-700">Total Enrollment</h2>
-                            <p className="text-2xl font-bold text-blue-800 mt-1">0</p>
+                            <p className="text-2xl font-bold text-blue-800 mt-1">{classData?.totalEnrollment}</p>
                         </div>
                         <div className="bg-green-50 p-2 shadow-md text-center rounded-lg">
                             <FaTasks className="text-green-600 text-3xl mx-auto mb-2 mt-1" />

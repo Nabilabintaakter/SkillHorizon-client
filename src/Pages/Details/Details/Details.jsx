@@ -66,7 +66,8 @@ const Details = () => {
                             </p>
                             <p className='flex text-gray-700 items-center gap-2'>
                                 <FaUserGraduate className="text-orange-500" />
-                                <span><b>Enrolled:</b> {classData?.enrolled || '0'}</span>
+                                <span><b>Enrolled:</b> {classData?.totalEnrollment
+                                    || '0'}</span>
                             </p>
                             <p className='flex text-gray-700 items-center gap-2'>
                                 <FaInfoCircle className="text-purple-500" />
