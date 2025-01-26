@@ -27,8 +27,8 @@ const MyClassAssignment = () => {
             return data;
         },
     });
-    // assignment
-    const { data: assignments = [], isLoading: isAssignmentsLoading, error, refetch: refetchAssignments } = useQuery({
+    // for assignment
+    const { data: assignments = [], isLoading: isAssignmentsLoading, refetch: refetchAssignments } = useQuery({
         queryKey: ['assignments', id, user?.email],
         queryFn: async () => {
             const { data } = await axiosSecure(`/assignments?teacherEmail=${user?.email}&classId=${id}`);
@@ -38,7 +38,14 @@ const MyClassAssignment = () => {
             console.error("Error fetching assignments:", err);
         }
     });
-
+    // for total assignments submission
+    const { data: submissionData = [] } = useQuery({
+        queryKey: ['submissions', id],
+        queryFn: async () => {
+            const { data } = await axiosSecure(`/my-class-assignment/submissions/${id}`);
+            return data;
+        },
+    });
 
     // Loading state check
     if (isClassLoading || isAssignmentsLoading) return <LoadingSpinner />;
@@ -68,7 +75,7 @@ const MyClassAssignment = () => {
                         <div className="bg-purple-50 p-2 shadow-md text-center rounded-lg">
                             <FaClipboardList className="text-purple-600 text-3xl mx-auto mb-2 mt-1" />
                             <h2 className="text-xl font-semibold text-gray-700">Total Submissions</h2>
-                            <p className="text-2xl font-bold text-purple-800 mt-1">0</p>
+                            <p className="text-2xl font-bold text-purple-800 mt-1">{submissionData?.length}</p>
                         </div>
                     </div>
                     <div className="mt-3">
