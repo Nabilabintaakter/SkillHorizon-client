@@ -13,7 +13,6 @@ const AssignmentSubmissionModal = ({ isOpen, close, assignment }) => {
     const { register, handleSubmit, reset, formState: { errors }, } = useForm();
     // useMutation hook
     // const queryClient = useQueryClient()
-    // const navigate = useNavigate()
     const axiosSecure = useAxiosSecure()
     const { isPending, mutateAsync } = useMutation({
         mutationFn: async submissionInfo => {
@@ -21,7 +20,7 @@ const AssignmentSubmissionModal = ({ isOpen, close, assignment }) => {
         },
         onSuccess: () => {
             console.log('assignment submission data saved')
-            // queryClient.invalidateQueries({ queryKey: ['classes'] })
+            // queryClient.invalidateQueries({ queryKey: ['submissions'] })
         },
         onError: err => {
             console.log(err.message)
@@ -29,6 +28,7 @@ const AssignmentSubmissionModal = ({ isOpen, close, assignment }) => {
     })
     const onSubmit = async (data) => {
         const submissionInfo = {
+            classId:assignment?.classId,
             className: assignment?.className,
             assignmentTitle: assignment?.title,
             ...data,
