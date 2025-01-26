@@ -1,4 +1,4 @@
-import { FaUser, FaEnvelope, FaInfoCircle, FaThList } from "react-icons/fa"; // Import React Icons
+import { FaUser, FaEnvelope, FaInfoCircle, FaThList } from "react-icons/fa"; 
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
 import LoadingSpinner from "../../../Shared/LoadingSpinner/LoadingSpinner";
@@ -10,6 +10,8 @@ import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 
 const MyClass = () => {
+    const axiosSecure = useAxiosSecure()
+    const { user } = useAuth();
     let [isOpen, setIsOpen] = useState(false)
     let [selectedClass, setSelectedClass] = useState(null)
 
@@ -21,8 +23,7 @@ const MyClass = () => {
         setIsOpen(false)
     }
 
-    const axiosSecure = useAxiosSecure()
-    const { user } = useAuth();
+
     const { data: classes = [], isLoading, refetch } = useQuery({
         queryKey: ['classes'],
         queryFn: async () => {

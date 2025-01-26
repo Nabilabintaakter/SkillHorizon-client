@@ -4,80 +4,76 @@ import useAuth from '../../hooks/useAuth';
 import toast from 'react-hot-toast';
 import { useMutation } from '@tanstack/react-query';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
-import { ImSpinner9 } from 'react-icons/im';
-import moment from 'moment'; // Import moment.js
+import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
 
 const CheckoutForm = ({ classData, clientSecret }) => {
     const stripe = useStripe();
     const elements = useElements();
     const { user } = useAuth();
-    const [errorMessage, setErrorMessage] = useState("");
-    const [transactionId, setTransactionId] = useState(""); 
+    const [errorMessage, setErrorMessage] = useState('');
+    const [isProcessing, setIsProcessing] = useState(false);
     const axiosSecure = useAxiosSecure();
     const navigate = useNavigate();
 
-    const { isPending, mutateAsync } = useMutation({
-        mutationFn: async paymentInfo => {
-            await axiosSecure.post(`/payments`, paymentInfo);
+    const { mutateAsync } = useMutation({
+        mutationFn: async (paymentInfo) => {
+            await axiosSecure.post('/payments', paymentInfo);
         },
         onSuccess: () => {
             console.log('Payment data saved');
         },
-        onError: err => {
-            console.log(err.message);
+        onError: (err) => {
+            console.error('Error saving payment data:', err.message);
         },
     });
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
         if (!stripe || !elements) return;
 
         const card = elements.getElement(CardElement);
-
         if (!card) {
-            setErrorMessage("Payment method not found.");
+            setErrorMessage('Payment method not found.');
             return;
         }
 
-        const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(clientSecret, {
-            payment_method: {
-                card: card,
-                billing_details: {
-                    email: user?.email || "Anonymous",
-                    name: user?.displayName || "Anonymous",
+        setIsProcessing(true);
+
+        try {
+            const { paymentIntent, error: confirmError } = await stripe.confirmCardPayment(clientSecret, {
+                payment_method: {
+                    card: card,
+                    billing_details: {
+                        email: user?.email || 'Anonymous',
+                        name: user?.displayName || 'Anonymous',
+                    },
                 },
-            },
-        });
+            });
 
-        if (confirmError) {
-            console.error('Error during payment confirmation:', confirmError.message);
-            setErrorMessage(confirmError.message);
-        } else {
-            console.log('Payment Successful:', paymentIntent);
-            setErrorMessage("");
-            if (paymentIntent?.status === "succeeded") {
-                setTransactionId(paymentIntent?.id);
+            if (confirmError) {
+                setErrorMessage(confirmError.message);
+                return;
+            }
 
-                // Save payment info in db
+            if (paymentIntent?.status === 'succeeded') {
                 const paymentInfo = {
                     classId: classData?._id,
-                    email: user?.email,
-                    transactionId: paymentIntent?.id,
-                    date: moment().utc().format()
+                    studentEmail: user?.email,
+                    transactionId: paymentIntent.id,
+                    date: moment().utc().format(),
                 };
 
-                try {
-                    await mutateAsync(paymentInfo);
-                    console.log(paymentInfo);
-                    toast.success("Payment Successful!");
-                    setTransactionId(""); 
-                    elements.getElement(CardElement).clear(); 
-                    navigate('/dashboard/my-enroll-class')
-                } catch (err) {
-                    toast.error(err.message);
-                }
+                await mutateAsync(paymentInfo);
+                toast.success('Payment Successful!');
+                navigate('/dashboard/my-enroll-class');
             }
+        } catch (err) {
+            toast.error('An error occurred during payment.');
+            console.error(err.message);
+        } finally {
+            setIsProcessing(false);
         }
     };
 
@@ -86,19 +82,13 @@ const CheckoutForm = ({ classData, clientSecret }) => {
             <CardElement />
             {errorMessage && <p className="text-red-500 mt-2">{errorMessage}</p>}
             <button
-                disabled={!stripe}
-                className={`mt-4 px-4 py-1 w-full flex justify-center rounded bg-green-600 text-white font-semibold transition ${
-                    !stripe ? "opacity-50 cursor-not-allowed" : "hover:bg-green-500"
+                type="submit"
+                disabled={!stripe || isProcessing}
+                className={`mt-4 px-4 py-2 w-full rounded bg-green-600 text-white font-semibold ${
+                    isProcessing ? 'opacity-50 cursor-not-allowed' : 'hover:bg-green-500'
                 }`}
             >
-                {isPending ? (
-                    <p className="flex items-center gap-2">
-                        Processing...
-                        <ImSpinner9 className="animate-spin m-auto text-sm" />
-                    </p>
-                ) : (
-                    'Pay'
-                )}
+                {isProcessing ? 'Processing...' : 'Pay'}
             </button>
         </form>
     );
