@@ -3,7 +3,7 @@ import React from 'react';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import useAuth from '../../../hooks/useAuth';
 import LoadingSpinner from '../../../Shared/LoadingSpinner/LoadingSpinner';
-import { FaUser, FaThList, FaChalkboardTeacher } from 'react-icons/fa';
+import { FaThList, FaChalkboardTeacher } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 const MyEnrollClass = () => {
@@ -26,7 +26,7 @@ const MyEnrollClass = () => {
                     Enrolled Classes Overview
                 </h1>
                 <p className="text-[#0886A0] font-medium">
-                    Manage and review the classes you have enrolled in with ease.
+                View all your enrolled classes in one place and seamlessly continue your learning journey.
                 </p>
             </div>
 
@@ -58,8 +58,7 @@ const MyEnrollClass = () => {
                                 {/* Buttons */}
                                 <div className="px-4 pb-4">
                                     <Link to={`/dashboard/my-enroll-class/${classItem.id}`}
-                                        disabled={classItem.status === "Pending" || classItem.status === "Rejected"}
-                                        className="bg-[#2196F3] text-white btn btn-sm border-none py-2 w-full rounded-md hover:bg-[#1976D2] transition">
+                                        className="bg-[#0d75ed] text-white btn btn-sm border-none py-2 w-full rounded-md hover:bg-[#15528f] transition">
                                         Continue
                                     </Link>
                                 </div>
