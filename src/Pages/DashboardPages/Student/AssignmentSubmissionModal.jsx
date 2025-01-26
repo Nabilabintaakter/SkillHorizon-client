@@ -6,19 +6,21 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useMutation } from "@tanstack/react-query";
 import { ImSpinner9 } from "react-icons/im";
 import toast from "react-hot-toast";
+import useAuth from "../../../hooks/useAuth";
 
-const AddAssignmentModal = ({ isOpen, close, classData,refetchAssignments,refetchClass }) => {
+const AssignmentSubmissionModal = ({ isOpen, close, assignment }) => {
+    const {user} = useAuth();
     const { register, handleSubmit, reset, formState: { errors }, } = useForm();
     // useMutation hook
     // const queryClient = useQueryClient()
     // const navigate = useNavigate()
     const axiosSecure = useAxiosSecure()
     const { isPending, mutateAsync } = useMutation({
-        mutationFn: async assignmentInfo => {
-            await axiosSecure.post(`/assignments`, assignmentInfo)
+        mutationFn: async submissionInfo => {
+            await axiosSecure.post(`/assignments-submission`, submissionInfo)
         },
         onSuccess: () => {
-            console.log('assignment data saved')
+            console.log('assignment submission data saved')
             // queryClient.invalidateQueries({ queryKey: ['classes'] })
         },
         onError: err => {
@@ -26,25 +28,23 @@ const AddAssignmentModal = ({ isOpen, close, classData,refetchAssignments,refetc
         },
     })
     const onSubmit = async (data) => {
-        const assignmentInfo = {
-            classId: classData?._id,
-            className: classData?.title,
-            teacherEmail: classData?.email,
+        const submissionInfo = {
+            className: assignment?.className,
+            assignmentTitle: assignment?.title,
             ...data,
+            teacherEmail: assignment?.teacherEmail,
+            studentEmail: user?.email
         }
         try {
-            await mutateAsync(assignmentInfo)
-            refetchClass();
-            refetchAssignments();
+            await mutateAsync(submissionInfo)
             reset();
             close();
-            toast.success('Assignment added successfully!');
+            toast.success('Assignment submitted successfully!');
 
         } catch (error) {
             toast.error(error.message)
         }
     };
-
     return (
         <Transition appear show={isOpen} as={Fragment}>
             <Dialog as="div" className="relative z-50" onClose={close}>
@@ -73,84 +73,32 @@ const AddAssignmentModal = ({ isOpen, close, classData,refetchAssignments,refetc
                         >
                             <Dialog.Panel className="w-full max-w-lg bg-gray-50  rounded-lg shadow-lg p-6 font-josefin">
                                 <Dialog.Title className="text-xl font-semibold text-gray-800">
-                                    Create New Assignment
+                                    Submit Assignment
                                 </Dialog.Title>
 
                                 <form
                                     onSubmit={handleSubmit(onSubmit)}
                                     className="mt-6 space-y-6"
                                 >
-                                    {/* Assignment Title */}
+                                    {/* Assignment submittedUrl */}
                                     <div>
                                         <label
-                                            htmlFor="title"
+                                            htmlFor="submittedUrl"
                                             className="block text-sm font-medium text-gray-800 mb-2"
                                         >
-                                            Assignment Title <span className="text-red-500">*</span>
+                                            Assignment Link <span className="text-red-500">*</span>
                                         </label>
                                         <input
-                                            type="text"
-                                            id="title"
-                                            {...register("title", { required: "Title is required" })}
-                                            placeholder="Enter assignment title"
+                                            type="url"
+                                            id="submittedUrl"
+                                            {...register("submittedUrl", { required: "link is required" })}
+                                            placeholder="Enter assignment link"
                                             className="block w-full rounded-lg border border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm p-2 placeholder-gray-400"
                                         />
-                                        {errors.title && (
-                                            <p className="text-red-500 text-sm mt-1">{errors.title.message}</p>
+                                        {errors.submittedUrl && (
+                                            <p className="text-red-500 text-sm mt-1">{errors.submittedUrl.message}</p>
                                         )}
                                     </div>
-
-                                    {/* Assignment Deadline */}
-                                    <div>
-                                        <label
-                                            htmlFor="deadline"
-                                            className="block text-sm font-medium text-gray-800 mb-2"
-                                        >
-                                            Assignment Deadline <span className="text-red-500">*</span>
-                                        </label>
-                                        <input
-                                            type="date"
-                                            id="deadline"
-                                            {...register("deadline", {
-                                                required: "Deadline is required",
-                                                validate: (value) => {
-                                                    const selectedDate = new Date(value);
-                                                    const currentDate = new Date();
-                                                    currentDate.setHours(0, 0, 0, 0); // Normalize current date to midnight
-                                                    return (
-                                                        selectedDate >= currentDate || "Deadline cannot be in the past"
-                                                    );
-                                                },
-                                            })}
-                                            className="block w-full rounded-lg border border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm p-2"
-                                        />
-                                        {errors.deadline && (
-                                            <p className="text-red-500 text-sm mt-1">{errors.deadline.message}</p>
-                                        )}
-                                    </div>
-
-                                    {/* Assignment Description */}
-                                    <div>
-                                        <label
-                                            htmlFor="description"
-                                            className="block text-sm font-medium text-gray-800 mb-2"
-                                        >
-                                            Assignment Description <span className="text-red-500">*</span>
-                                        </label>
-                                        <textarea
-                                            id="description"
-                                            rows={4}
-                                            {...register("description", {
-                                                required: "Description is required",
-                                            })}
-                                            placeholder="Write a brief description"
-                                            className="block w-full rounded-lg border border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm p-2 placeholder-gray-400"
-                                        />
-                                        {errors.description && (
-                                            <p className="text-red-500 text-sm mt-1">{errors.description.message}</p>
-                                        )}
-                                    </div>
-
                                     {/* Submit and Cancel Buttons */}
                                     <div className="flex justify-end space-x-4">
                                         <button
@@ -166,11 +114,11 @@ const AddAssignmentModal = ({ isOpen, close, classData,refetchAssignments,refetc
                                         >
                                             {isPending ? (
                                                 <p className="flex items-center gap-2">
-                                                    Saving...
+                                                    Submitting...
                                                     <ImSpinner9 className="animate-spin m-auto text-sm" />
                                                 </p>
                                             ) : (
-                                                'Add Assignment'
+                                                'Submit'
                                             )}
                                         </button>
                                     </div>
@@ -184,4 +132,4 @@ const AddAssignmentModal = ({ isOpen, close, classData,refetchAssignments,refetc
     );
 };
 
-export default AddAssignmentModal;
+export default AssignmentSubmissionModal;

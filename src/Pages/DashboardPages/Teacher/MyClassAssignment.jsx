@@ -82,7 +82,7 @@ const MyClassAssignment = () => {
                     </div>
                 </>}
 
-                {/* UPDATE MODAL */}
+                {/* AddAssignmentModal */}
                 <AddAssignmentModal
                     isOpen={isOpen}
                     close={close}

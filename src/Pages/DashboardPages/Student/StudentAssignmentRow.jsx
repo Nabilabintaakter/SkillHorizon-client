@@ -1,6 +1,12 @@
-import React from 'react';
+import { Button } from '@headlessui/react';
+import React, { useState } from 'react';
+import AssignmentSubmissionModal from './AssignmentSubmissionModal';
 
 const StudentAssignmentRow = ({ assignment, index }) => {
+    let [isOpen, setIsOpen] = useState(false);
+    function close() {
+        setIsOpen(false);
+    }
     return (
         <tr
 
@@ -15,11 +21,18 @@ const StudentAssignmentRow = ({ assignment, index }) => {
             {/* Deadline */}
             <td className="px-4 py-3 text-sm font-medium text-gray-600">{assignment.deadline}</td>
             <td className="px-4 py-3 md:px-7 text-sm font-medium text-gray-600">
-                <button
+                <Button
+                    onClick={() => setIsOpen(true)}
                     className="border-none btn btn-sm py-1 md:px-7 w-full rounded-md  bg-green-500 hover:bg-white text-white hover:text-green-600 transition-all duration-500"
                 >
                     Submit
-                </button>
+                </Button>
+                {/*AssignmentSubmissionModal*/}
+                <AssignmentSubmissionModal
+                    isOpen={isOpen}
+                    close={close}
+                    assignment={assignment}
+                />
             </td>
         </tr>
     );
