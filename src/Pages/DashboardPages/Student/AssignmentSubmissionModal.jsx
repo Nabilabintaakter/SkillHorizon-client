@@ -7,23 +7,24 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { ImSpinner9 } from "react-icons/im";
 import toast from "react-hot-toast";
 import useAuth from "../../../hooks/useAuth";
-import moment from 'moment';
+import moment from "moment";
 
 const AssignmentSubmissionModal = ({ isOpen, close, assignment, thisAssignmentSubmission }) => {
     const { user } = useAuth();
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const axiosSecure = useAxiosSecure();
 
-    // useMutation hook
-    const { isPending, mutateAsync } = useMutation({
-        mutationFn: async submissionInfo => {
-            await axiosSecure.post(`/assignments-submission`, submissionInfo);
+    // UseMutation for submission
+    const { isLoading: isSubmitting, mutateAsync } = useMutation({
+        mutationFn: async (submissionInfo) => {
+            const response = await axiosSecure.post(`/assignments-submission`, submissionInfo);
+            return response.data;
         },
         onSuccess: () => {
-            console.log('Assignment submission data saved');
+            toast.success("Assignment submitted successfully!");
         },
-        onError: err => {
-            console.log(err.message);
+        onError: (error) => {
+            toast.error(error.response?.data?.message || "Something went wrong!");
         },
     });
 
@@ -32,7 +33,7 @@ const AssignmentSubmissionModal = ({ isOpen, close, assignment, thisAssignmentSu
             classId: assignment?.classId,
             className: assignment?.className,
             assignmentTitle: assignment?.title,
-            ...data,
+            submittedUrl: data.submittedUrl,
             teacherEmail: assignment?.teacherEmail,
             studentEmail: user?.email,
             submittedDate: moment().utc().format(),
@@ -43,22 +44,24 @@ const AssignmentSubmissionModal = ({ isOpen, close, assignment, thisAssignmentSu
             reset();
             close();
             refetch();
-            toast.success('Assignment submitted successfully!');
         } catch (error) {
-            toast.error(error.message);
+            console.error("Submission failed:", error.message);
         }
     };
 
-    // Fetch submission data
-    const { data: mySubmission = {}, refetch } = useQuery({
-        queryKey: ["submission", assignment?.title],
+    // Fetch previous submission (if exists)
+    const { data: mySubmission = {}, refetch, isFetching } = useQuery({
+        queryKey: ["submission", assignment?.title, user?.email],
         queryFn: async () => {
-            const { data } = await axiosSecure(`/my-submission/${assignment?.title}`);
+            const { data } = await axiosSecure.get(
+                `/my-submission?title=${assignment?.title}&email=${user?.email}`
+            );
             return data;
         },
+        enabled: !!assignment?.title && !!user?.email, // Fetch only when data is available
     });
 
-    // Update the parent state with mySubmission using useEffect
+    // Update the parent state with mySubmission
     useEffect(() => {
         if (thisAssignmentSubmission) {
             thisAssignmentSubmission(mySubmission);
@@ -91,7 +94,7 @@ const AssignmentSubmissionModal = ({ isOpen, close, assignment, thisAssignmentSu
                             leaveFrom="opacity-100 scale-100"
                             leaveTo="opacity-0 scale-95"
                         >
-                            <Dialog.Panel className="w-full max-w-lg bg-gray-50 rounded-lg shadow-lg p-6 font-josefin">
+                            <Dialog.Panel className="w-full max-w-lg bg-gray-50 rounded-lg shadow-lg p-6">
                                 <Dialog.Title className="text-xl font-semibold text-gray-800">
                                     Submit Assignment
                                 </Dialog.Title>
@@ -111,12 +114,14 @@ const AssignmentSubmissionModal = ({ isOpen, close, assignment, thisAssignmentSu
                                         <input
                                             type="url"
                                             id="submittedUrl"
-                                            {...register("submittedUrl", { required: "link is required" })}
+                                            {...register("submittedUrl", { required: "Assignment link is required" })}
                                             placeholder="Enter assignment link"
                                             className="block w-full rounded-lg border border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm p-2 placeholder-gray-400"
                                         />
                                         {errors.submittedUrl && (
-                                            <p className="text-red-500 text-sm mt-1">{errors.submittedUrl.message}</p>
+                                            <p className="text-red-500 text-sm mt-1">
+                                                {errors.submittedUrl.message}
+                                            </p>
                                         )}
                                     </div>
                                     {/* Submit and Cancel Buttons */}
@@ -130,15 +135,16 @@ const AssignmentSubmissionModal = ({ isOpen, close, assignment, thisAssignmentSu
                                         </button>
                                         <button
                                             type="submit"
+                                            disabled={isSubmitting}
                                             className="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:outline-none"
                                         >
-                                            {isPending ? (
-                                                <p className="flex items-center gap-2">
+                                            {isSubmitting ? (
+                                                <span className="flex items-center gap-2">
                                                     Submitting...
                                                     <ImSpinner9 className="animate-spin m-auto text-sm" />
-                                                </p>
+                                                </span>
                                             ) : (
-                                                'Submit'
+                                                "Submit"
                                             )}
                                         </button>
                                     </div>

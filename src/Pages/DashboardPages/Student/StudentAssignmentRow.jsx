@@ -1,8 +1,6 @@
 import { Button } from '@headlessui/react';
 import React, { useState } from 'react';
 import AssignmentSubmissionModal from './AssignmentSubmissionModal';
-import useAxiosSecure from '../../../hooks/useAxiosSecure';
-import { useQuery } from '@tanstack/react-query';
 
 const StudentAssignmentRow = ({ assignment, index }) => {
     let [isOpen, setIsOpen] = useState(false);
