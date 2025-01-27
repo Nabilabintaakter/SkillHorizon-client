@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import LoadingSpinner from '../../../Shared/LoadingSpinner/LoadingSpinner';
@@ -72,11 +72,11 @@ const MyClassAssignment = () => {
                             <h2 className="text-xl font-semibold text-gray-700">Total Assignments</h2>
                             <p className="text-2xl font-bold text-green-800 mt-1">{assignments?.length}</p>
                         </div>
-                        <div className="bg-purple-50 p-2 shadow-md text-center rounded-lg">
+                        <Link to={`/dashboard/my-class-assignment-submissions/${id }`} className="bg-purple-50 p-2 shadow-md text-center rounded-lg">
                             <FaClipboardList className="text-purple-600 text-3xl mx-auto mb-2 mt-1" />
                             <h2 className="text-xl font-semibold text-gray-700">Total Submissions</h2>
                             <p className="text-2xl font-bold text-purple-800 mt-1">{submissionData?.length}</p>
-                        </div>
+                        </Link>
                     </div>
                     <div className="mt-3">
                         <Button

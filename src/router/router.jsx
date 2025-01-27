@@ -23,6 +23,7 @@ import TeacherRoute from "./TeacherRoute";
 import AdminRoute from "./AdminRoute";
 import MyClassAssignment from "../Pages/DashboardPages/Teacher/MyClassAssignment";
 import EnrollClassDetails from "../Pages/DashboardPages/Student/EnrollClassDetails";
+import AssignmentSubmissions from "../Pages/DashboardPages/Teacher/AssignmentSubmissions";
 
 const router = createBrowserRouter([
   {
@@ -115,6 +116,16 @@ const router = createBrowserRouter([
           <PrivateRoute>
             <TeacherRoute>
               <MyClassAssignment></MyClassAssignment>
+            </TeacherRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: 'my-class-assignment-submissions/:id',
+        element: (
+          <PrivateRoute>
+            <TeacherRoute>
+              <AssignmentSubmissions></AssignmentSubmissions>
             </TeacherRoute>
           </PrivateRoute>
         ),
