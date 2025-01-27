@@ -59,10 +59,17 @@ const EnrollClassDetails = () => {
                             </Button>
                         </div>
                         {/* EvaluationModal */}
-                        <EvaluationModal
-                            isOpen={isOpen}
-                            close={close}
-                        />
+                        {assignments.length > 0 && (
+                            [...new Set(assignments.map(item => item?.className))].map((uniqueClassName, index) => (
+                                <EvaluationModal
+                                    key={index}
+                                    isOpen={isOpen}
+                                    close={close}
+                                    uniqueClassName={uniqueClassName}
+                                />
+                            ))
+                        )}
+
                     </div>
                     <table className="table-auto w-full border-collapse bg-white shadow-md rounded-lg">
                         {/* Table Header */}
@@ -101,13 +108,6 @@ const EnrollClassDetails = () => {
                             <p className="text-gray-500 text-md mb-6 xl:w-[50%] mx-auto px-5">
                                 It looks like no assignments have been added to this class yet.
                             </p>
-                            <Button
-                                onClick={() => setIsOpen(true)}
-                                className="text-white rounded-[5px] bg-gradient-to-br from-[#66BE80] to-[#139196] w-fit font-medium hover:bg-bg-gradient-to-br hover:from-[#139196] hover:to-[#139196] cursor-pointer px-5 md:px-6 py-2 md:py-3 flex gap-2 items-center duration-1000 ease-in-out transition-all"
-                            >
-                                <FcFeedback className="text-white text-lg" />
-                                <span>Teaching Evaluation Report</span>
-                            </Button>
                         </div>
                     </div>
                 )}

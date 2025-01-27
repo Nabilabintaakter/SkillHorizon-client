@@ -3,34 +3,56 @@ import { useForm } from "react-hook-form";
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { useMutation } from "@tanstack/react-query";
+import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
+import useAuth from "../../../hooks/useAuth";
 import { ImSpinner9 } from "react-icons/im";
+import { useMutation } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa"; // Importing icons from react-icons
 
-const EvaluationModal = ({ isOpen, close }) => {
-    const [rating, setRating] = useState(0); // State for the star rating
-    const { register, handleSubmit, reset, formState: { errors } } = useForm();
-    const axiosSecure = useAxiosSecure();
-
-    // Handle star click
+const EvaluationModal = ({ isOpen, close, uniqueClassName }) => {
+    const { user } = useAuth();
+    const [rating, setRating] = useState(0);
+    const { register, handleSubmit, reset, setError, formState: { errors } } = useForm();
+    // useMutation hook
+    // const queryClient = useQueryClient()
+    const axiosSecure = useAxiosSecure()
+    const { isPending, mutateAsync } = useMutation({
+        mutationFn: async evaluationData => {
+            await axiosSecure.post(`/reviews`, evaluationData)
+        },
+        onSuccess: () => {
+            console.log('reviews saved')
+            // queryClient.invalidateQueries({ queryKey: ['reviews'] })
+        },
+        onError: err => {
+            console.log(err.message)
+        },
+    })
     const handleStarClick = (value) => {
         setRating(value);
     };
 
     const onSubmit = async (data) => {
+        if (rating < 1) {
+            setError("rating", { type: "manual", message: "Please provide a rating of at least 1 star." });
+            return;
+        }
         const evaluationData = {
-            teacherEmail: "teacher-email", 
-            rating: rating, 
+            classTitle: uniqueClassName,
+            studentName: user?.displayName,
+            studentEmail: user?.email,
+            rating: rating,
             ...data,
         };
+        console.log(evaluationData);
         try {
-            await axiosSecure.post("/submit-evaluation", evaluationData);
-            toast.success("Evaluation submitted successfully");
+            await mutateAsync(evaluationData)
             reset();
-            close(); 
+            close();
+            toast.success('Your evaluation has been submitted successfully!');
+
         } catch (error) {
-            toast.error("Failed to submit evaluation");
+            toast.error(error.message)
         }
     };
 
@@ -80,25 +102,28 @@ const EvaluationModal = ({ isOpen, close }) => {
                                     Submit Your Teacher Evaluation
                                 </Dialog.Title>
 
-                                <form
-                                    onSubmit={handleSubmit(onSubmit)}
-                                    className="space-y-4"
-                                >
+                                <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                                     {/* Rating Input for Teacher */}
                                     <div className="flex flex-col">
                                         <div className="mt-4 flex justify-center space-x-2">
-                                            {renderStars()} 
+                                            {renderStars()}
                                         </div>
+                                        {errors.rating && (
+                                            <span className="text-red-500 text-sm mt-2 flex justify-center">{errors.rating.message}</span>
+                                        )}
                                     </div>
 
                                     {/* Comments Input */}
                                     <div className="flex flex-col">
                                         <textarea
                                             id="comments"
-                                            {...register("comments")}
+                                            {...register("comments", { required: "Comments are required" })}
                                             className="mt-4 p-3 border border-gray-300 rounded-lg text-black focus:outline-none focus:ring-2 focus:ring-teal-500"
                                             placeholder="Add your comments about the teacher here"
                                         />
+                                        {errors.comments && (
+                                            <span className="text-red-500 text-sm mt-2">{errors.comments.message}</span>
+                                        )}
                                     </div>
 
                                     {/* Submit and Cancel Buttons */}
@@ -114,7 +139,14 @@ const EvaluationModal = ({ isOpen, close }) => {
                                             type="submit"
                                             className="w-1/2 px-6 py-3 text-white bg-teal-600 rounded-lg hover:bg-teal-700 focus:ring-2 focus:ring-teal-500 focus:outline-none transition-all duration-200"
                                         >
-                                            Submit
+                                            {isPending ? (
+                                                <p className="flex items-center gap-2">
+                                                    Saving...
+                                                    <ImSpinner9 className="animate-spin m-auto text-sm" />
+                                                </p>
+                                            ) : (
+                                                'Submit'
+                                            )}
                                         </button>
                                     </div>
                                 </form>
