@@ -2,7 +2,6 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
-import { AiOutlineFileText } from "react-icons/ai"; // Assignment Icon
 import { MdEmail } from "react-icons/md"; // Email Icon
 import { BsLink45Deg } from "react-icons/bs"; // URL Icon
 import { FaClipboard } from "react-icons/fa";
