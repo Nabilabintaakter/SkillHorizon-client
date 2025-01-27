@@ -53,7 +53,7 @@ const Collaborators = () => {
             <Container>
                 <div className=" text-center">
                     <Heading subtitle={'Trusted Partners'} title={'Empowering Learning Together with Renowned Platforms'}></Heading>
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4">
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
                         {collaborators.map((collaborator, index) => (
                             <div
                                 key={index}

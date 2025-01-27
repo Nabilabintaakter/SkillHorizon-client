@@ -43,7 +43,7 @@ const ReviewSlider = () => {
             >
                 {reviews.map((review, index) => (
                     <SwiperSlide key={index} className="flex justify-center items-center">
-                        <div className="text-center  w-full h-[370px] sm:h-[300px] md:h-[410px] lg:h-[320px] px-5 pb-9 flex flex-col justify-center">
+                        <div className="text-center  w-full h-[370px] sm:h-[320px] md:h-[410px] lg:h-[320px] px-5 pb-9 flex flex-col justify-center">
                             <img
                                 src={review.studentImage}
                                 alt={review.studentName}
