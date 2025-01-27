@@ -52,7 +52,7 @@ const ReviewSlider = () => {
                             <h3 className="text-lg md:text-xl font-semibold text-gray-800">
                                 {review.studentName}
                             </h3>
-                            <p className="text-sm md:text-base text-[#92E3A9] italic mb-3">
+                            <p className="text-sm md:text-base text-[#219892] italic mb-3">
                                 {review.classTitle}
                             </p>
                             <div className="flex justify-center gap-1 mb-4">

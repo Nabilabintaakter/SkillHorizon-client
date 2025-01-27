@@ -2,8 +2,15 @@
 import { NavLink } from 'react-router-dom'
 
 const MenuItem = ({ label, address, icon: Icon }) => {
+  const scrollToTop = () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+    });
+};
   return (
     <NavLink
+    onClick={scrollToTop}
       to={address}
       end
       className={({ isActive }) =>

@@ -9,9 +9,15 @@ import useAuth from '../../hooks/useAuth';
 const Navbar = () => {
     const { user, signingOut } = useAuth();
     const navigate = useNavigate();
+    const scrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+        });
+    };
     const handleSignOut = () => {
         signingOut()
-            .then(() => { 
+            .then(() => {
                 navigate('/')
             })
             .catch(err => console.log(err))
@@ -20,6 +26,7 @@ const Navbar = () => {
     const links = <>
         <li>
             <NavLink
+                onClick={scrollToTop}
                 to="/"
                 className={({ isActive }) =>
                     ` hover:text-[#139196] transition-all duration-500 ${isActive ? 'text-[#139196] font-bold' : 'font-semibold'
@@ -32,6 +39,7 @@ const Navbar = () => {
         </li>
         <li>
             <NavLink
+                onClick={scrollToTop}
                 to="/allClasses"
                 className={({ isActive }) =>
                     ` hover:text-[#139196] transition-all duration-500 ${isActive ? 'text-[#139196] font-bold' : 'font-semibold'
@@ -42,6 +50,7 @@ const Navbar = () => {
         </li>
         <li>
             <NavLink
+                onClick={scrollToTop}
                 to="/teachOnSkill"
                 className={({ isActive }) =>
                     ` hover:text-[#139196] transition-all duration-500 ${isActive ? 'text-[#139196] font-bold' : 'font-semibold'
@@ -83,7 +92,7 @@ const Navbar = () => {
                                     <div tabIndex={0} role="button" className=" avatar">
                                         <div className="w-10 rounded-full bg-[#128F9D] p-[1px]">
                                             <img
-                                            className='rounded-full object-cover'
+                                                className='rounded-full object-cover'
                                                 alt="User"
                                                 src={user?.photoURL} />
                                         </div>
@@ -91,10 +100,11 @@ const Navbar = () => {
                                     <ul
                                         tabIndex={0}
                                         className="menu menu-sm dropdown-content bg-green-50 rounded-md z-[1] mt-48 w-40 md:w-52 p-2 lg:p-3 shadow">
-                                        
-                                            <p className='text-blue-950 md:text-lg font-bold text-center mb-3'>{user?.displayName}</p>
-                                        
+
+                                        <p className='text-blue-950 md:text-lg font-bold text-center mb-3'>{user?.displayName}</p>
+
                                         <li><NavLink
+                                            onClick={scrollToTop}
                                             to="/dashboard/profile"
                                             className={({ isActive }) =>
                                                 ` hover:text-[#139196] transition-all duration-500 bg-[#139196] bg-opacity-35 rounded-[5px] flex justify-center items-center ${isActive ? 'text-[#139196] font-bold' : 'font-semibold'
