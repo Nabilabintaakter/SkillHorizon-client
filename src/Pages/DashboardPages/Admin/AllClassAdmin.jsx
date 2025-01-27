@@ -2,6 +2,7 @@ import toast from "react-hot-toast";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import LoadingSpinner from "../../../Shared/LoadingSpinner/LoadingSpinner";
 import { useMutation, useQuery } from "@tanstack/react-query";
+import { Link } from "react-router-dom";
 
 const AllClassAdmin = () => {
     const axiosSecure = useAxiosSecure()
@@ -131,12 +132,12 @@ const AllClassAdmin = () => {
 
                                 {/* More Info */}
                                 <td className="px-4">
-                                    <button
+                                    <Link to={`/dashboard/my-class/${classItem._id}/${classItem.email}`}
                                         className="border-none btn btn-sm rounded-md  bg-yellow-500 hover:bg-white text-xs text-white hover:text-yellow-500 transition-all duration-500"
                                         disabled={classItem.status === "Pending" || classItem.status === "Rejected"}
                                     >
                                         Progress
-                                    </button>
+                                    </Link>
                                 </td>
                             </tr>
                         ))}

@@ -49,7 +49,7 @@ const EnrollClassDetails = () => {
                                 className="text-white rounded-[5px] bg-gradient-to-br from-[#66BE80] to-[#139196] w-fit font-medium hover:bg-bg-gradient-to-br hover:from-[#139196] hover:to-[#139196] cursor-pointer px-3 py-1 md:px-5 md:py-2 flex gap-2 items-center duration-1000 ease-in-out transition-all"
                             >
                                 <FcFeedback className="text-white text-lg" />
-                                <span>Feedback Us</span>
+                                <span>Teaching Evaluation Report</span>
                             </button>
                         </div>
                     </div>
@@ -94,7 +94,7 @@ const EnrollClassDetails = () => {
                                 className="text-white rounded-[5px] bg-gradient-to-br from-[#66BE80] to-[#139196] w-fit font-medium hover:bg-bg-gradient-to-br hover:from-[#139196] hover:to-[#139196] cursor-pointer px-5 md:px-6 py-2 md:py-3 flex gap-2 items-center duration-1000 ease-in-out transition-all"
                             >
                                 <FcFeedback className="text-white text-lg" />
-                                <span>Feedback Us</span>
+                                <span>Teaching Evaluation Report</span>
                             </button>
                         </div>
                     </div>

@@ -111,15 +111,15 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: 'my-class/:id',
+        path: 'my-class/:id/:email',
         element: (
           <PrivateRoute>
             <TeacherRoute>
-              <MyClassAssignment></MyClassAssignment>
+              <MyClassAssignment />
             </TeacherRoute>
           </PrivateRoute>
         ),
-      },
+      },      
       {
         path: 'my-class-assignment-submissions/:id',
         element: (

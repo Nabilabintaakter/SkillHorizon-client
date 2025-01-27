@@ -8,7 +8,7 @@ const TeacherRoute = ({ children }) => {
     const {signingOut} = useAuth();
   
     if (isLoading) return <LoadingSpinner />
-    if (role === 'Teacher') return children
+    if (role === 'Teacher' || role=== "Admin") return children
     else{
       signingOut()
       return <Navigate to='/login' replace='true' />

@@ -11,13 +11,13 @@ import AssignmentTableRow from './AssignmentTableRow';
 import { AiOutlineFileExclamation } from 'react-icons/ai';
 
 const MyClassAssignment = () => {
-    const { user } = useAuth();
-    const { id } = useParams();
+    const { id ,email} = useParams();
     const axiosSecure = useAxiosSecure();
     let [isOpen, setIsOpen] = useState(false);
     function close() {
         setIsOpen(false);
     }
+    console.log(id,email);
 
     // for class
     const { data: classData = {}, isLoading: isClassLoading, refetch: refetchClass } = useQuery({
@@ -27,17 +27,19 @@ const MyClassAssignment = () => {
             return data;
         },
     });
-    // for assignment
     const { data: assignments = [], isLoading: isAssignmentsLoading, refetch: refetchAssignments } = useQuery({
-        queryKey: ['assignments', id, user?.email],
+        queryKey: ['assignments', id, email],
         queryFn: async () => {
-            const { data } = await axiosSecure(`/assignments?teacherEmail=${user?.email}&classId=${id}`);
+            const { data } = await axiosSecure(`/assignments?teacherEmail=${email}&classId=${id}`);
             return data;
         },
         onError: (err) => {
             console.error("Error fetching assignments:", err);
-        }
+        },
+        // Optional: Trigger refetch on params change (like email or id)
+        enabled: !!id && !!email,
     });
+    
     // for total assignments submission
     const { data: submissionData = [] } = useQuery({
         queryKey: ['submissions', id],
@@ -50,7 +52,7 @@ const MyClassAssignment = () => {
     // Loading state check
     if (isClassLoading || isAssignmentsLoading) return <LoadingSpinner />;
 
-    if (user?.email === classData?.email) {
+    if (email === classData?.email) {
         return (
             <div className="container mx-auto py-4 md:py-8 px-4 lg:px-5 xl:px-9 pb-10">
                 <div className="text-center mb-8">

@@ -140,7 +140,7 @@ const MyClass = () => {
                                             Delete
                                         </button>
                                     </div>
-                                    <Link to={`/dashboard/my-class/${classItem._id}`} disabled={classItem.status === "Pending" || classItem.status === "Rejected"} className="bg-[#2196F3] text-white btn btn-sm border-none py-1 w-full rounded-md hover:bg-[#1976D2] transition">
+                                    <Link to={`/dashboard/my-class/${classItem._id}/${classItem.email}`} disabled={classItem.status === "Pending" || classItem.status === "Rejected"} className="bg-[#2196F3] text-white btn btn-sm border-none py-1 w-full rounded-md hover:bg-[#1976D2] transition">
                                         See Details
                                     </Link>
                                 </div>
