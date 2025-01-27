@@ -32,7 +32,7 @@ const StudentAssignmentRow = ({ assignment, index }) => {
             <td className="px-4 py-3 md:px-7 text-sm font-medium text-gray-600">
             <Button
           onClick={() => setIsOpen(true)}
-          disabled={isButtonDisabled} // Button disable করার জন্য state ব্যবহার
+          disabled={isButtonDisabled}
           className={`border-none btn btn-sm py-1 md:px-7 w-full rounded-md ${
             isButtonDisabled
               ? "bg-gray-400 text-gray-700 cursor-not-allowed"

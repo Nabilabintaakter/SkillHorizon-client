@@ -83,7 +83,7 @@ const AssignmentSubmissionModal = ({ isOpen, close, assignment, thisAssignmentSu
                     <div className="fixed inset-0 bg-black bg-opacity-30" />
                 </Transition.Child>
 
-                <div className="fixed inset-0 overflow-y-auto">
+                <div className="font-josefin fixed inset-0 overflow-y-auto">
                     <div className="flex items-center justify-center min-h-full p-4">
                         <Transition.Child
                             as={Fragment}

@@ -17,7 +17,6 @@ const MyClassAssignment = () => {
     function close() {
         setIsOpen(false);
     }
-    console.log(id,email);
 
     // for class
     const { data: classData = {}, isLoading: isClassLoading, refetch: refetchClass } = useQuery({
