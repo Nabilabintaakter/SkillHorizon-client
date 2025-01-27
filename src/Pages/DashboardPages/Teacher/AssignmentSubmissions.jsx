@@ -4,11 +4,12 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import { MdEmail } from "react-icons/md"; // Email Icon
 import { BsLink45Deg } from "react-icons/bs"; // URL Icon
-import { FaClipboard } from "react-icons/fa";
+import { FaClipboard, FaRegClock } from "react-icons/fa"; // Clock Icon
 
 const AssignmentSubmissions = () => {
     const { id } = useParams();
     const axiosSecure = useAxiosSecure();
+
     // Fetch submission data
     const { data: submissionData = [] } = useQuery({
         queryKey: ["submissions", id],
@@ -18,6 +19,12 @@ const AssignmentSubmissions = () => {
         },
     });
 
+    // Function to format UTC date into local date format
+    const formatDate = (utcDate) => {
+        const date = new Date(utcDate);
+        return date.toLocaleString(); // Converts UTC to local time format
+    };
+
     return (
         <div className="container mx-auto py-6 md:py-10 px-4 lg:px-6 xl:px-10">
             {/* Heading */}
@@ -25,7 +32,7 @@ const AssignmentSubmissions = () => {
                 <h1 className="text-gray-800 text-2xl md:text-3xl lg:text-4xl font-bold w-[70%] mx-auto">
                     Assignment Submissions
                 </h1>
-                {submissionData?.length>0 && <p className="text-gray-800 text-xl md:text-2xl mt-3 font-medium w-[70%] mx-auto">{submissionData[0]?.className || "Class"}</p>}
+                {submissionData?.length > 0 && <p className="text-gray-800 text-xl md:text-2xl mt-3 font-medium w-[70%] mx-auto">{submissionData[0]?.className || "Class"}</p>}
                 <p className="text-[#0886A0] font-medium mt-2">
                     Total Submissions: {submissionData?.length} | Track assignment submissions in detail
                 </p>
@@ -42,10 +49,8 @@ const AssignmentSubmissions = () => {
                             <div className="flex items-center gap-2 mb-4">
                                 <div className="flex items-center space-x-2">
                                     <span className="text-xl text-purple-600 font-bold">{index + 1}.</span>
-                                    <span className="text-purple-600 text-xl flex items-center font-medium">{item.assignmentTitle}
-                                    </span>
+                                    <span className="text-purple-600 text-xl flex items-center font-medium">{item.assignmentTitle}</span>
                                 </div>
-
                             </div>
 
                             <p className="text-sm font-medium text-gray-700 mb-2">
@@ -53,8 +58,7 @@ const AssignmentSubmissions = () => {
                                 Submitted by:{" "}
                                 <span className="font-normal text-gray-600">{item.studentEmail}</span>
                             </p>
-
-                            <p className="text-sm font-medium text-gray-700">
+                            <p className="text-sm font-medium text-gray-700 mb-2">
                                 <BsLink45Deg className="inline-block text-green-600 mr-1" />
                                 Submission URL:{" "}
                                 <a
@@ -65,6 +69,11 @@ const AssignmentSubmissions = () => {
                                 >
                                     View Submission
                                 </a>
+                            </p>
+                            <p className="text-sm font-medium text-gray-700 mb-2">
+                                <FaRegClock className="inline-block text-[#FF7B54] mr-1" />
+                                Submitted date:{" "}
+                                <span className="font-normal text-gray-600">{formatDate(item.submittedDate)}</span>
                             </p>
                         </div>
                     ))
