@@ -81,7 +81,7 @@ const UpdateClassModal = ({ isOpen, close, classItem ,refetch}) => {
 
     return (
         <Dialog open={isOpen} as="div" className="relative z-10" onClose={handleClose}>
-            <div className="fixed inset-0 backdrop-blur-[0.5px]"></div>
+            <div className="fixed inset-0 bg-black/5"></div>
             <div className="fixed inset-0 flex items-center justify-center p-4 font-josefin">
                 <DialogPanel className="w-full max-w-lg bg-white rounded-lg shadow-lg p-6 text-gray-900 relative">
                     <button

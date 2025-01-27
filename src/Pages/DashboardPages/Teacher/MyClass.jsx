@@ -60,7 +60,7 @@ const MyClass = () => {
         });
     };
     return (
-        <div className="container mx-auto py-4 md:py-8 px-4 lg:px-5 xl:px-9 ">
+        <div className="container mx-auto py-4 md:py-8 px-4 lg:px-5 xl:px-9 pb-10">
             <div className="text-center mb-8">
                 <h1 className='text-black mb-3 text-2xl md:text-3xl lg:text-4xl font-bold w-full mx-auto'>Manage Your Classes</h1>
                 <p className='text-[#0886A0]  font-medium'>View, Update, and Delete Your Added Classes Seamlessly</p>
@@ -102,7 +102,7 @@ const MyClass = () => {
                                     {/* Description */}
                                     <p className="text-gray-500 flex items-start gap-2 mb-2">
                                         <FaInfoCircle className="text-base text-[#fac927] flex-shrink-0 w-4 h-4 mt-[2.5px]" />
-                                        <span className="leading-10">{classItem.description}</span>
+                                        <span className="leading-tight">{classItem.description}</span>
                                     </p>
 
                                     {/* Name */}

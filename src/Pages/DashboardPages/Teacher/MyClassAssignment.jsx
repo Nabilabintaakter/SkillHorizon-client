@@ -52,7 +52,7 @@ const MyClassAssignment = () => {
 
     if (user?.email === classData?.email) {
         return (
-            <div className="container mx-auto py-4 md:py-8 px-4 lg:px-5 xl:px-9">
+            <div className="container mx-auto py-4 md:py-8 px-4 lg:px-5 xl:px-9 pb-10">
                 <div className="text-center mb-8">
                     <h1 className='text-black mb-3 text-2xl md:text-3xl lg:text-4xl font-bold w-full mx-auto'>
                         {classData?.title ? `${classData.title}` : 'Class Progress Dashboard'}
@@ -61,7 +61,7 @@ const MyClassAssignment = () => {
                 </div>
 
                 {assignments.length > 0 && <>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                         <div className="bg-blue-50 p-2 shadow-md text-center rounded-lg">
                             <FaUserFriends className="text-blue-600 text-3xl mx-auto mb-2 mt-1" />
                             <h2 className="text-xl font-semibold text-gray-700">Total Enrollment</h2>
@@ -72,13 +72,13 @@ const MyClassAssignment = () => {
                             <h2 className="text-xl font-semibold text-gray-700">Total Assignments</h2>
                             <p className="text-2xl font-bold text-green-800 mt-1">{assignments?.length}</p>
                         </div>
-                        <Link to={`/dashboard/my-class-assignment-submissions/${id }`} className="bg-purple-50 p-2 shadow-md text-center rounded-lg">
+                        <Link to={`/dashboard/my-class-assignment-submissions/${id }`} className="bg-purple-50 p-2 shadow-md text-center col-span-2 md:col-span-1 rounded-lg">
                             <FaClipboardList className="text-purple-600 text-3xl mx-auto mb-2 mt-1" />
                             <h2 className="text-xl font-semibold text-gray-700">Total Submissions</h2>
                             <p className="text-2xl font-bold text-purple-800 mt-1">{submissionData?.length}</p>
                         </Link>
                     </div>
-                    <div className="mt-3">
+                    <div className="mt-6">
                         <Button
                             onClick={() => setIsOpen(true)}
                             className="px-4 py-2 bg-gradient-to-r from-blue-700 to-indigo-700 text-white font-semibold rounded-md shadow-lg hover:from-blue-400 hover:to-indigo-600 transition-colors duration-500 flex items-center justify-center space-x-2"
