@@ -5,6 +5,7 @@ import StatsSection from '../StatsSection/StatsSection';
 import JoinAsInstructor from '../JoinAsInstructor/JoinAsInstructor';
 import Categories from '../Categories/Categories';
 import FeaturesSection from '../FeaturesSection/FeaturesSection';
+import Reviews from '../Reviews/Reviews';
 
 const Home = () => {
     return (
@@ -14,6 +15,7 @@ const Home = () => {
             <StatsSection></StatsSection>
             <Categories></Categories>
             <FeaturesSection></FeaturesSection>
+            <Reviews></Reviews>
             <JoinAsInstructor></JoinAsInstructor>
         </div>
     );

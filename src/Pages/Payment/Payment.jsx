@@ -53,17 +53,17 @@ const Payment = () => {
 
     return (
         <Container>
-            <div className="flex justify-center items-center min-h-screen">
+            <div className="flex justify-center items-center min-h-[calc(100vh-64px)]">
                 <div className="w-full max-w-md">
-                    <h2 className="text-center text-xl font-semibold mb-4">
+                    <h2 className="text-center text-2xl lg:text-3xl font-semibold mb-4">
                         Complete Your Payment
                     </h2>
                     <div className="bg-gray-50 rounded border p-4">
-                        <div className="flex justify-between font-semibold">
+                        <div className="flex justify-between text-xl md:text-2xl font-semibold">
                             <p>Total</p>
-                            <p className="text-green-600">${price.toFixed(2)}</p>
+                            <p className="text-xl md:text-2xl text-[#139196] font-bold">${price.toFixed(2)}</p>
                         </div>
-                        <small className="line-through block text-gray-500 mb-4">$1000</small>
+                        <small className="line-through text-gray-500 mb-4 flex justify-end">$1000</small>
                         {clientSecret ? (
                             <Elements stripe={stripePromise} options={{ clientSecret }}>
                                 <CheckoutForm classData={classData} clientSecret={clientSecret} />

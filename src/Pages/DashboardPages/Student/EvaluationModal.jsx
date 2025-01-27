@@ -40,7 +40,7 @@ const EvaluationModal = ({ isOpen, close, uniqueClassName }) => {
         const evaluationData = {
             classTitle: uniqueClassName,
             studentName: user?.displayName,
-            studentEmail: user?.email,
+            studentImage: user?.photoURL,
             rating: rating,
             ...data,
         };

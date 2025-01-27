@@ -26,6 +26,7 @@ const MyClassAssignment = () => {
             return data;
         },
     });
+    console.log(classData);
     const { data: assignments = [], isLoading: isAssignmentsLoading, refetch: refetchAssignments } = useQuery({
         queryKey: ['assignments', id, email],
         queryFn: async () => {
@@ -60,8 +61,6 @@ const MyClassAssignment = () => {
                     </h1>
                     <p className='text-[#0886A0] font-medium'>Track enrollments, assignments, and submissions efficiently</p>
                 </div>
-
-                {assignments.length > 0 && <>
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                         <div className="bg-blue-50 p-2 shadow-md text-center rounded-lg">
                             <FaUserFriends className="text-blue-600 text-3xl mx-auto mb-2 mt-1" />
@@ -79,7 +78,7 @@ const MyClassAssignment = () => {
                             <p className="text-2xl font-bold text-purple-800 mt-1">{submissionData?.length}</p>
                         </Link>
                     </div>
-                    <div className="mt-6">
+                    {assignments.length > 0 && <div className="mt-6">
                         <Button
                             onClick={() => setIsOpen(true)}
                             className="px-4 py-2 bg-gradient-to-r from-blue-700 to-indigo-700 text-white font-semibold rounded-md shadow-lg hover:from-blue-400 hover:to-indigo-600 transition-colors duration-500 flex items-center justify-center space-x-2"
@@ -87,8 +86,7 @@ const MyClassAssignment = () => {
                             <FaPlusCircle className="text-white" />
                             <span className="">Create Assignment</span>
                         </Button>
-                    </div>
-                </>}
+                    </div>}
 
                 {/* AddAssignmentModal */}
                 <AddAssignmentModal

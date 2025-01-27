@@ -64,9 +64,9 @@ const Profile = () => {
                                 </p>
                             </div>
                         </div>
-                        <div className="mt-6 absolute bottom-[112px] right-2">
+                        <div className="mt-6 absolute bottom-[112px] right-2 ">
                             <button
-                                className={`flex items-center px-4 py-1 text-white rounded-full text-sm font-medium shadow-lg ${userData[0]?.role === "Admin"
+                                className={`flex items-center px-4 py-1 text-white rounded-full text-sm font-medium shadow-lg cursor-default ${userData[0]?.role === "Admin"
                                         ? "bg-gradient-to-r from-green-400 to-green-600"
                                         : userData[0]?.role === "Student"
                                             ? "bg-gradient-to-r from-yellow-400 to-yellow-600"
