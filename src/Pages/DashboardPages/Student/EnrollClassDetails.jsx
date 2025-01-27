@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import LoadingSpinner from '../../../Shared/LoadingSpinner/LoadingSpinner';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
@@ -15,6 +15,7 @@ const EnrollClassDetails = () => {
     let [isOpen, setIsOpen] = useState(false);
     function close() {
         setIsOpen(false);
+        document.title = `Assignments | SkillHorizon`;
     }
 
     const { data: assignments = [], isLoading, refetch } = useQuery({
@@ -24,7 +25,10 @@ const EnrollClassDetails = () => {
             return data;
         },
     });
-    console.log(assignments);
+    
+    useEffect(() => {
+        document.title = `Assignments | SkillHorizon`;
+    }, [])
     if (isLoading) return <LoadingSpinner />;
     return (
         <div className="container mx-auto py-4 md:py-8 px-4 lg:px-5 xl:px-9">

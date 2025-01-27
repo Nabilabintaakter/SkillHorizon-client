@@ -30,6 +30,7 @@ const Payment = () => {
                 .post('/create-payment-intent', { price: classData.price })
                 .then(({ data }) => {
                     setClientSecret(data.clientSecret);
+                    document.title = 'Payment | SkillHorizon';
                 })
                 .catch((err) => {
                     console.error('Error fetching clientSecret:', err);

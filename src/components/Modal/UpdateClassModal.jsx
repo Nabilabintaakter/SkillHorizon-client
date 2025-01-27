@@ -29,6 +29,7 @@ const UpdateClassModal = ({ isOpen, close, classItem ,refetch}) => {
             setUploadImage({
                 image: { name: 'Choose Image' },
             });
+            document.title = 'Update Your Class | SkillHorizon';
         }
     }, [isOpen, classItem, reset]);
 
@@ -68,7 +69,7 @@ const UpdateClassModal = ({ isOpen, close, classItem ,refetch}) => {
                 id: classItem?._id,
             };
             console.log(classInfo);
-            UpdateClass(classInfo);  // Call the mutation to update class
+            UpdateClass(classInfo);  
         } catch (error) {
             toast.error(error.message || 'Error uploading image');
         }

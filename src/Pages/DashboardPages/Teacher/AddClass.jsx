@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import bg from '../../../assets/add-class.jpg';
 import useAuth from '../../../hooks/useAuth';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { imageUpload, shortImageName } from '../../../api/utils';
 import toast from 'react-hot-toast';
 import { ImSpinner9 } from 'react-icons/im';
@@ -66,6 +66,9 @@ const AddClass = () => {
             toast.error(err.message)
         }
     };
+    useEffect(() => {
+        document.title = `Add Class | SkillHorizon`;
+    }, [])
 
     return (
         <div

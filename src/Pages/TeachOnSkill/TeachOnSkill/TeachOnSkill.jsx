@@ -10,11 +10,15 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { ImSpinner9 } from "react-icons/im";
 import { MdPendingActions, MdVerified } from "react-icons/md";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import { useEffect } from "react";
 
 const TeachOnSkill = () => {
     const { user } = useAuth();
     const axiosPublic = useAxiosPublic()
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
+    useEffect(() => {
+        document.title = 'Teach On SkillHorizon | SkillHorizon';
+    }, [])
     // get my data
     const { data: teacher = [], refetch } = useQuery({
         queryKey: ['teacher'],

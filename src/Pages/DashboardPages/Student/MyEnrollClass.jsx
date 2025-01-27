@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useEffect } from 'react';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import useAuth from '../../../hooks/useAuth';
 import LoadingSpinner from '../../../Shared/LoadingSpinner/LoadingSpinner';
@@ -16,6 +16,10 @@ const MyEnrollClass = () => {
             return data
         },
     })
+    
+    useEffect(() => {
+        document.title = `My Enrolled Classes | SkillHorizon`;
+    }, [])
     if (isLoading) return <LoadingSpinner></LoadingSpinner>
     console.log(classes);
 

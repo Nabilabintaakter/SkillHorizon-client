@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Container from '../../../Shared/Container/Container';
 import useAxiosPublic from '../../../hooks/useAxiosPublic';
 import { useQuery } from '@tanstack/react-query';
@@ -6,9 +6,11 @@ import LoadingSpinner from '../../../Shared/LoadingSpinner/LoadingSpinner';
 import { FaEnvelope, FaThList, FaUserCircle } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import Heading from '../../../Shared/Heading/Heading';
-import { FaChalkboardUser } from 'react-icons/fa6';
 
 const AllClasses = () => {
+    useEffect(() => {
+        document.title = 'All Classes | SkillHorizon';
+    }, [])
     const axiosPublic = useAxiosPublic();
     const { data: classes = [], isLoading } = useQuery({
         queryKey: ['classes'],

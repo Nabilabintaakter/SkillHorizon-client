@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
-import { MdEmail } from "react-icons/md"; // Email Icon
-import { BsLink45Deg } from "react-icons/bs"; // URL Icon
-import { FaClipboard, FaRegClock } from "react-icons/fa"; // Clock Icon
+import { MdEmail } from "react-icons/md"; 
+import { BsLink45Deg } from "react-icons/bs"; 
+import { FaClipboard, FaRegClock } from "react-icons/fa";
 
 const AssignmentSubmissions = () => {
     const { id } = useParams();
@@ -18,12 +18,13 @@ const AssignmentSubmissions = () => {
             return data;
         },
     });
-
-    // Function to format UTC date into local date format
     const formatDate = (utcDate) => {
         const date = new Date(utcDate);
-        return date.toLocaleString(); // Converts UTC to local time format
+        return date.toLocaleString(); 
     };
+    useEffect(() => {
+        document.title = `Assignment Submissions | SkillHorizon`;
+    }, [])
 
     return (
         <div className="container mx-auto py-6 md:py-10 px-4 lg:px-6 xl:px-10">

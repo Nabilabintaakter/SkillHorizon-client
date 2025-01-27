@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import cover from '../../../assets/cover.png';
 import userImg from '../../../assets/user.png';
 import useAuth from '../../../hooks/useAuth';
@@ -18,6 +18,9 @@ const Profile = () => {
             return data
         },
     })
+    useEffect(() => {
+        document.title = ` Your Profile | SkillHorizon`;
+    }, [])
     if (isLoading) return <LoadingSpinner></LoadingSpinner>
 
     return (

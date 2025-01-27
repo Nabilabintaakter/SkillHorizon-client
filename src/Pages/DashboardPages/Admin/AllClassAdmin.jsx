@@ -3,6 +3,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import LoadingSpinner from "../../../Shared/LoadingSpinner/LoadingSpinner";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 const AllClassAdmin = () => {
     const axiosSecure = useAxiosSecure()
@@ -61,6 +62,9 @@ const AllClassAdmin = () => {
         }
         makeRejectClass(classData);
     };
+    useEffect(() => {
+        document.title = `All Class Requests | SkillHorizon`;
+    }, [])
     if (isLoading) return <LoadingSpinner></LoadingSpinner>
 
     return (

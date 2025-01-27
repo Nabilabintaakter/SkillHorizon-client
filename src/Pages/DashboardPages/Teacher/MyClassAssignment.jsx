@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
@@ -6,7 +6,6 @@ import LoadingSpinner from '../../../Shared/LoadingSpinner/LoadingSpinner';
 import { FaUserFriends, FaTasks, FaClipboardList, FaPlusCircle } from 'react-icons/fa';
 import { Button } from '@headlessui/react';
 import AddAssignmentModal from './AddAssignmentModal';
-import useAuth from '../../../hooks/useAuth';
 import AssignmentTableRow from './AssignmentTableRow';
 import { AiOutlineFileExclamation } from 'react-icons/ai';
 
@@ -16,6 +15,7 @@ const MyClassAssignment = () => {
     let [isOpen, setIsOpen] = useState(false);
     function close() {
         setIsOpen(false);
+        document.title = `Assignments | SkillHorizon`;
     }
 
     // for class
@@ -48,6 +48,9 @@ const MyClassAssignment = () => {
             return data;
         },
     });
+    useEffect(() => {
+        document.title = `Assignments | SkillHorizon`;
+    }, [])
 
     // Loading state check
     if (isClassLoading || isAssignmentsLoading) return <LoadingSpinner />;

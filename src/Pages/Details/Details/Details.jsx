@@ -1,11 +1,11 @@
-import React from 'react';
+
 import { Link, useParams } from 'react-router-dom';
 import Container from '../../../Shared/Container/Container';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import LoadingSpinner from '../../../Shared/LoadingSpinner/LoadingSpinner';
 import { FaChalkboardTeacher, FaEnvelope, FaDollarSign, FaUserGraduate, FaInfoCircle, FaMoneyBillWave } from 'react-icons/fa';
-
+import React, { useEffect } from 'react';
 const Details = () => {
     const { id } = useParams()
     const axiosSecure = useAxiosSecure();
@@ -16,8 +16,13 @@ const Details = () => {
             return data
         },
     })
+    useEffect(() => {
+        document.title = `${classData?.title} | SkillHorizon`;
+    }, [classData?.title])
     console.log(classData)
     if (isLoading) return <LoadingSpinner></LoadingSpinner>
+
+
 
     return (
         <div className='bg-green-50 py-5 md:pb-10'>

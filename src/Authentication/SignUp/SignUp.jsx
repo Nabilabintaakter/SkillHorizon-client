@@ -3,7 +3,7 @@ import image2 from '../../assets/plant.png';
 import Container from '../../Shared/Container/Container';
 import { useForm } from 'react-hook-form';
 import { FcGoogle } from 'react-icons/fc';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
@@ -21,6 +21,9 @@ const SignUp = () => {
     const { setUser, setLoading, createUser, handleUpdateProfile, signInWithGoogle, loading } = useAuth();
     const location = useLocation()
     const from = location?.state?.from?.pathname || '/'
+    useEffect(() => {
+        document.title = 'Sign Up | SkillHorizon';
+    }, [])
 
     // useMutation hook
     // const queryClient = useQueryClient()

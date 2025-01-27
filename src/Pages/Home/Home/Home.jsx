@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Banner from '../Banner/Banner';
 import Collaborators from '../Collaborators/Collaborators';
 import StatsSection from '../StatsSection/StatsSection';
@@ -8,6 +8,9 @@ import FeaturesSection from '../FeaturesSection/FeaturesSection';
 import Reviews from '../Reviews/Reviews';
 
 const Home = () => {
+    useEffect(() => {
+        document.title = 'Home | SkillHorizon';
+    }, [])
     return (
         <div>
             <Banner></Banner>

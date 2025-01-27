@@ -3,6 +3,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 import { useMutation, useQuery } from "@tanstack/react-query";
 import LoadingSpinner from "../../../Shared/LoadingSpinner/LoadingSpinner";
+import { useEffect } from "react";
 
 const Users = () => {
     const axiosSecure = useAxiosSecure();
@@ -39,6 +40,9 @@ const Users = () => {
         }
         makeAdmin(userData);
     };
+        useEffect(() => {
+            document.title = `All Users | SkillHorizon`;
+        }, [])
 
     if (isLoading) return <LoadingSpinner></LoadingSpinner>
 

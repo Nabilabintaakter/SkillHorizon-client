@@ -3,12 +3,10 @@ import image2 from '../../assets/plant.png';
 import Container from '../../Shared/Container/Container';
 import { useForm } from 'react-hook-form';
 import { FcGoogle } from 'react-icons/fc';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IoMdEye, IoMdEyeOff } from 'react-icons/io';
-import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
-
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
-import LoadingSpinner from '../../Shared/LoadingSpinner/LoadingSpinner';
 import { ImSpinner9 } from 'react-icons/im';
 import useAuth from '../../hooks/useAuth';
 import { useMutation } from '@tanstack/react-query';
@@ -22,6 +20,9 @@ const Login = () => {
     const navigate = useNavigate()
     const location = useLocation()
     const from = location?.state?.from?.pathname || '/'
+    useEffect(() => {
+        document.title = 'Login | SkillHorizon';
+    }, [])
 
     // useMutation hook
     // const queryClient = useQueryClient()

@@ -4,7 +4,7 @@ import useAuth from "../../../hooks/useAuth";
 import LoadingSpinner from "../../../Shared/LoadingSpinner/LoadingSpinner";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from '@headlessui/react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import UpdateClassModal from "../../../components/Modal/UpdateClassModal";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
@@ -21,6 +21,7 @@ const MyClass = () => {
     }
     function close() {
         setIsOpen(false)
+        document.title = 'My Classes | SkillHorizon';
     }
 
 
@@ -31,6 +32,9 @@ const MyClass = () => {
             return data
         },
     })
+    useEffect(() => {
+        document.title = `My Classes | SkillHorizon`;
+    }, [])
     if (isLoading) return <LoadingSpinner></LoadingSpinner>
 
     // DELETE

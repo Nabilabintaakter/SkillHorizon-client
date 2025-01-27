@@ -2,6 +2,7 @@ import toast from "react-hot-toast";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import LoadingSpinner from "../../../Shared/LoadingSpinner/LoadingSpinner";
 import { useMutation, useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
 
 const TeacherRequest = () => {
     const axiosSecure = useAxiosSecure()
@@ -61,6 +62,9 @@ const TeacherRequest = () => {
         }
         rejectTeacher(teacherData);
     };
+    useEffect(() => {
+        document.title = `Teacher Requests | SkillHorizon`;
+    }, [])
     if (isLoading) return <LoadingSpinner></LoadingSpinner>
 
     return (
@@ -137,10 +141,10 @@ const TeacherRequest = () => {
                                 <td className="px-4">
                                     <button
                                         className={`px-4 py-[2px] text-sm cursor-default rounded-2xl border-[1px] ${teacher.status === "Accepted"
-                                                ? "bg-green-200 text-green-600 border-green-400"
-                                                : teacher.status === "Rejected"
-                                                    ? "bg-red-200 text-red-600 border-red-400"
-                                                    : "bg-yellow-200 text-yellow-600 border-yellow-400"
+                                            ? "bg-green-200 text-green-600 border-green-400"
+                                            : teacher.status === "Rejected"
+                                                ? "bg-red-200 text-red-600 border-red-400"
+                                                : "bg-yellow-200 text-yellow-600 border-yellow-400"
                                             }`}
                                     >
                                         {teacher.status}
