@@ -4,6 +4,7 @@ import ReactPaginate from "react-paginate";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import LoadingSpinner from "../../../Shared/LoadingSpinner/LoadingSpinner";
 import { useEffect, useState } from "react";
+import { Zoom } from "react-awesome-reveal";
 
 const Users = () => {
   const axiosSecure = useAxiosSecure();
@@ -79,14 +80,16 @@ const Users = () => {
 
   return (
     <div className="container mx-auto py-4 md:py-8 px-4 lg:px-5 xl:px-9">
-      <div className="text-center mb-8">
-        <h1 className="text-black mb-3 text-2xl md:text-3xl lg:text-4xl font-bold w-full mx-auto">
-          User Management Panel
-        </h1>
-        <p className="text-[#0886A0] font-medium">
-          View user details, manage roles, and grant admin privileges effortlessly.
-        </p>
-      </div>
+      <Zoom triggerOnce>
+        <div className="text-center mb-8">
+          <h1 className="text-black mb-3 text-2xl md:text-3xl lg:text-4xl font-bold w-full mx-auto">
+            User Management Panel
+          </h1>
+          <p className="text-[#0886A0] font-medium">
+            View user details, manage roles, and grant admin privileges effortlessly.
+          </p>
+        </div>
+      </Zoom>
       <div className="my-5 md:my-3">
         <p className="text-gray-600">
           A total of <span className="text-black text-xl">{users.length}</span> users are currently registered on your platform.
@@ -109,11 +112,10 @@ const Users = () => {
             {currentUsers.map((userData, index) => (
               <tr
                 key={userData._id}
-                className={`relative border-b ${
-                  index % 2 === 0
+                className={`relative border-b ${index % 2 === 0
                     ? "bg-[#95D3A2] bg-opacity-10"
                     : "bg-[#95D3A2] bg-opacity-20"
-                } hover:bg-[#95D3A2] hover:bg-opacity-30`}
+                  } hover:bg-[#95D3A2] hover:bg-opacity-30`}
               >
                 <td className="px-4 font-medium hidden md:table-cell">
                   {offset + index + 1}
@@ -134,13 +136,12 @@ const Users = () => {
                 <td className="px-4 text-gray-600 ">{userData.email}</td>
                 <td className="px-4">
                   <button
-                    className={`px-4 py-[2px] text-sm cursor-default rounded-2xl border-[1px] ${
-                      userData.role === "Admin"
+                    className={`px-4 py-[2px] text-sm cursor-default rounded-2xl border-[1px] ${userData.role === "Admin"
                         ? "bg-green-200 text-green-600 border-green-400"
                         : userData.role === "Teacher"
-                        ? "bg-blue-200 text-blue-600 border-blue-400"
-                        : "bg-yellow-200 text-yellow-600 border-yellow-400"
-                    }`}
+                          ? "bg-blue-200 text-blue-600 border-blue-400"
+                          : "bg-yellow-200 text-yellow-600 border-yellow-400"
+                      }`}
                   >
                     {userData.role}
                   </button>

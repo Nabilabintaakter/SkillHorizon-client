@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react'
 import UpdateClassModal from "../../../components/Modal/UpdateClassModal";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import { Zoom } from "react-awesome-reveal";
 
 const MyClass = () => {
     const axiosSecure = useAxiosSecure()
@@ -81,14 +82,16 @@ const MyClass = () => {
     };
     return (
         <div className="container mx-auto py-4 md:py-8 px-4 lg:px-5 xl:px-9 pb-10">
-            <div className="text-center mb-8">
-                <h1 className='text-black mb-3 text-2xl md:text-3xl lg:text-4xl font-bold w-full mx-auto'>Manage Your Classes</h1>
-                <p className='text-[#0886A0]  font-medium'>View, Update, and Delete Your Added Classes Seamlessly</p>
-            </div><div className='my-5'>
-                <p className='text-gray-600'>
-                    You've added <span className='text-black text-xl'>{classes.length}</span> classes. You can now update, delete, or view the details of approved classes.
-                </p>
-            </div>
+            <Zoom tr>
+                <div className="text-center mb-8">
+                    <h1 className='text-black mb-3 text-2xl md:text-3xl lg:text-4xl font-bold w-full mx-auto'>Manage Your Classes</h1>
+                    <p className='text-[#0886A0]  font-medium'>View, Update, and Delete Your Added Classes Seamlessly</p>
+                </div>  </Zoom><div className='my-5'>
+                    <p className='text-gray-600'>
+                        You've added <span className='text-black text-xl'>{classes.length}</span> classes. You can now update, delete, or view the details of approved classes.
+                    </p>
+                </div>
+          
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4">
                 {
@@ -165,9 +168,11 @@ const MyClass = () => {
                                             Delete
                                         </button>
                                     </div>
-                                    <Link to={`/dashboard/my-class/${classItem._id}/${classItem.email}`} disabled={classItem.status === "Pending" || classItem.status === "Rejected"} className="bg-[#2196F3] text-white btn btn-sm border-none py-1 w-full rounded-md hover:bg-[#1976D2] transition">
-                                        See Details
-                                    </Link>
+                                    <Zoom triggerOnce>
+                                        <Link to={`/dashboard/my-class/${classItem._id}/${classItem.email}`} disabled={classItem.status === "Pending" || classItem.status === "Rejected"} className="bg-[#2196F3] text-white btn btn-sm border-none py-1 w-full rounded-md hover:bg-[#1976D2] transition">
+                                            See Details
+                                        </Link>
+                                    </Zoom>
                                 </div>
                             </div>
                         )) :
@@ -185,7 +190,7 @@ const MyClass = () => {
                 }
             </div>
             {/* Pagination and Showing range */}
-                {classes?.length > 0 &&             <div className="mt-10 flex justify-between items-center">
+            {classes?.length > 0 && <div className="mt-10 flex justify-between items-center">
                 <p className="text-gray-800">
                     Showing <span className="text-black text-xl">{startItem}</span>-<span className="text-black text-xl">{endItem}</span> of <span className="text-black text-xl">{classes.length}</span> classes
                 </p>

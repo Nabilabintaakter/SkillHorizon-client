@@ -9,6 +9,7 @@ import { Button } from '@headlessui/react';
 import AddAssignmentModal from './AddAssignmentModal';
 import AssignmentTableRow from './AssignmentTableRow';
 import { AiOutlineFileExclamation } from 'react-icons/ai';
+import { Zoom } from 'react-awesome-reveal';
 
 const MyClassAssignment = () => {
     const { id, email } = useParams();
@@ -27,7 +28,6 @@ const MyClassAssignment = () => {
             return data;
         },
     });
-    console.log(classData);
     const { data: assignments = [], isLoading: isAssignmentsLoading, refetch: refetchAssignments } = useQuery({
         queryKey: ['assignments', id, email],
         queryFn: async () => {
@@ -73,12 +73,14 @@ const MyClassAssignment = () => {
     if (email === classData?.email) {
         return (
             <div className="container mx-auto py-4 md:py-8 px-4 lg:px-5 xl:px-9 pb-10">
-                <div className="text-center mb-8">
-                    <h1 className='text-black mb-3 text-2xl md:text-3xl lg:text-4xl font-bold w-full mx-auto'>
-                        {classData?.title ? `${classData.title}` : 'Class Progress Dashboard'}
-                    </h1>
-                    <p className='text-[#0886A0] font-medium'>Track enrollments, assignments, and submissions efficiently</p>
-                </div>
+                <Zoom triggerOnce>
+                    <div className="text-center mb-8">
+                        <h1 className='text-black mb-3 text-2xl md:text-3xl lg:text-4xl font-bold w-full mx-auto'>
+                            {classData?.title ? `${classData.title}` : 'Class Progress Dashboard'}
+                        </h1>
+                        <p className='text-[#0886A0] font-medium'>Track enrollments, assignments, and submissions efficiently</p>
+                    </div>
+                </Zoom>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                     <div className="bg-blue-50 p-2 shadow-md text-center rounded-lg">
                         <FaUserFriends className="text-blue-600 text-3xl mx-auto mb-2 mt-1" />
@@ -163,29 +165,29 @@ const MyClassAssignment = () => {
                 {/* Pagination and Showing range */}
                 {
                     assignments.length > 0 && <div className="mt-10 flex justify-between items-center">
-                    <p className="text-gray-800 text-sm md:text-base">
-                        Showing <span className="text-black text-sm md:text-xl">{startItem}</span>-<span className="text-black text-sm md:text-xl">{endItem}</span> of <span className="text-black text-sm md:text-xl">{assignments.length}</span> assignments
-                    </p>
-                    <ReactPaginate
-                    previousLabel={'← Previous'}
-                    nextLabel={'Next →'}
-                    breakLabel={'...'}
-                    pageCount={pageCount}
-                    marginPagesDisplayed={2}
-                    pageRangeDisplayed={5}
-                    onPageChange={handlePageChange}
-                    containerClassName={'pagination flex justify-center gap-3 items-center'}
-                    pageClassName={'bg-[#e3edf2] px-3 py-1 rounded-md shadow-sm hover:bg-[#f0f4f8]'}
-                    pageLinkClassName={'text-[#139196] font-medium hover:text-gray-800'}
-                    activeClassName={'bg-[#139196] text-white font-semibold shadow-md border-2 border-[#139196]'} // Active page color changes
-                    previousClassName={'px-3 py-1 bg-[#139196] text-white rounded-md shadow-sm hover:bg-[#e3edf2] hover:text-gray-800 text-sm md:text-base'}
-                    nextClassName={'px-3 py-1 bg-[#139196] text-white rounded-md shadow-sm hover:bg-[#e3edf2] hover:text-gray-800 text-sm md:text-base'}
-                    disabledClassName={'bg-gray-200 cursor-not-allowed hover:text-white'}
-                    breakClassName={'text-gray-800'}
-                    style={{ height: '40px' }}
-                />
+                        <p className="text-gray-800 text-sm md:text-base">
+                            Showing <span className="text-black text-sm md:text-xl">{startItem}</span>-<span className="text-black text-sm md:text-xl">{endItem}</span> of <span className="text-black text-sm md:text-xl">{assignments.length}</span> assignments
+                        </p>
+                        <ReactPaginate
+                            previousLabel={'← Previous'}
+                            nextLabel={'Next →'}
+                            breakLabel={'...'}
+                            pageCount={pageCount}
+                            marginPagesDisplayed={2}
+                            pageRangeDisplayed={5}
+                            onPageChange={handlePageChange}
+                            containerClassName={'pagination flex justify-center gap-3 items-center'}
+                            pageClassName={'bg-[#e3edf2] px-3 py-1 rounded-md shadow-sm hover:bg-[#f0f4f8]'}
+                            pageLinkClassName={'text-[#139196] font-medium hover:text-gray-800'}
+                            activeClassName={'bg-[#139196] text-white font-semibold shadow-md border-2 border-[#139196]'} // Active page color changes
+                            previousClassName={'px-3 py-1 bg-[#139196] text-white rounded-md shadow-sm hover:bg-[#e3edf2] hover:text-gray-800 text-sm md:text-base'}
+                            nextClassName={'px-3 py-1 bg-[#139196] text-white rounded-md shadow-sm hover:bg-[#e3edf2] hover:text-gray-800 text-sm md:text-base'}
+                            disabledClassName={'bg-gray-200 cursor-not-allowed hover:text-white'}
+                            breakClassName={'text-gray-800'}
+                            style={{ height: '40px' }}
+                        />
 
-                </div>
+                    </div>
                 }
             </div>
         );

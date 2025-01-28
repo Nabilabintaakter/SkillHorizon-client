@@ -7,6 +7,7 @@ import w3 from "../../../assets/w3schools_logo_500_04AA6D.png.f19139956c5b9eec28
 import skill from "../../../assets/Skillshare_Logo.png";
 import Container from "../../../Shared/Container/Container";
 import Heading from "../../../Shared/Heading/Heading";
+import { Slide } from "react-awesome-reveal";
 
 const Collaborators = () => {
     const collaborators = [
@@ -55,26 +56,31 @@ const Collaborators = () => {
                     <Heading subtitle={'Trusted Partners'} title={'Empowering Learning Together with Renowned Platforms'}></Heading>
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
                         {collaborators.map((collaborator, index) => (
-                            <div
-                                key={index}
-                                className={`relative group ${collaborator.bgColor} shadow-md rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 bg-opacity-15`}
+                            <Slide  
+                                triggerOnce 
                             >
-                                {/* Card Front: Logo */}
-                                <div className="flex justify-center items-center p-8">
-                                    <img
-                                        src={collaborator.logo}
-                                        alt={collaborator.name}
-                                        className="w-12 h-12 md:w-20 md:h-20 object-contain"
-                                    />
-                                </div>
-                                {/* Card Hover Content */}
                                 <div
-                                    className={`absolute  inset-0 ${collaborator.bgColor} bg-opacity-80 opacity-0 group-hover:opacity-100 transition duration-500 flex flex-col justify-center items-center text-white text-sm px-2 md:px-4 `}
+                                
+                                key={index}
+                                    className={`relative group ${collaborator.bgColor} shadow-md rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 bg-opacity-15`}
                                 >
-                                    <h3 className="font-semibold text-xl md:text-2xl md:mb-2">{collaborator.name}</h3>
-                                    <p className="text-center text-sm md:text-lg">{collaborator.description}</p>
+                                    
+                                    <div className="flex justify-center items-center p-8">
+                                        <img
+                                            src={collaborator.logo}
+                                            alt={collaborator.name}
+                                            className="w-12 h-12 md:w-20 md:h-20 object-contain"
+                                        />
+                                    </div>
+                                    {/* Card Hover Content */}
+                                    <div
+                                        className={`absolute inset-0 ${collaborator.bgColor} bg-opacity-80 opacity-0 group-hover:opacity-100 transition duration-500 flex flex-col justify-center items-center text-white text-sm px-2 md:px-4`}
+                                    >
+                                        <h3 className="font-semibold text-xl md:text-2xl md:mb-2">{collaborator.name}</h3>
+                                        <p className="text-center text-sm md:text-lg">{collaborator.description}</p>
+                                    </div>
                                 </div>
-                            </div>
+                            </Slide>
                         ))}
                     </div>
                 </div>

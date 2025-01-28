@@ -2,6 +2,7 @@ import React from "react";
 import instructorImage from "../../../assets/teacher.jpg";
 import Container from "../../../Shared/Container/Container";
 import { Link } from "react-router-dom";
+import { Zoom } from "react-awesome-reveal";
 
 const JoinAsInstructor = () => {
     return (
@@ -30,7 +31,9 @@ const JoinAsInstructor = () => {
                             We provide the tools and skills to teach what you love. Join us and
                             achieve your goals while inspiring the next generation of learners.
                         </p>
-                        <Link to='/teachOnSkill' className=" text-white rounded-[5px] bg-gradient-to-br from-[#66BE80] to-[#139196] w-fit font-medium hover:bg-bg-gradient-to-br hover:from-[#139196] hover:to-[#139196] cursor-pointer px-5 md:px-6 py-2 md:py-3 flex justify-center items-center duration-1000 ease-in-out transition-all">Become an Instructor</Link>
+                        <Zoom triggerOnce>
+                            <Link to='/teachOnSkill' className=" text-white rounded-[5px] bg-gradient-to-br from-[#66BE80] to-[#139196] w-fit font-medium hover:bg-bg-gradient-to-br hover:from-[#139196] hover:to-[#139196] cursor-pointer px-5 md:px-6 py-2 md:py-3 flex justify-center items-center duration-1000 ease-in-out transition-all">Become an Instructor</Link>
+                        </Zoom>
                     </div>
                 </div>
             </Container>

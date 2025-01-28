@@ -1,3 +1,4 @@
+import { Slide } from 'react-awesome-reveal';
 import reviews from '../../../assets/reviews.png';
 import Container from '../../../Shared/Container/Container';
 import ReviewSlider from './REviewSlider';
@@ -18,7 +19,9 @@ const Reviews = () => {
                                 <h1>See What They Say About Us</h1>
                             </div>
                             <div className='mt-6 bg-white rounded-t-[40px] rounded-br-[40px] shadow-lg'>
-                                <ReviewSlider></ReviewSlider>
+                                <Slide direction='right' triggerOnce>
+                                    <ReviewSlider></ReviewSlider>
+                                </Slide>
                             </div>
                         </div>
                     </div>

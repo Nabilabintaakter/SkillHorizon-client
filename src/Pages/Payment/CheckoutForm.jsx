@@ -21,7 +21,7 @@ const CheckoutForm = ({ classData, clientSecret }) => {
             await axiosSecure.post('/payments', paymentInfo);
         },
         onSuccess: () => {
-            console.log('Payment data saved');
+            // console.log('Payment data saved');
         },
         onError: (err) => {
             console.error('Error saving payment data:', err.message);

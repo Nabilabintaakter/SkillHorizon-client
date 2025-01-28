@@ -68,7 +68,7 @@ const UpdateClassModal = ({ isOpen, close, classItem ,refetch}) => {
                 price: parseInt(data?.price, 10),
                 id: classItem?._id,
             };
-            console.log(classInfo);
+            // console.log(classInfo);
             UpdateClass(classInfo);  
         } catch (error) {
             toast.error(error.message || 'Error uploading image');

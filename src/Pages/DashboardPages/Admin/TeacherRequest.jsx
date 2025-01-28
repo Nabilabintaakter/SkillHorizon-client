@@ -4,6 +4,7 @@ import LoadingSpinner from "../../../Shared/LoadingSpinner/LoadingSpinner";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import ReactPaginate from 'react-paginate';
+import { Zoom } from "react-awesome-reveal";
 
 const TeacherRequest = () => {
     const axiosSecure = useAxiosSecure();
@@ -83,14 +84,16 @@ const TeacherRequest = () => {
 
     return (
         <div className="container mx-auto py-4 md:py-8 px-4 lg:px-5 xl:px-9">
-            <div className="text-center mb-8">
-                <h1 className="text-black mb-3 text-2xl md:text-3xl lg:text-4xl font-bold w-full mx-auto">
-                    Manage Teacher Requests
-                </h1>
-                <p className="text-[#0886A0] font-medium">
-                    Review and Approve Teacher Applications Seamlessly
-                </p>
-            </div>
+            <Zoom triggerOnce>
+                <div className="text-center mb-8">
+                    <h1 className="text-black mb-3 text-2xl md:text-3xl lg:text-4xl font-bold w-full mx-auto">
+                        Manage Teacher Requests
+                    </h1>
+                    <p className="text-[#0886A0] font-medium">
+                        Review and Approve Teacher Applications Seamlessly
+                    </p>
+                </div>
+            </Zoom>
             <div className="my-5 md:my-3">
                 <p className="text-gray-600">
                     A total of <span className="text-black text-xl">{teachers.length}</span> users have requested to become teachers on your platform.

@@ -2,6 +2,7 @@ import React from "react";
 import { FaChalkboardTeacher, FaLightbulb, FaBookOpen, FaHandsHelping, FaTasks } from "react-icons/fa";
 import Heading from "../../../Shared/Heading/Heading";
 import Container from "../../../Shared/Container/Container";
+import { Fade } from "react-awesome-reveal";
 
 const FeaturesSection = () => {
     const features = [
@@ -22,7 +23,7 @@ const FeaturesSection = () => {
         },
         {
             title: "Interactive Learning",
-            description: "Engage in real-world projects and tasks to strengthen your skills through hands-on experience.",
+            description: "Engage in real-world projects and tasks to strengthen your skills through hands-on experience and our expert leads.",
             icon: <FaHandsHelping className="text-6xl lg:text-7xl text-red-500 mx-auto" />,
         },
     ];
@@ -33,15 +34,17 @@ const FeaturesSection = () => {
                 <Heading subtitle={'Our Features'} title={'Why You Should Choose Our Platform'}></Heading>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-8 lg:gap-5">
                     {features.map((feature, index) => (
-                        <div
-                        key={index}
-                        className="bg-white rounded-3xl p-6 py-8 xl:py-10 text-center hover:-translate-y-[6px]  transition-transform duration-700 ease-out"
-                    >
-                        <div className="mb-4 md:mb-7">{feature.icon}</div>
-                        <h3 className="text-xl md:text-2xl text-black font-bold mb-3 md:mb-6">{feature.title}</h3>
-                        <p className="text-gray-600 leading-relaxed">{feature.description}</p>
-                    </div>
-                    
+                        <Fade  duration={1000} delay={index * 0.2}>
+                            <div
+                                key={index}
+                                className="bg-white rounded-3xl p-6 py-8 xl:py-10 text-center hover:-translate-y-[6px]  transition-transform duration-700 ease-out"
+                            >
+                                <div className="mb-4 md:mb-7">{feature.icon}</div>
+                                <h3 className="text-xl md:text-2xl text-black font-bold mb-3 md:mb-6">{feature.title}</h3>
+                                <p className="text-gray-600 leading-relaxed">{feature.description}</p>
+                            </div>
+                        </Fade>
+
                     ))}
                 </div>
             </Container>

@@ -19,7 +19,6 @@ const Details = () => {
     useEffect(() => {
         document.title = `${classData?.title} | SkillHorizon`;
     }, [classData?.title])
-    console.log(classData)
     if (isLoading) return <LoadingSpinner></LoadingSpinner>
 
 

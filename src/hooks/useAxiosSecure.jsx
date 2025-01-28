@@ -32,7 +32,6 @@ const useAxiosSecure = () => {
                         await signingOut();
                         setLoading(false);
                         navigate('/login');
-                        console.log('hayhay');
                     }
                     return Promise.reject(error);
                 }

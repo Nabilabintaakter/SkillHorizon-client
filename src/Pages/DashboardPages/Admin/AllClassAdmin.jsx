@@ -5,6 +5,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import { useEffect, useState } from "react";
+import { Zoom } from "react-awesome-reveal";
 
 const AllClassAdmin = () => {
     const axiosSecure = useAxiosSecure();
@@ -91,10 +92,12 @@ const AllClassAdmin = () => {
 
     return (
         <div className="container mx-auto py-4 md:py-8 px-4 lg:px-5 xl:px-9">
-            <div className="text-center mb-8">
-                <h1 className="text-black mb-3 text-2xl md:text-3xl lg:text-4xl font-bold w-full mx-auto">Manage All Classes</h1>
-                <p className="text-[#0886A0] font-medium">Review, Approve, or Reject Classes and Track Progress</p>
-            </div>
+            <Zoom triggerOnce>
+                <div className="text-center mb-8">
+                    <h1 className="text-black mb-3 text-2xl md:text-3xl lg:text-4xl font-bold w-full mx-auto">Manage All Classes</h1>
+                    <p className="text-[#0886A0] font-medium">Review, Approve, or Reject Classes and Track Progress</p>
+                </div>
+            </Zoom>
             <div className="my-5 md:my-3">
                 <p className="text-gray-600">
                     A total of <span className="text-black text-xl">{classes.length}</span> class requests have been submitted by teachers for your review.

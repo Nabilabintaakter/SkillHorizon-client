@@ -6,6 +6,7 @@ import useAuth from '../../../hooks/useAuth';
 import LoadingSpinner from '../../../Shared/LoadingSpinner/LoadingSpinner';
 import { FaThList, FaChalkboardTeacher } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { Zoom } from 'react-awesome-reveal';
 
 const MyEnrollClass = () => {
     const axiosSecure = useAxiosSecure()
@@ -40,14 +41,16 @@ const MyEnrollClass = () => {
 
     return (
         <div className="container mx-auto py-4 md:py-8 px-4 lg:px-5 xl:px-9">
-            <div className="text-center mb-8">
-                <h1 className="text-black mb-3 text-2xl md:text-3xl lg:text-4xl font-bold w-full mx-auto">
-                    Enrolled Classes Overview
-                </h1>
-                <p className="text-[#0886A0] font-medium">
-                    View all your enrolled classes in one place and seamlessly continue your learning journey.
-                </p>
-            </div>
+            <Zoom triggerOnce>
+                <div className="text-center mb-8">
+                    <h1 className="text-black mb-3 text-2xl md:text-3xl lg:text-4xl font-bold w-full mx-auto">
+                        Enrolled Classes Overview
+                    </h1>
+                    <p className="text-[#0886A0] font-medium">
+                        View all your enrolled classes in one place and seamlessly continue your learning journey.
+                    </p>
+                </div>
+            </Zoom>
             <div className='my-5'>
                 <p className='text-gray-600'>
                     You’ve Enrolled in <span className='text-black text-xl'>{classes.length}</span> Classes. Continue Your Learning Journey!
@@ -105,7 +108,7 @@ const MyEnrollClass = () => {
                 }
             </div>
             {/* Pagination and Showing range */}
-            {classes?.length > 0 &&             <div className="mt-10 flex justify-between items-center">
+            {classes?.length > 0 && <div className="mt-10 flex justify-between items-center">
                 <p className="text-gray-800">
                     Showing <span className="text-black text-xl">{startItem}</span>-<span className="text-black text-xl">{endItem}</span> of <span className="text-black text-xl">{classes.length}</span> classes
                 </p>

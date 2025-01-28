@@ -18,11 +18,11 @@ const AddAssignmentModal = ({ isOpen, close, classData,refetchAssignments,refetc
             await axiosSecure.post(`/assignments`, assignmentInfo)
         },
         onSuccess: () => {
-            console.log('assignment data saved')
+            // console.log('assignment data saved')
             // queryClient.invalidateQueries({ queryKey: ['classes'] })
         },
         onError: err => {
-            console.log(err.message)
+            // console.log(err.message)
         },
     })
     const onSubmit = async (data) => {

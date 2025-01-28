@@ -21,11 +21,11 @@ const EvaluationModal = ({ isOpen, close, uniqueClassName }) => {
             await axiosSecure.post(`/reviews`, evaluationData)
         },
         onSuccess: () => {
-            console.log('reviews saved')
+            // console.log('reviews saved')
             // queryClient.invalidateQueries({ queryKey: ['reviews'] })
         },
         onError: err => {
-            console.log(err.message)
+            // console.log(err.message)
         },
     })
     const handleStarClick = (value) => {
@@ -44,7 +44,6 @@ const EvaluationModal = ({ isOpen, close, uniqueClassName }) => {
             rating: rating,
             ...data,
         };
-        console.log(evaluationData);
         try {
             await mutateAsync(evaluationData)
             reset();

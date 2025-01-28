@@ -33,11 +33,11 @@ const SignUp = () => {
             await axiosPublic.post(`/users`, userData)
         },
         onSuccess: () => {
-            console.log('user data saved')
+            // console.log('user data saved')
             // queryClient.invalidateQueries({ queryKey: ['classes'] })
         },
         onError: err => {
-            console.log(err.message)
+            // console.log(err.message)
         },
     })
 
