@@ -47,7 +47,7 @@ const AssignmentSubmissions = () => {
             {/* Heading */}
             <Zoom triggerOnce>
                 <div className="text-center mb-10">
-                    <h1 className="text-gray-800 text-2xl md:text-3xl lg:text-4xl font-bold w-[70%] mx-auto">
+                    <h1 className="text-gray-800 text-2xl md:text-3xl lg:text-4xl font-bold w-full mx-auto">
                         Assignment Submissions
                     </h1>
                     {submissionData?.length > 0 && <p className="text-gray-800 text-xl md:text-2xl mt-3 font-medium w-[70%] mx-auto">{submissionData[0]?.className || "Class"}</p>}
@@ -59,78 +59,54 @@ const AssignmentSubmissions = () => {
 
             {/* Content */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 md:gap-6">
-                {submissionData.length > 0 ? (
-                    currentSubmissionData.map((item, index) => (
-                        <Slide triggerOnce direction="up" delay={index*2}>
-                            <div
-                                key={index}
-                                className="p-6 border rounded-lg shadow-md bg-white hover:shadow-lg transition-shadow"
-                            >
-                                <div className="flex items-center gap-2 mb-4">
-                                    <div className="flex items-center space-x-2">
-                                        <span className="text-xl text-purple-600 font-bold">{offset + index + 1}.</span>
-                                        <span className="text-purple-600 text-xl flex items-center font-medium">{item.assignmentTitle}</span>
-                                    </div>
-                                </div>
-
-                                <p className="text-sm font-medium text-gray-700 mb-2">
-                                    <MdEmail className="inline-block text-[#FF7B54] mr-1" />
-                                    Submitted by:{" "}
-                                    <span className="font-normal text-gray-600">{item.studentEmail}</span>
-                                </p>
-                                <p className="text-sm font-medium text-gray-700 mb-2">
-                                    <BsLink45Deg className="inline-block text-green-600 mr-1" />
-                                    Submission URL:{" "}
-                                    <a
-                                        href={item.submittedUrl}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="text-blue-600 underline"
-                                    >
-                                        View Submission
-                                    </a>
-                                </p>
-                                <p className="text-sm font-medium text-gray-700 mb-2">
-                                    <FaRegClock className="inline-block text-[#FF7B54] mr-1" />
-                                    Submitted date:{" "}
-                                    <span className="font-normal text-gray-600">{formatDate(item.submittedDate)}</span>
-                                </p>
+    {submissionData.length > 0 ? (
+        currentSubmissionData.map((item, index) => (
+            <Slide triggerOnce direction="up" delay={index * 2}>
+                <div
+                    key={index}
+                    className="p-6 border rounded-lg shadow-md bg-white hover:shadow-lg transition-shadow flex flex-col justify-between min-h-[150px] lg:min-h-[180px] h-full"
+                >
+                    <div>
+                        <div className="flex items-center gap-2 mb-4">
+                            <div className="flex items-center space-x-2">
+                                <span className="text-xl text-purple-600 font-bold">{offset + index + 1}.</span>
+                                <span className="text-purple-600 text-xl flex items-center font-medium">{item.assignmentTitle}</span>
                             </div>
-                        </Slide>
-                    ))
-                ) : (
-                    <p className="col-span-2 text-center w-[70%] lg:w-[40%] mx-auto text-red-600 text-lg flex flex-col items-center gap-3">
-                        <FaClipboard className="text-4xl text-red-400 " />
-                        <span>No submissions have been made for this assignment yet.</span>
-                    </p>
-                )}
-                {/* Pagination and Showing range */}
-                {
-                    submissionData.length > 0 && <div className="mt-10 flex justify-between items-center col-span-2">
-                        <p className="text-gray-800">
-                            Showing <span className="text-black text-xl">{startItem}</span>-<span className="text-black text-xl">{endItem}</span> of <span className="text-black text-xl">{submissionData.length}</span> submissions
+                        </div>
+                        <p className="text-sm font-medium text-gray-700 mb-2">
+                            <MdEmail className="inline-block text-[#FF7B54] mr-1" />
+                            Submitted by:{" "}
+                            <span className="font-normal text-gray-600">{item.studentEmail}</span>
                         </p>
-                        <ReactPaginate
-                            previousLabel={'← Previous'}
-                            nextLabel={'Next →'}
-                            breakLabel={'...'}
-                            pageCount={pageCount}
-                            marginPagesDisplayed={2}
-                            pageRangeDisplayed={5}
-                            onPageChange={handlePageChange}
-                            containerClassName={'pagination flex justify-center gap-3 items-center'}
-                            pageClassName={'bg-[#e3edf2] px-3 py-1 rounded-md shadow-sm hover:bg-[#f0f4f8]'}
-                            pageLinkClassName={'text-[#139196] font-medium hover:text-gray-800'}
-                            activeClassName={'bg-[#139196] text-white font-semibold shadow-md border-2 border-[#139196]'} // Active page color changes
-                            previousClassName={'px-3 py-1 bg-[#139196] text-white rounded-md shadow-sm hover:bg-[#e3edf2] hover:text-gray-800 text-sm md:text-base'}
-                            nextClassName={'px-3 py-1 bg-[#139196] text-white rounded-md shadow-sm hover:bg-[#e3edf2] hover:text-gray-800 text-sm md:text-base'}
-                            disabledClassName={'bg-gray-200 cursor-not-allowed hover:text-white'}
-                            breakClassName={'text-gray-800'}
-                            style={{ height: '40px' }}
-                        />
+                        <p className="text-sm font-medium text-gray-700 mb-2">
+                            <BsLink45Deg className="inline-block text-green-600 mr-1" />
+                            Submission URL:{" "}
+                            <a
+                                href={item.submittedUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-blue-600 underline"
+                            >
+                                View Submission
+                            </a>
+                        </p>
+                        <p className="text-sm font-medium text-gray-700 mb-2">
+                            <FaRegClock className="inline-block text-[#FF7B54] mr-1" />
+                            Submitted date:{" "}
+                            <span className="font-normal text-gray-600">{formatDate(item.submittedDate)}</span>
+                        </p>
                     </div>
-                }
-            </div>
+                </div>
+            </Slide>
+        ))
+    ) : (
+        <p className="col-span-2 text-center w-[70%] lg:w-[40%] mx-auto text-red-600 text-lg flex flex-col items-center gap-3">
+            <FaClipboard className="text-4xl text-red-400 " />
+            <span>No submissions have been made for this assignment yet.</span>
+        </p>
+    )}
+</div>
+
         </div>
     );
 };
