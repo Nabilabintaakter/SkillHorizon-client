@@ -24,11 +24,13 @@ import AdminRoute from "./AdminRoute";
 import MyClassAssignment from "../Pages/DashboardPages/Teacher/MyClassAssignment";
 import EnrollClassDetails from "../Pages/DashboardPages/Student/EnrollClassDetails";
 import AssignmentSubmissions from "../Pages/DashboardPages/Teacher/AssignmentSubmissions";
+import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout></MainLayout>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",
@@ -63,6 +65,7 @@ const router = createBrowserRouter([
   { 
     path: '/dashboard',
     element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         index: true, 
