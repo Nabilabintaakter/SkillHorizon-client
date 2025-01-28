@@ -19,9 +19,9 @@ const Footer = () => {
                     <div>
                         <h3 className="text-lg font-semibold">Quick Link</h3>
                         <ul className="text-gray-400 mt-4 space-y-2">
-                            <li><a href="/courses" className="hover:text-blue-500">Courses</a></li>
-                            <li><a href="/about-us" className="hover:text-blue-500">About Us</a></li>
-                            <li><a href="/terms" className="hover:text-blue-500">Terms & Conditions</a></li>
+                            <li><a href="/allClasses" className="hover:text-blue-500">Courses</a></li>
+                            <li><a href="" className="hover:text-blue-500">Featured Courses</a></li>
+                            <li><a href="" className="hover:text-blue-500">Terms & Conditions</a></li>
                         </ul>
                     </div>
 
@@ -29,9 +29,9 @@ const Footer = () => {
                     <div>
                         <h3 className="text-lg font-semibold">Help Center</h3>
                         <ul className="text-gray-400 mt-4 space-y-2">
-                            <li><a href="/support" className="hover:text-blue-500">Support</a></li>
-                            <li><a href="/get-help" className="hover:text-blue-500">Get Help</a></li>
-                            <li><a href="/privacy-policy" className="hover:text-blue-500">Privacy Policy</a></li>
+                            <li><a href="" className="hover:text-blue-500">Support</a></li>
+                            <li><a href="" className="hover:text-blue-500">Get Help</a></li>
+                            <li><a href="" className="hover:text-blue-500">Privacy Policy</a></li>
                         </ul>
                     </div>
 

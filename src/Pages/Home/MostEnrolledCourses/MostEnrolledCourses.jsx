@@ -23,7 +23,7 @@ const MostEnrolledCourses = () => {
     })
 
     return (
-        <div className=" py-10 md:py-16 bg-[#F1EFEE]">
+        <div id='featured' className=" py-10 md:py-16 bg-[#F1EFEE]">
             <Container>
                 {/* header */}
                 <div className="flex items-center justify-between">
