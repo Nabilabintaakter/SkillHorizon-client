@@ -93,7 +93,7 @@ const AllClasses = () => {
 
                                     {/* Enrollments */}
                                     <span
-                                        className={`absolute top-3 right-3 px-3 py-1 text-sm backdrop-blur-md text-green-500 bg-white/80 rounded-lg border-[1px] border-green-500 group-hover:hidden`}
+                                        className={`absolute top-3 right-3 px-3 py-1 text-sm backdrop-blur-md text-green-500 bg-white/95 rounded-lg border-[1px] border-green-500 group-hover:hidden`}
                                     >
                                         {classItem.totalEnrollment > 0
                                             ? `${classItem.totalEnrollment} Enrollments`
@@ -132,7 +132,7 @@ const AllClasses = () => {
                 </div>
 
                 {/* Pagination and Showing range */}
-                <div className="mt-5 flex justify-between items-center">
+                <div className="mt-10 flex justify-between items-center">
                     <p className="text-gray-800">
                         Showing <span className="text-black text-xl">{startItem}</span>-<span className="text-black text-xl">{endItem}</span> of <span className="text-black text-xl">{classes.length}</span> classes
                     </p>

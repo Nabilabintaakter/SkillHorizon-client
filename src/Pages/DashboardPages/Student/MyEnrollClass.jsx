@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import ReactPaginate from 'react-paginate';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import useAuth from '../../../hooks/useAuth';
 import LoadingSpinner from '../../../Shared/LoadingSpinner/LoadingSpinner';
@@ -16,12 +17,26 @@ const MyEnrollClass = () => {
             return data
         },
     })
-    
+
     useEffect(() => {
         document.title = `My Enrolled Classes | SkillHorizon`;
     }, [])
+    const [currentPage, setCurrentPage] = useState(0);
+    const itemsPerPage = 9;
+
+    // Pagination logic
+    const offset = currentPage * itemsPerPage;
+    const currentClasses = classes.slice(offset, offset + itemsPerPage);
+    const pageCount = Math.ceil(classes.length / itemsPerPage);
+
+    const handlePageChange = ({ selected }) => {
+        setCurrentPage(selected);
+    };
+
+    // Calculate the range of items being displayed
+    const startItem = currentPage * itemsPerPage + 1;
+    const endItem = Math.min((currentPage + 1) * itemsPerPage, classes.length);
     if (isLoading) return <LoadingSpinner></LoadingSpinner>
-    console.log(classes);
 
     return (
         <div className="container mx-auto py-4 md:py-8 px-4 lg:px-5 xl:px-9">
@@ -30,15 +45,19 @@ const MyEnrollClass = () => {
                     Enrolled Classes Overview
                 </h1>
                 <p className="text-[#0886A0] font-medium">
-                View all your enrolled classes in one place and seamlessly continue your learning journey.
+                    View all your enrolled classes in one place and seamlessly continue your learning journey.
                 </p>
             </div>
-
+            <div className='my-5'>
+                <p className='text-gray-600'>
+                    You’ve Enrolled in <span className='text-black text-xl'>{classes.length}</span> Classes. Continue Your Learning Journey!
+                </p>
+            </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6">
                 {
                     classes?.length > 0 ?
-                        classes.map((classItem, index) => (
+                        currentClasses.map((classItem, index) => (
                             <div key={index} className="relative bg-white drop-shadow-xl rounded-lg overflow-hidden flex flex-col justify-between transform transition-all duration-700 hover:scale-105">
                                 {/* Image */}
                                 <img
@@ -85,7 +104,29 @@ const MyEnrollClass = () => {
                         )
                 }
             </div>
-
+            {/* Pagination and Showing range */}
+            <div className="mt-10 flex justify-between items-center">
+                <p className="text-gray-800">
+                    Showing <span className="text-black text-xl">{startItem}</span>-<span className="text-black text-xl">{endItem}</span> of <span className="text-black text-xl">{classes.length}</span> classes
+                </p>
+                <ReactPaginate
+                    previousLabel={'← Previous'}
+                    nextLabel={'Next →'}
+                    breakLabel={'...'}
+                    pageCount={pageCount}
+                    marginPagesDisplayed={2}
+                    pageRangeDisplayed={5}
+                    onPageChange={handlePageChange}
+                    containerClassName={'pagination flex justify-center gap-3'}
+                    pageClassName={'bg-[#e3edf2] px-3 py-1 rounded-md shadow-sm hover:bg-[#f0f4f8]'}
+                    pageLinkClassName={'text-[#139196] font-medium hover:text-gray-800'}
+                    activeClassName={'bg-[#139196] text-white font-semibold shadow-md'}
+                    previousClassName={'px-3 py-1 bg-[#139196] text-white rounded-md shadow-sm hover:bg-[#e3edf2] hover:text-gray-800'}
+                    nextClassName={'px-3 py-1 bg-[#139196] text-white rounded-md shadow-sm hover:bg-[#e3edf2] hover:text-gray-800'}
+                    disabledClassName={'bg-gray-200 cursor-not-allowed'}
+                    breakClassName={'text-gray-800'}
+                />
+            </div>
         </div>
     );
 };
