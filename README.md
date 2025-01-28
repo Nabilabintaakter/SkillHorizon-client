@@ -3,7 +3,7 @@
 **SkillHorizon** is a modern, full-stack MERN (MongoDB, Express.js, React, Node.js) application designed to revolutionize educational institution and tutor-student interactions. It makes skill learning and class management more efficient, user-friendly, and accessible.
 
 ## Admin Credentials:
-- **Username**: SkillHorizon
+- **Useremail**: skillhorizonadmin@gmail.com
 - **Password**: 123Aa!
 
 ## Live Site URL:
