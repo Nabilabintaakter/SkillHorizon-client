@@ -1,6 +1,7 @@
-import { FaUser, FaEnvelope, FaInfoCircle, FaThList } from "react-icons/fa"; 
+import { FaUser, FaEnvelope, FaInfoCircle, FaThList } from "react-icons/fa";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
+import ReactPaginate from 'react-paginate';
 import LoadingSpinner from "../../../Shared/LoadingSpinner/LoadingSpinner";
 import { useQuery } from "@tanstack/react-query";
 import { Button } from '@headlessui/react'
@@ -35,6 +36,21 @@ const MyClass = () => {
     useEffect(() => {
         document.title = `My Classes | SkillHorizon`;
     }, [])
+    const [currentPage, setCurrentPage] = useState(0);
+    const itemsPerPage = 9;
+
+    // Pagination logic
+    const offset = currentPage * itemsPerPage;
+    const currentClasses = classes.slice(offset, offset + itemsPerPage);
+    const pageCount = Math.ceil(classes.length / itemsPerPage);
+
+    const handlePageChange = ({ selected }) => {
+        setCurrentPage(selected);
+    };
+
+    // Calculate the range of items being displayed
+    const startItem = currentPage * itemsPerPage + 1;
+    const endItem = Math.min((currentPage + 1) * itemsPerPage, classes.length);
     if (isLoading) return <LoadingSpinner></LoadingSpinner>
 
     // DELETE
@@ -68,11 +84,16 @@ const MyClass = () => {
             <div className="text-center mb-8">
                 <h1 className='text-black mb-3 text-2xl md:text-3xl lg:text-4xl font-bold w-full mx-auto'>Manage Your Classes</h1>
                 <p className='text-[#0886A0]  font-medium'>View, Update, and Delete Your Added Classes Seamlessly</p>
+            </div><div className='my-5'>
+                <p className='text-gray-600'>
+                    You've added <span className='text-black text-xl'>{classes.length}</span> classes. You can now update, delete, or view the details of approved classes.
+                </p>
             </div>
+
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4">
                 {
                     classes?.length > 0 ?
-                        classes.map((classItem, index) => (
+                        currentClasses.map((classItem, index) => (
                             <div key={index} className="relative bg-white drop-shadow-lg rounded-lg overflow-hidden flex flex-col justify-between">
 
                                 {/* Status Badge */}
@@ -162,6 +183,29 @@ const MyClass = () => {
                             </div>
                         )
                 }
+            </div>
+            {/* Pagination and Showing range */}
+            <div className="mt-10 flex justify-between items-center">
+                <p className="text-gray-800">
+                    Showing <span className="text-black text-xl">{startItem}</span>-<span className="text-black text-xl">{endItem}</span> of <span className="text-black text-xl">{classes.length}</span> classes
+                </p>
+                <ReactPaginate
+                    previousLabel={'← Previous'}
+                    nextLabel={'Next →'}
+                    breakLabel={'...'}
+                    pageCount={pageCount}
+                    marginPagesDisplayed={2}
+                    pageRangeDisplayed={5}
+                    onPageChange={handlePageChange}
+                    containerClassName={'pagination flex justify-center gap-3'}
+                    pageClassName={'bg-[#e3edf2] px-3 py-1 rounded-md shadow-sm hover:bg-[#f0f4f8]'}
+                    pageLinkClassName={'text-[#139196] font-medium hover:text-gray-800'}
+                    activeClassName={'bg-[#139196] text-white font-semibold shadow-md'}
+                    previousClassName={'px-3 py-1 bg-[#139196] text-white rounded-md shadow-sm hover:bg-[#e3edf2] hover:text-gray-800'}
+                    nextClassName={'px-3 py-1 bg-[#139196] text-white rounded-md shadow-sm hover:bg-[#e3edf2] hover:text-gray-800'}
+                    disabledClassName={'bg-gray-200 cursor-not-allowed'}
+                    breakClassName={'text-gray-800'}
+                />
             </div>
         </div>
     )

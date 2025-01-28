@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import ReactPaginate from 'react-paginate';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import LoadingSpinner from '../../../Shared/LoadingSpinner/LoadingSpinner';
@@ -10,7 +11,7 @@ import AssignmentTableRow from './AssignmentTableRow';
 import { AiOutlineFileExclamation } from 'react-icons/ai';
 
 const MyClassAssignment = () => {
-    const { id ,email} = useParams();
+    const { id, email } = useParams();
     const axiosSecure = useAxiosSecure();
     let [isOpen, setIsOpen] = useState(false);
     function close() {
@@ -39,7 +40,7 @@ const MyClassAssignment = () => {
         // Optional: Trigger refetch on params change (like email or id)
         enabled: !!id && !!email,
     });
-    
+
     // for total assignments submission
     const { data: submissionData = [] } = useQuery({
         queryKey: ['submissions', id],
@@ -51,7 +52,21 @@ const MyClassAssignment = () => {
     useEffect(() => {
         document.title = `Assignments | SkillHorizon`;
     }, [])
+    const [currentPage, setCurrentPage] = useState(0);
+    const itemsPerPage = 9;
 
+    // Pagination logic
+    const offset = currentPage * itemsPerPage;
+    const currentAssignments = assignments.slice(offset, offset + itemsPerPage);
+    const pageCount = Math.ceil(assignments.length / itemsPerPage);
+
+    const handlePageChange = ({ selected }) => {
+        setCurrentPage(selected);
+    };
+
+    // Calculate the range of items being displayed
+    const startItem = currentPage * itemsPerPage + 1;
+    const endItem = Math.min((currentPage + 1) * itemsPerPage, assignments.length);
     // Loading state check
     if (isClassLoading || isAssignmentsLoading) return <LoadingSpinner />;
 
@@ -64,32 +79,38 @@ const MyClassAssignment = () => {
                     </h1>
                     <p className='text-[#0886A0] font-medium'>Track enrollments, assignments, and submissions efficiently</p>
                 </div>
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                        <div className="bg-blue-50 p-2 shadow-md text-center rounded-lg">
-                            <FaUserFriends className="text-blue-600 text-3xl mx-auto mb-2 mt-1" />
-                            <h2 className="text-xl font-semibold text-gray-700">Total Enrollment</h2>
-                            <p className="text-2xl font-bold text-blue-800 mt-1">{classData?.totalEnrollment}</p>
-                        </div>
-                        <div className="bg-green-50 p-2 shadow-md text-center rounded-lg">
-                            <FaTasks className="text-green-600 text-3xl mx-auto mb-2 mt-1" />
-                            <h2 className="text-xl font-semibold text-gray-700">Total Assignments</h2>
-                            <p className="text-2xl font-bold text-green-800 mt-1">{assignments?.length}</p>
-                        </div>
-                        <Link to={`/dashboard/my-class-assignment-submissions/${id }`} className="bg-purple-50 p-2 shadow-md text-center col-span-2 md:col-span-1 rounded-lg">
-                            <FaClipboardList className="text-purple-600 text-3xl mx-auto mb-2 mt-1" />
-                            <h2 className="text-xl font-semibold text-gray-700">Total Submissions</h2>
-                            <p className="text-2xl font-bold text-purple-800 mt-1">{submissionData?.length}</p>
-                        </Link>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                    <div className="bg-blue-50 p-2 shadow-md text-center rounded-lg">
+                        <FaUserFriends className="text-blue-600 text-3xl mx-auto mb-2 mt-1" />
+                        <h2 className="text-xl font-semibold text-gray-700">Total Enrollments</h2>
+                        <p className="text-2xl font-bold text-blue-800 mt-1">{classData?.totalEnrollment}</p>
                     </div>
-                    {assignments.length > 0 && <div className="mt-6">
-                        <Button
-                            onClick={() => setIsOpen(true)}
-                            className="px-4 py-2 bg-gradient-to-r from-blue-700 to-indigo-700 text-white font-semibold rounded-md shadow-lg hover:from-blue-400 hover:to-indigo-600 transition-colors duration-500 flex items-center justify-center space-x-2"
-                        >
-                            <FaPlusCircle className="text-white" />
-                            <span className="">Create Assignment</span>
-                        </Button>
-                    </div>}
+                    <div className="bg-green-50 p-2 shadow-md text-center rounded-lg">
+                        <FaTasks className="text-green-600 text-3xl mx-auto mb-2 mt-1" />
+                        <h2 className="text-xl font-semibold text-gray-700">Total Assignments</h2>
+                        <p className="text-2xl font-bold text-green-800 mt-1">{assignments?.length}</p>
+                    </div>
+                    <Link to={`/dashboard/my-class-assignment-submissions/${id}`} className="bg-purple-50 p-2 shadow-md text-center col-span-2 md:col-span-1 rounded-lg">
+                        <FaClipboardList className="text-purple-600 text-3xl mx-auto mb-2 mt-1" />
+                        <h2 className="text-xl font-semibold text-gray-700">Total Submissions</h2>
+                        <p className="text-2xl font-bold text-purple-800 mt-1">{submissionData?.length}</p>
+                    </Link>
+                </div>
+                {assignments.length > 0 && <div className="mt-6">
+                    <Button
+                        onClick={() => setIsOpen(true)}
+                        className="px-4 py-2 bg-gradient-to-r from-blue-700 to-indigo-700 text-white font-semibold rounded-md shadow-lg hover:from-blue-400 hover:to-indigo-600 transition-colors duration-500 flex items-center justify-center space-x-2"
+                    >
+                        <FaPlusCircle className="text-white" />
+                        <span className="">Create Assignment</span>
+                    </Button>
+                    <div className='my-5 md:my-3'>
+                        <p className='text-gray-600'>
+                            You’ve added <span className='text-black text-xl'>{assignments.length}</span> assignments for this class. You may add additional assignments by clicking the "Create Assignment" button.
+                        </p>
+                    </div>
+
+                </div>}
 
                 {/* AddAssignmentModal */}
                 <AddAssignmentModal
@@ -139,6 +160,33 @@ const MyClassAssignment = () => {
                     </div>
 
                 )}
+                {/* Pagination and Showing range */}
+                <div className="mt-10 flex justify-between items-center">
+                    <p className="text-gray-800 text-sm md:text-base">
+                        Showing <span className="text-black text-sm md:text-xl">{startItem}</span>-<span className="text-black text-sm md:text-xl">{endItem}</span> of <span className="text-black text-sm md:text-xl">{assignments.length}</span> assignments
+                    </p>
+                    <ReactPaginate
+                        previousLabel={'← Previous'}
+                        nextLabel={'Next →'}
+                        breakLabel={'...'}
+                        pageCount={pageCount}
+                        marginPagesDisplayed={2}
+                        pageRangeDisplayed={5}
+                        onPageChange={handlePageChange}
+                        containerClassName={'pagination flex justify-center gap-3 items-center'}
+                        pageClassName={'bg-[#e3edf2] px-3 py-1 rounded-md shadow-sm hover:bg-[#f0f4f8]'}
+                        pageLinkClassName={'text-[#139196] font-medium hover:text-gray-800'}
+                        activeClassName={'bg-[#139196] text-white font-semibold shadow-md'}
+                        previousClassName={'px-3 py-1 bg-[#139196] text-white rounded-md shadow-sm hover:bg-[#e3edf2] hover:text-gray-800 text-sm md:text-base'}
+                        nextClassName={'px-3 py-1 bg-[#139196] text-white rounded-md shadow-sm hover:bg-[#e3edf2] hover:text-gray-800 text-sm md:text-base'}
+                        disabledClassName={'bg-gray-200 cursor-not-allowed hover:text-white'}
+                        breakClassName={'text-gray-800'}
+                        // Fixed height for consistent button size
+                        style={{ height: '40px' }}
+                    />
+
+                </div>
+
             </div>
         );
     }
