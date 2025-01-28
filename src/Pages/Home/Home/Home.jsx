@@ -6,6 +6,7 @@ import JoinAsInstructor from '../JoinAsInstructor/JoinAsInstructor';
 import Categories from '../Categories/Categories';
 import FeaturesSection from '../FeaturesSection/FeaturesSection';
 import Reviews from '../Reviews/Reviews';
+import MostEnrolledCourses from '../MostEnrolledCourses/MostEnrolledCourses';
 
 const Home = () => {
     useEffect(() => {
@@ -15,6 +16,7 @@ const Home = () => {
         <div>
             <Banner></Banner>
             <Collaborators></Collaborators>
+            <MostEnrolledCourses></MostEnrolledCourses>
             <StatsSection></StatsSection>
             <Categories></Categories>
             <FeaturesSection></FeaturesSection>

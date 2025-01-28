@@ -4,6 +4,27 @@
 @tailwind components;
 @tailwind utilities;
 
-.font-josefin{
+.font-josefin {
     font-family: "Josefin Sans", serif;
-  }
+}
+.swiper-container {
+  position: relative;
+}
+.swiper-pagination {
+    bottom: -5px !important; 
+    text-align: center;
+    z-index: 50; 
+    position: absolute; 
+}
+
+.swiper-pagination-bullet {
+    background: #139196 !important;
+    opacity: 0.8;
+    width: 10px;
+    height: 10px;
+}
+
+.swiper-pagination-bullet-active {
+    background: #66BE80 !important;
+    opacity: 1;
+}
