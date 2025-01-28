@@ -2,7 +2,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
-import banner from '../../../assets/banner.webp'
+import banner from '../../../assets/banner-3.jpeg'
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import Container from '../../../Shared/Container/Container';
 import { RiRewindStartMiniFill } from 'react-icons/ri';
