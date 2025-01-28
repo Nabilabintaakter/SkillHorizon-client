@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import ReactPaginate from 'react-paginate';
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
-import { MdEmail } from "react-icons/md"; 
-import { BsLink45Deg } from "react-icons/bs"; 
+import { MdEmail } from "react-icons/md";
+import { BsLink45Deg } from "react-icons/bs";
 import { FaClipboard, FaRegClock } from "react-icons/fa";
 
 const AssignmentSubmissions = () => {
@@ -20,12 +21,26 @@ const AssignmentSubmissions = () => {
     });
     const formatDate = (utcDate) => {
         const date = new Date(utcDate);
-        return date.toLocaleString(); 
+        return date.toLocaleString();
     };
     useEffect(() => {
         document.title = `Assignment Submissions | SkillHorizon`;
     }, [])
+    const [currentPage, setCurrentPage] = useState(0);
+    const itemsPerPage = 10;
 
+    // Pagination logic
+    const offset = currentPage * itemsPerPage;
+    const currentSubmissionData = submissionData.slice(offset, offset + itemsPerPage);
+    const pageCount = Math.ceil(submissionData.length / itemsPerPage);
+
+    const handlePageChange = ({ selected }) => {
+        setCurrentPage(selected);
+    };
+
+    // Calculate the range of items being displayed
+    const startItem = currentPage * itemsPerPage + 1;
+    const endItem = Math.min((currentPage + 1) * itemsPerPage, submissionData.length);
     return (
         <div className="container mx-auto py-6 md:py-10 px-4 lg:px-6 xl:px-10">
             {/* Heading */}
@@ -42,7 +57,7 @@ const AssignmentSubmissions = () => {
             {/* Content */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 md:gap-6">
                 {submissionData.length > 0 ? (
-                    submissionData.map((item, index) => (
+                    currentSubmissionData.map((item, index) => (
                         <div
                             key={index}
                             className="p-6 border rounded-lg shadow-md bg-white hover:shadow-lg transition-shadow"
@@ -84,6 +99,29 @@ const AssignmentSubmissions = () => {
                         <span>No submissions have been made for this assignment yet.</span>
                     </p>
                 )}
+            {/* Pagination and Showing range */}
+            <div className="mt-10 flex justify-between items-center col-span-2">
+                <p className="text-gray-800">
+                    Showing <span className="text-black text-xl">{startItem}</span>-<span className="text-black text-xl">{endItem}</span> of <span className="text-black text-xl">{submissionData.length}</span> submissions
+                </p>
+                <ReactPaginate
+                    previousLabel={'← Previous'}
+                    nextLabel={'Next →'}
+                    breakLabel={'...'}
+                    pageCount={pageCount}
+                    marginPagesDisplayed={2}
+                    pageRangeDisplayed={5}
+                    onPageChange={handlePageChange}
+                    containerClassName={'pagination flex justify-center gap-3'}
+                    pageClassName={'bg-[#e3edf2] px-3 py-1 rounded-md shadow-sm hover:bg-[#f0f4f8]'}
+                    pageLinkClassName={'text-[#139196] font-medium hover:text-gray-800'}
+                    activeClassName={'bg-[#139196] text-white font-semibold shadow-md'}
+                    previousClassName={'px-3 py-1 bg-[#139196] text-white rounded-md shadow-sm hover:bg-[#e3edf2] hover:text-gray-800'}
+                    nextClassName={'px-3 py-1 bg-[#139196] text-white rounded-md shadow-sm hover:bg-[#e3edf2] hover:text-gray-800'}
+                    disabledClassName={'bg-gray-200 cursor-not-allowed'}
+                    breakClassName={'text-gray-800'}
+                />
+            </div>
             </div>
         </div>
     );
