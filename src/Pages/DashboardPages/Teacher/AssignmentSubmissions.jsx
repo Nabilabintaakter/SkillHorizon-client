@@ -99,30 +99,32 @@ const AssignmentSubmissions = () => {
                         <span>No submissions have been made for this assignment yet.</span>
                     </p>
                 )}
-            {/* Pagination and Showing range */}
-            <div className="mt-10 flex justify-between items-center col-span-2">
-                <p className="text-gray-800">
-                    Showing <span className="text-black text-xl">{startItem}</span>-<span className="text-black text-xl">{endItem}</span> of <span className="text-black text-xl">{submissionData.length}</span> submissions
-                </p>
-                <ReactPaginate
-                    previousLabel={'← Previous'}
-                    nextLabel={'Next →'}
-                    breakLabel={'...'}
-                    pageCount={pageCount}
-                    marginPagesDisplayed={2}
-                    pageRangeDisplayed={5}
-                    onPageChange={handlePageChange}
-                    containerClassName={'pagination flex justify-center gap-3 items-center'}
-                    pageClassName={'bg-[#e3edf2] px-3 py-1 rounded-md shadow-sm hover:bg-[#f0f4f8]'}
-                    pageLinkClassName={'text-[#139196] font-medium hover:text-gray-800'}
-                    activeClassName={'bg-[#139196] text-white font-semibold shadow-md border-2 border-[#139196]'} // Active page color changes
-                    previousClassName={'px-3 py-1 bg-[#139196] text-white rounded-md shadow-sm hover:bg-[#e3edf2] hover:text-gray-800 text-sm md:text-base'}
-                    nextClassName={'px-3 py-1 bg-[#139196] text-white rounded-md shadow-sm hover:bg-[#e3edf2] hover:text-gray-800 text-sm md:text-base'}
-                    disabledClassName={'bg-gray-200 cursor-not-allowed hover:text-white'}
-                    breakClassName={'text-gray-800'}
-                    style={{ height: '40px' }}
-                />
-            </div>
+                {/* Pagination and Showing range */}
+                {
+                    submissionData.length > 0 && <div className="mt-10 flex justify-between items-center col-span-2">
+                        <p className="text-gray-800">
+                            Showing <span className="text-black text-xl">{startItem}</span>-<span className="text-black text-xl">{endItem}</span> of <span className="text-black text-xl">{submissionData.length}</span> submissions
+                        </p>
+                        <ReactPaginate
+                            previousLabel={'← Previous'}
+                            nextLabel={'Next →'}
+                            breakLabel={'...'}
+                            pageCount={pageCount}
+                            marginPagesDisplayed={2}
+                            pageRangeDisplayed={5}
+                            onPageChange={handlePageChange}
+                            containerClassName={'pagination flex justify-center gap-3 items-center'}
+                            pageClassName={'bg-[#e3edf2] px-3 py-1 rounded-md shadow-sm hover:bg-[#f0f4f8]'}
+                            pageLinkClassName={'text-[#139196] font-medium hover:text-gray-800'}
+                            activeClassName={'bg-[#139196] text-white font-semibold shadow-md border-2 border-[#139196]'} // Active page color changes
+                            previousClassName={'px-3 py-1 bg-[#139196] text-white rounded-md shadow-sm hover:bg-[#e3edf2] hover:text-gray-800 text-sm md:text-base'}
+                            nextClassName={'px-3 py-1 bg-[#139196] text-white rounded-md shadow-sm hover:bg-[#e3edf2] hover:text-gray-800 text-sm md:text-base'}
+                            disabledClassName={'bg-gray-200 cursor-not-allowed hover:text-white'}
+                            breakClassName={'text-gray-800'}
+                            style={{ height: '40px' }}
+                        />
+                    </div>
+                }
             </div>
         </div>
     );

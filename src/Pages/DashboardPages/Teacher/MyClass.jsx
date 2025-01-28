@@ -185,7 +185,7 @@ const MyClass = () => {
                 }
             </div>
             {/* Pagination and Showing range */}
-            <div className="mt-10 flex justify-between items-center">
+                {classes?.length > 0 &&             <div className="mt-10 flex justify-between items-center">
                 <p className="text-gray-800">
                     Showing <span className="text-black text-xl">{startItem}</span>-<span className="text-black text-xl">{endItem}</span> of <span className="text-black text-xl">{classes.length}</span> classes
                 </p>
@@ -207,7 +207,7 @@ const MyClass = () => {
                     breakClassName={'text-gray-800'}
                     style={{ height: '40px' }}
                 />
-            </div>
+            </div>}
         </div>
     )
 }

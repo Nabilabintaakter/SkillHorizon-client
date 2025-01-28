@@ -161,7 +161,8 @@ const MyClassAssignment = () => {
 
                 )}
                 {/* Pagination and Showing range */}
-                <div className="mt-10 flex justify-between items-center">
+                {
+                    assignments.length > 0 && <div className="mt-10 flex justify-between items-center">
                     <p className="text-gray-800 text-sm md:text-base">
                         Showing <span className="text-black text-sm md:text-xl">{startItem}</span>-<span className="text-black text-sm md:text-xl">{endItem}</span> of <span className="text-black text-sm md:text-xl">{assignments.length}</span> assignments
                     </p>
@@ -185,6 +186,7 @@ const MyClassAssignment = () => {
                 />
 
                 </div>
+                }
             </div>
         );
     }
