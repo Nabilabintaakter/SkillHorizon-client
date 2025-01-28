@@ -1,5 +1,6 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import ReactPaginate from 'react-paginate';
 import LoadingSpinner from '../../../Shared/LoadingSpinner/LoadingSpinner';
 import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
@@ -25,16 +26,31 @@ const EnrollClassDetails = () => {
             return data;
         },
     });
-    
+
     useEffect(() => {
         document.title = `Assignments | SkillHorizon`;
     }, [])
+    const [currentPage, setCurrentPage] = useState(0);
+    const itemsPerPage = 9;
+
+    // Pagination logic
+    const offset = currentPage * itemsPerPage;
+    const currentAssignments = assignments.slice(offset, offset + itemsPerPage);
+    const pageCount = Math.ceil(assignments.length / itemsPerPage);
+
+    const handlePageChange = ({ selected }) => {
+        setCurrentPage(selected);
+    };
+
+    // Calculate the range of items being displayed
+    const startItem = currentPage * itemsPerPage + 1;
+    const endItem = Math.min((currentPage + 1) * itemsPerPage, assignments.length);
     if (isLoading) return <LoadingSpinner />;
     return (
         <div className="container mx-auto py-4 md:py-8 px-4 lg:px-5 xl:px-9">
-            {assignments.length > 0 && <div className="text-center mb-8">
+            {currentAssignments.length > 0 && <div className="text-center mb-8">
                 <h1 className='text-black mb-3 text-2xl md:text-3xl lg:text-4xl font-bold w-full mx-auto'>
-                    {assignments.length > 0 && (
+                    {currentAssignments.length > 0 && (
                         [...new Set(assignments.map(item => item?.className))].map((uniqueClassName, index) => (
                             <p key={index}>
                                 {uniqueClassName}
@@ -46,7 +62,7 @@ const EnrollClassDetails = () => {
                     Stay updated on your class assignments, deadlines, and progress all in one place.
                 </p>
             </div>}
-            {assignments.length > 0 ?
+            {currentAssignments.length > 0 ?
                 <div className="overflow-x-auto mt-4">
                     <div className='flex justify-between mb-1'>
                         <h2 className="text-xl md:text-2xl font-semibold text-gray-800 mb-3">
@@ -75,6 +91,12 @@ const EnrollClassDetails = () => {
                         )}
 
                     </div>
+                    <div className='mt-1 mb-2'>
+                        <p className='text-gray-600'>
+                            <span className='text-black text-xl'>{assignments.length}</span> Assignments Available for You. Complete Them to Continue Your Learning Journey!
+                        </p>
+                    </div>
+
                     <table className="table-auto w-full border-collapse bg-white shadow-md rounded-lg">
                         {/* Table Header */}
                         <thead>
@@ -88,7 +110,7 @@ const EnrollClassDetails = () => {
                         </thead>
                         {/* Table Body */}
                         <tbody>
-                            {assignments.map((assignment, index) => (
+                            {currentAssignments.map((assignment, index) => (
                                 <StudentAssignmentRow key={assignment._id} index={index} assignment={assignment} />
                             ))}
                         </tbody>
@@ -115,6 +137,29 @@ const EnrollClassDetails = () => {
                         </div>
                     </div>
                 )}
+            {/* Pagination and Showing range */}
+            <div className="mt-10 flex justify-between items-center">
+                <p className="text-gray-800">
+                    Showing <span className="text-black text-xl">{startItem}</span>-<span className="text-black text-xl">{endItem}</span> of <span className="text-black text-xl">{assignments.length}</span> assignments
+                </p>
+                <ReactPaginate
+                    previousLabel={'← Previous'}
+                    nextLabel={'Next →'}
+                    breakLabel={'...'}
+                    pageCount={pageCount}
+                    marginPagesDisplayed={2}
+                    pageRangeDisplayed={5}
+                    onPageChange={handlePageChange}
+                    containerClassName={'pagination flex justify-center gap-3'}
+                    pageClassName={'bg-[#e3edf2] px-3 py-1 rounded-md shadow-sm hover:bg-[#f0f4f8]'}
+                    pageLinkClassName={'text-[#139196] font-medium hover:text-gray-800'}
+                    activeClassName={'bg-[#139196] text-white font-semibold shadow-md'}
+                    previousClassName={'px-3 py-1 bg-[#139196] text-white rounded-md shadow-sm hover:bg-[#e3edf2] hover:text-gray-800'}
+                    nextClassName={'px-3 py-1 bg-[#139196] text-white rounded-md shadow-sm hover:bg-[#e3edf2] hover:text-gray-800'}
+                    disabledClassName={'bg-gray-200 cursor-not-allowed'}
+                    breakClassName={'text-gray-800'}
+                />
+            </div>
         </div>
     );
 };
