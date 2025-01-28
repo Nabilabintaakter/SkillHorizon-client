@@ -7,15 +7,7 @@
 .font-josefin {
     font-family: "Josefin Sans", serif;
 }
-.swiper-container {
-  position: relative;
-}
-.swiper-pagination {
-    bottom: -5px !important; 
-    text-align: center;
-    z-index: 50; 
-    position: absolute; 
-}
+
 
 .swiper-pagination-bullet {
     background: #139196 !important;

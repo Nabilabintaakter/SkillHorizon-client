@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import ReactPaginate from 'react-paginate';
 import Container from '../../../Shared/Container/Container';
 import useAxiosPublic from '../../../hooks/useAxiosPublic';
 import { useQuery } from '@tanstack/react-query';
@@ -10,43 +11,57 @@ import Heading from '../../../Shared/Heading/Heading';
 const AllClasses = () => {
     useEffect(() => {
         document.title = 'All Classes | SkillHorizon';
-    }, [])
+    }, []);
+
     const axiosPublic = useAxiosPublic();
     const { data: classes = [], isLoading } = useQuery({
         queryKey: ['classes'],
         queryFn: async () => {
             const { data } = await axiosPublic(`/all-classes`)
-            return data
+            return data;
         },
-    })
-    console.log(classes)
-    if (isLoading) return <LoadingSpinner></LoadingSpinner>
+    });
 
+    const [currentPage, setCurrentPage] = useState(0);
+    const itemsPerPage = 10;
 
+    // Pagination logic
+    const offset = currentPage * itemsPerPage;
+    const currentClasses = classes.slice(offset, offset + itemsPerPage);
+    const pageCount = Math.ceil(classes.length / itemsPerPage);
+
+    const handlePageChange = ({ selected }) => {
+        setCurrentPage(selected);
+    };
+
+    // Calculate the range of items being displayed
+    const startItem = currentPage * itemsPerPage + 1;
+    const endItem = Math.min((currentPage + 1) * itemsPerPage, classes.length);
+
+    if (isLoading) return <LoadingSpinner></LoadingSpinner>;
 
     return (
-        <div className=' py-5 min-h-screen md:pb-10'>
+        <div className='py-5 min-h-screen md:pb-10'>
             <Container>
-                <Heading subtitle={'All  Classes'} title={'Unlock New Possibilities with Our Expert-Led Classes'}></Heading>
+                <Heading subtitle={'All Classes'} title={'Unlock New Possibilities with Our Expert-Led Classes'} />
                 <div className='-mt-5 mb-5'>
-                    <p className='text-gray-600'>Discover All <span className='text-black text-xl'>{classes.length}</span> Classes Available for You</p>
+                    <p className='text-gray-600'>
+                        Discover All <span className='text-black text-xl'>{classes.length}</span> Classes Available for You
+                    </p>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
                     {
-                        classes.length > 0 ?
-
-                            classes.map((classItem, index) => (
-
-
+                        currentClasses.length > 0 ?
+                            currentClasses.map((classItem, index) => (
                                 <div
                                     key={index}
-                                    className="relative bg-white rounded-md overflow-hidden flex flex-col justify-between group hover:bg-gradient-to-br hover:from-[#66BE80] hover:to-[#139196] transition duration-500 ease-out h-[335px] md:h-[330px]"
+                                    className="relative bg-white rounded-md overflow-hidden flex flex-col justify-between group hover:bg-gradient-to-br hover:from-[#66BE80] hover:to-[#139196] transition duration-500 ease-out h-[335px] md:h-[350px]"
                                 >
                                     {/* Image */}
                                     <img
                                         src={classItem.image}
                                         alt={classItem.title}
-                                        className="w-full h-52 md:h-44  object-cover rounded-md group-hover:opacity-0 transition duration-300"
+                                        className="w-full h-52 md:h-44 object-cover rounded-md group-hover:opacity-0 transition duration-300"
                                     />
 
                                     {/* Content */}
@@ -82,7 +97,7 @@ const AllClasses = () => {
                                     >
                                         {classItem.totalEnrollment > 0
                                             ? `${classItem.totalEnrollment} Enrollments`
-                                            : "Be the first to enroll !"}
+                                            : "Be the first to enroll!"}
                                     </span>
 
                                     {/* Enroll Now Button */}
@@ -100,10 +115,7 @@ const AllClasses = () => {
                                         </button>
                                     </Link>
                                 </div>
-
-
                             ))
-
                             :
                             (
                                 <div className="col-span-full text-center py-16 flex flex-col items-center bg-[#fef2f2] rounded-lg shadow-md border-[1px] border-red-200">
@@ -117,6 +129,30 @@ const AllClasses = () => {
                                 </div>
                             )
                     }
+                </div>
+
+                {/* Pagination and Showing range */}
+                <div className="mt-5 flex justify-between items-center">
+                    <p className="text-gray-800">
+                        Showing <span className="text-black text-xl">{startItem}</span>-<span className="text-black text-xl">{endItem}</span> of <span className="text-black text-xl">{classes.length}</span> classes
+                    </p>
+                    <ReactPaginate
+                        previousLabel={'← Previous'}
+                        nextLabel={'Next →'}
+                        breakLabel={'...'}
+                        pageCount={pageCount}
+                        marginPagesDisplayed={2}
+                        pageRangeDisplayed={5}
+                        onPageChange={handlePageChange}
+                        containerClassName={'pagination flex justify-center gap-3'}
+                        pageClassName={'bg-[#e3edf2] px-3 py-1 rounded-md shadow-sm hover:bg-[#f0f4f8]'}
+                        pageLinkClassName={'text-[#139196] font-medium hover:text-gray-800'}
+                        activeClassName={'bg-[#139196] text-white font-semibold shadow-md'}
+                        previousClassName={'px-3 py-1 bg-[#139196] text-white rounded-md shadow-sm hover:bg-[#e3edf2] hover:text-gray-800'}
+                        nextClassName={'px-3 py-1 bg-[#139196] text-white rounded-md shadow-sm hover:bg-[#e3edf2] hover:text-gray-800'}
+                        disabledClassName={'bg-gray-200 cursor-not-allowed'}
+                        breakClassName={'text-gray-800'}
+                    />
                 </div>
             </Container>
         </div>

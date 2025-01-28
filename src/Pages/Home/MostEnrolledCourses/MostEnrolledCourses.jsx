@@ -22,7 +22,7 @@ const MostEnrolledCourses = () => {
     })
     console.log(featuredClasses);
     return (
-        <div className=" py-10 md:pb-16 bg-[#F1EFEE]">
+        <div className=" py-10 md:py-16 bg-[#F1EFEE]">
             <Container>
                 {/* header */}
                 <div className="flex items-center justify-between">

@@ -141,11 +141,11 @@ const EvaluationModal = ({ isOpen, close, uniqueClassName }) => {
                                         >
                                             {isPending ? (
                                                 <p className="flex items-center gap-2">
-                                                    Saving...
+                                                    Sending...
                                                     <ImSpinner9 className="animate-spin m-auto text-sm" />
                                                 </p>
                                             ) : (
-                                                'Submit'
+                                                'Send'
                                             )}
                                         </button>
                                     </div>
