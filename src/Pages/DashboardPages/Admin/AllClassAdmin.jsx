@@ -3,7 +3,8 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import LoadingSpinner from "../../../Shared/LoadingSpinner/LoadingSpinner";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import ReactPaginate from 'react-paginate';
+import { useEffect, useState } from "react";
 
 const AllClassAdmin = () => {
     const axiosSecure = useAxiosSecure()
@@ -65,6 +66,21 @@ const AllClassAdmin = () => {
     useEffect(() => {
         document.title = `All Class Requests | SkillHorizon`;
     }, [])
+    const [currentPage, setCurrentPage] = useState(0);
+    const itemsPerPage = 10;
+
+    // Pagination logic
+    const offset = currentPage * itemsPerPage;
+    const currentClasses = classes.slice(offset, offset + itemsPerPage);
+    const pageCount = Math.ceil(classes.length / itemsPerPage);
+
+    const handlePageChange = ({ selected }) => {
+        setCurrentPage(selected);
+    };
+
+    // Calculate the range of items being displayed
+    const startItem = currentPage * itemsPerPage + 1;
+    const endItem = Math.min((currentPage + 1) * itemsPerPage, classes.length);
     if (isLoading) return <LoadingSpinner></LoadingSpinner>
 
     return (
@@ -73,7 +89,9 @@ const AllClassAdmin = () => {
                 <h1 className='text-black mb-3 text-2xl md:text-3xl lg:text-4xl font-bold w-full mx-auto'>Manage All Classes</h1>
                 <p className='text-[#0886A0] font-medium'>Review, Approve, or Reject Classes and Track Progress</p>
             </div>
-
+            <div className='my-5 md:my-3'>
+                <p className='text-gray-600'> A total of <span className='text-black text-xl'>{classes.length}</span> class requests have been submitted by teachers for your review.</p>
+            </div>
             <div className="overflow-x-auto">
                 <table className="table-auto w-full border-collapse bg-white shadow-md rounded-lg">
                     {/* Table Header */}
@@ -91,13 +109,13 @@ const AllClassAdmin = () => {
 
                     {/* Table Body */}
                     <tbody>
-                        {classes.map((classItem, index) => (
+                        {currentClasses.map((classItem, index) => (
                             <tr
                                 key={classItem._id}
                                 className={`relative border-b ${index % 2 === 0 ? 'bg-[#95D3A2] bg-opacity-10' : 'bg-[#95D3A2] bg-opacity-20'} hover:bg-[#95D3A2] hover:bg-opacity-30`}
                             >
                                 {/* Serial Number */}
-                                <td className="px-4  font-medium">{index + 1}</td>
+                                <td className="px-4 font-medium">{offset + index + 1}</td>
 
                                 {/* Class Image */}
                                 <td className="absolute mt-3 px-4  flex items-center gap-2">
@@ -147,6 +165,30 @@ const AllClassAdmin = () => {
                         ))}
                     </tbody>
                 </table>
+            </div>
+            {/* Pagination and Showing range */}
+            <div className="mt-10 flex justify-between items-center">
+                <p className="text-gray-800 text-sm md:text-base">
+                    Showing <span className="text-black text-sm md:text-xl">{startItem}</span>-<span className="text-black text-sm md:text-xl">{endItem}</span> of <span className="text-black text-sm md:text-xl">{classes.length}</span> classes
+                </p>
+                <ReactPaginate
+                    previousLabel={'← Previous'}
+                    nextLabel={'Next →'}
+                    breakLabel={'...'}
+                    pageCount={pageCount}
+                    marginPagesDisplayed={2}
+                    pageRangeDisplayed={5}
+                    onPageChange={handlePageChange}
+                    containerClassName={'pagination flex justify-center gap-3 items-center'}
+                    pageClassName={'bg-[#e3edf2] px-3 py-1 rounded-md shadow-sm hover:bg-[#f0f4f8]'}
+                    pageLinkClassName={'text-[#139196] font-medium hover:text-gray-800'}
+                    activeClassName={'bg-[#139196] text-white font-semibold shadow-md border-2 border-[#139196]'} // Active page color changes
+                    previousClassName={'px-3 py-1 bg-[#139196] text-white rounded-md shadow-sm hover:bg-[#e3edf2] hover:text-gray-800 text-sm md:text-base'}
+                    nextClassName={'px-3 py-1 bg-[#139196] text-white rounded-md shadow-sm hover:bg-[#e3edf2] hover:text-gray-800 text-sm md:text-base'}
+                    disabledClassName={'bg-gray-200 cursor-not-allowed hover:text-white'}
+                    breakClassName={'text-gray-800'}
+                    style={{ height: '40px' }}
+                />
             </div>
         </div>
     );

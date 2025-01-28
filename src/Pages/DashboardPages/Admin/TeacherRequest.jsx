@@ -2,7 +2,8 @@ import toast from "react-hot-toast";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import LoadingSpinner from "../../../Shared/LoadingSpinner/LoadingSpinner";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import ReactPaginate from 'react-paginate';
 
 const TeacherRequest = () => {
     const axiosSecure = useAxiosSecure()
@@ -18,7 +19,7 @@ const TeacherRequest = () => {
     // Mutation to approve a user an teacher
     const { mutate: makeTeacher, isLoading: isMutating } = useMutation({
         mutationFn: async (teacherData) => {
-            const response = await axiosSecure.patch(`/users/teacher-approve/${teacherData.email}`);
+            const response = await axiosSecure.patch(`/teachers/teacher-approve/${teacherData.email}`);
             return response.data;
         },
         onSuccess: () => {
@@ -33,7 +34,7 @@ const TeacherRequest = () => {
     // Mutation to reject a user an teacher
     const { mutate: rejectTeacher } = useMutation({
         mutationFn: async (teacherData) => {
-            const response = await axiosSecure.patch(`/users/teacher-reject/${teacherData.email}`);
+            const response = await axiosSecure.patch(`/teachers/teacher-reject/${teacherData.email}`);
             return response.data;
         },
         onSuccess: () => {
@@ -65,6 +66,21 @@ const TeacherRequest = () => {
     useEffect(() => {
         document.title = `Teacher Requests | SkillHorizon`;
     }, [])
+    const [currentPage, setCurrentPage] = useState(0);
+    const itemsPerPage = 10;
+
+    // Pagination logic
+    const offset = currentPage * itemsPerPage;
+    const currentTeachers = teachers.slice(offset, offset + itemsPerPage);
+    const pageCount = Math.ceil(teachers.length / itemsPerPage);
+
+    const handlePageChange = ({ selected }) => {
+        setCurrentPage(selected);
+    };
+
+    // Calculate the range of items being displayed
+    const startItem = currentPage * itemsPerPage + 1;
+    const endItem = Math.min((currentPage + 1) * itemsPerPage, teachers.length);
     if (isLoading) return <LoadingSpinner></LoadingSpinner>
 
     return (
@@ -77,7 +93,12 @@ const TeacherRequest = () => {
                     Review and Approve Teacher Applications Seamlessly
                 </p>
             </div>
+            <div className='my-5 md:my-3'>
+                <p className='text-gray-600'>
+                    A total of <span className='text-black text-xl'>{teachers.length}</span> users have requested to become teachers on your platform.
+                </p>
 
+            </div>
             <div className="overflow-x-auto">
                 <table className="table-auto w-full border-collapse bg-white shadow-md rounded-lg">
                     {/* Table Header */}
@@ -94,7 +115,7 @@ const TeacherRequest = () => {
                     </thead>
                     {/* Table Body */}
                     <tbody>
-                        {teachers.map((teacher, index) => (
+                        {currentTeachers.map((teacher, index) => (
                             <tr
                                 key={teacher._id}
                                 className={`relative border-b ${index % 2 === 0 ? 'bg-[#95D3A2] bg-opacity-10' : 'bg-[#95D3A2] bg-opacity-20'} hover:bg-[#95D3A2] hover:bg-opacity-30`}
@@ -154,6 +175,30 @@ const TeacherRequest = () => {
                         ))}
                     </tbody>
                 </table>
+            </div>
+            {/* Pagination and Showing range */}
+            <div className="mt-10 flex justify-between items-center">
+                <p className="text-gray-800 text-sm md:text-base">
+                    Showing <span className="text-black text-sm md:text-xl">{startItem}</span>-<span className="text-black text-sm md:text-xl">{endItem}</span> of <span className="text-black text-sm md:text-xl">{teachers.length}</span> teachers
+                </p>
+                <ReactPaginate
+                    previousLabel={'← Previous'}
+                    nextLabel={'Next →'}
+                    breakLabel={'...'}
+                    pageCount={pageCount}
+                    marginPagesDisplayed={2}
+                    pageRangeDisplayed={5}
+                    onPageChange={handlePageChange}
+                    containerClassName={'pagination flex justify-center gap-3 items-center'}
+                    pageClassName={'bg-[#e3edf2] px-3 py-1 rounded-md shadow-sm hover:bg-[#f0f4f8]'}
+                    pageLinkClassName={'text-[#139196] font-medium hover:text-gray-800'}
+                    activeClassName={'bg-[#139196] text-white font-semibold shadow-md border-2 border-[#139196]'} // Active page color changes
+                    previousClassName={'px-3 py-1 bg-[#139196] text-white rounded-md shadow-sm hover:bg-[#e3edf2] hover:text-gray-800 text-sm md:text-base'}
+                    nextClassName={'px-3 py-1 bg-[#139196] text-white rounded-md shadow-sm hover:bg-[#e3edf2] hover:text-gray-800 text-sm md:text-base'}
+                    disabledClassName={'bg-gray-200 cursor-not-allowed hover:text-white'}
+                    breakClassName={'text-gray-800'}
+                    style={{ height: '40px' }}
+                />
             </div>
         </div>
     );

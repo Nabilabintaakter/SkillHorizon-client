@@ -2,7 +2,7 @@ import { Button } from '@headlessui/react';
 import React, { useState } from 'react';
 import AssignmentSubmissionModal from './AssignmentSubmissionModal';
 
-const StudentAssignmentRow = ({ assignment, index }) => {
+const StudentAssignmentRow = ({ assignment, index,offset }) => {
     let [isOpen, setIsOpen] = useState(false);
     const [isButtonDisabled, setIsButtonDisabled] = useState(false);
     function close() {
@@ -22,7 +22,7 @@ const StudentAssignmentRow = ({ assignment, index }) => {
             className={`border-b ${index % 2 === 0 ? 'bg-[#95D3A2] bg-opacity-10' : 'bg-[#95D3A2] bg-opacity-20'} hover:bg-[#95D3A2] hover:bg-opacity-30`}
         >
             {/* index */}
-            <td className="px-4 py-3 text-sm font-semibold text-gray-800">{index + 1}</td>
+            <td className="px-4 py-3 text-sm font-semibold text-gray-800">{offset+index + 1}</td>
             {/* Title */}
             <td className="px-4 py-3 text-sm font-medium text-gray-800">{assignment.title}</td>
             {/* Description */}

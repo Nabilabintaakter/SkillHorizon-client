@@ -106,7 +106,7 @@ const MyClassAssignment = () => {
                     </Button>
                     <div className='my-5 md:my-3'>
                         <p className='text-gray-600'>
-                            You’ve added <span className='text-black text-xl'>{assignments.length}</span> assignments for this class. You may add additional assignments by clicking the "Create Assignment" button.
+                            You’ve added <span className='text-black text-xl'>{assignments.length}</span> assignments for this class.
                         </p>
                     </div>
 
@@ -135,8 +135,8 @@ const MyClassAssignment = () => {
                             </thead>
                             {/* Table Body */}
                             <tbody>
-                                {assignments.map((assignment, index) => (
-                                    <AssignmentTableRow key={assignment._id} index={index} assignment={assignment} />
+                                {currentAssignments.map((assignment, index) => (
+                                    <AssignmentTableRow key={assignment._id} index={index} offset={offset} assignment={assignment} />
                                 ))}
                             </tbody>
                         </table>
@@ -166,27 +166,25 @@ const MyClassAssignment = () => {
                         Showing <span className="text-black text-sm md:text-xl">{startItem}</span>-<span className="text-black text-sm md:text-xl">{endItem}</span> of <span className="text-black text-sm md:text-xl">{assignments.length}</span> assignments
                     </p>
                     <ReactPaginate
-                        previousLabel={'← Previous'}
-                        nextLabel={'Next →'}
-                        breakLabel={'...'}
-                        pageCount={pageCount}
-                        marginPagesDisplayed={2}
-                        pageRangeDisplayed={5}
-                        onPageChange={handlePageChange}
-                        containerClassName={'pagination flex justify-center gap-3 items-center'}
-                        pageClassName={'bg-[#e3edf2] px-3 py-1 rounded-md shadow-sm hover:bg-[#f0f4f8]'}
-                        pageLinkClassName={'text-[#139196] font-medium hover:text-gray-800'}
-                        activeClassName={'bg-[#139196] text-white font-semibold shadow-md'}
-                        previousClassName={'px-3 py-1 bg-[#139196] text-white rounded-md shadow-sm hover:bg-[#e3edf2] hover:text-gray-800 text-sm md:text-base'}
-                        nextClassName={'px-3 py-1 bg-[#139196] text-white rounded-md shadow-sm hover:bg-[#e3edf2] hover:text-gray-800 text-sm md:text-base'}
-                        disabledClassName={'bg-gray-200 cursor-not-allowed hover:text-white'}
-                        breakClassName={'text-gray-800'}
-                        // Fixed height for consistent button size
-                        style={{ height: '40px' }}
-                    />
+                    previousLabel={'← Previous'}
+                    nextLabel={'Next →'}
+                    breakLabel={'...'}
+                    pageCount={pageCount}
+                    marginPagesDisplayed={2}
+                    pageRangeDisplayed={5}
+                    onPageChange={handlePageChange}
+                    containerClassName={'pagination flex justify-center gap-3 items-center'}
+                    pageClassName={'bg-[#e3edf2] px-3 py-1 rounded-md shadow-sm hover:bg-[#f0f4f8]'}
+                    pageLinkClassName={'text-[#139196] font-medium hover:text-gray-800'}
+                    activeClassName={'bg-[#139196] text-white font-semibold shadow-md border-2 border-[#139196]'} // Active page color changes
+                    previousClassName={'px-3 py-1 bg-[#139196] text-white rounded-md shadow-sm hover:bg-[#e3edf2] hover:text-gray-800 text-sm md:text-base'}
+                    nextClassName={'px-3 py-1 bg-[#139196] text-white rounded-md shadow-sm hover:bg-[#e3edf2] hover:text-gray-800 text-sm md:text-base'}
+                    disabledClassName={'bg-gray-200 cursor-not-allowed hover:text-white'}
+                    breakClassName={'text-gray-800'}
+                    style={{ height: '40px' }}
+                />
 
                 </div>
-
             </div>
         );
     }

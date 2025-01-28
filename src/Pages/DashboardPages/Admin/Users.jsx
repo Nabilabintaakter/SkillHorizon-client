@@ -1,9 +1,9 @@
 import toast from "react-hot-toast";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-
+import ReactPaginate from 'react-paginate';
 import { useMutation, useQuery } from "@tanstack/react-query";
 import LoadingSpinner from "../../../Shared/LoadingSpinner/LoadingSpinner";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const Users = () => {
     const axiosSecure = useAxiosSecure();
@@ -25,7 +25,7 @@ const Users = () => {
         },
         onSuccess: () => {
             toast.success("User successfully made admin!");
-            refetch(); 
+            refetch();
         },
         onError: (error) => {
             console.error(error);
@@ -40,10 +40,24 @@ const Users = () => {
         }
         makeAdmin(userData);
     };
-        useEffect(() => {
-            document.title = `All Users | SkillHorizon`;
-        }, [])
+    useEffect(() => {
+        document.title = `All Users | SkillHorizon`;
+    }, [])
+    const [currentPage, setCurrentPage] = useState(0);
+    const itemsPerPage = 10;
 
+    // Pagination logic
+    const offset = currentPage * itemsPerPage;
+    const currentUsers = users.slice(offset, offset + itemsPerPage);
+    const pageCount = Math.ceil(users.length / itemsPerPage);
+
+    const handlePageChange = ({ selected }) => {
+        setCurrentPage(selected);
+    };
+
+    // Calculate the range of items being displayed
+    const startItem = currentPage * itemsPerPage + 1;
+    const endItem = Math.min((currentPage + 1) * itemsPerPage, users.length);
     if (isLoading) return <LoadingSpinner></LoadingSpinner>
 
     return (
@@ -54,6 +68,11 @@ const Users = () => {
                 </h1>
                 <p className="text-[#0886A0] font-medium">
                     View user details, manage roles, and grant admin privileges effortlessly.
+                </p>
+            </div>
+            <div className='my-5 md:my-3'>
+                <p className='text-gray-600'>
+                    A total of <span className='text-black text-xl'>{users.length}</span> users are currently registered on your platform.
                 </p>
             </div>
 
@@ -70,15 +89,15 @@ const Users = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {users.map((userData, index) => (
+                        {currentUsers.map((userData, index) => (
                             <tr
                                 key={userData._id}
                                 className={`relative border-b ${index % 2 === 0
-                                        ? "bg-[#95D3A2] bg-opacity-10"
-                                        : "bg-[#95D3A2] bg-opacity-20"
+                                    ? "bg-[#95D3A2] bg-opacity-10"
+                                    : "bg-[#95D3A2] bg-opacity-20"
                                     } hover:bg-[#95D3A2] hover:bg-opacity-30`}
                             >
-                                <td className="px-4 font-medium hidden md:table-cell">{index + 1}</td>
+                                <td className="px-4 font-medium hidden md:table-cell">{offset + index + 1}</td>
                                 <td className="absolute mt-6 md:mt-3 px-4">
                                     <div className="w-10 h-10 rounded-full">
                                         <img
@@ -96,10 +115,10 @@ const Users = () => {
                                 <td className="px-4">
                                     <button
                                         className={`px-4 py-[2px] text-sm cursor-default rounded-2xl border-[1px] ${userData.role === "Admin"
-                                                ? "bg-green-200 text-green-600 border-green-400"
-                                                : userData.role === "Teacher"
-                                                    ? "bg-blue-200 text-blue-600 border-blue-400"
-                                                    : "bg-yellow-200 text-yellow-600 border-yellow-400"
+                                            ? "bg-green-200 text-green-600 border-green-400"
+                                            : userData.role === "Teacher"
+                                                ? "bg-blue-200 text-blue-600 border-blue-400"
+                                                : "bg-yellow-200 text-yellow-600 border-yellow-400"
                                             }`}
                                     >
                                         {userData.role}
@@ -119,6 +138,30 @@ const Users = () => {
                         ))}
                     </tbody>
                 </table>
+            </div>
+            {/* Pagination and Showing range */}
+            <div className="mt-10 flex justify-between items-center">
+                <p className="text-gray-800 text-sm md:text-base">
+                    Showing <span className="text-black text-sm md:text-xl">{startItem}</span>-<span className="text-black text-sm md:text-xl">{endItem}</span> of <span className="text-black text-sm md:text-xl">{users.length}</span> users
+                </p>
+                <ReactPaginate
+                    previousLabel={'← Previous'}
+                    nextLabel={'Next →'}
+                    breakLabel={'...'}
+                    pageCount={pageCount}
+                    marginPagesDisplayed={2}
+                    pageRangeDisplayed={5}
+                    onPageChange={handlePageChange}
+                    containerClassName={'pagination flex justify-center gap-3 items-center'}
+                    pageClassName={'bg-[#e3edf2] px-3 py-1 rounded-md shadow-sm hover:bg-[#f0f4f8]'}
+                    pageLinkClassName={'text-[#139196] font-medium hover:text-gray-800'}
+                    activeClassName={'bg-[#139196] text-white font-semibold shadow-md border-2 border-[#139196]'} // Active page color changes
+                    previousClassName={'px-3 py-1 bg-[#139196] text-white rounded-md shadow-sm hover:bg-[#e3edf2] hover:text-gray-800 text-sm md:text-base'}
+                    nextClassName={'px-3 py-1 bg-[#139196] text-white rounded-md shadow-sm hover:bg-[#e3edf2] hover:text-gray-800 text-sm md:text-base'}
+                    disabledClassName={'bg-gray-200 cursor-not-allowed hover:text-white'}
+                    breakClassName={'text-gray-800'}
+                    style={{ height: '40px' }}
+                />
             </div>
         </div>
     );
