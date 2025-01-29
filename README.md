@@ -1,37 +1,135 @@
-# SkillHorizon - EduManage
+# **SkillHorizon - EduManage**
 
-**SkillHorizon** is a modern, full-stack MERN (MongoDB, Express.js, React, Node.js) application designed to revolutionize educational institution and tutor-student interactions. It makes skill learning and class management more efficient, user-friendly, and accessible.
+**SkillHorizon** is a full-stack MERN (MongoDB, Express.js, React, Node.js) application aimed at improving educational institution and tutor-student interactions. It streamlines skill learning, class management, and enhances user experience through dynamic features.
 
-## Admin Credentials:
-- **Useremail**: skillhorizonadmin@gmail.com
+## 🌐 **Live Website**  
+[Visit the Live Site](https://skillhorizon-11d1f.web.app/)
+
+## 🔑 **Admin Credentials**  
+- **Email**: skillhorizonadmin@gmail.com  
 - **Password**: 123Aa!
 
-## Live Site URL:
-[Live Site - SkillHorizon](https://skillhorizon-11d1f.web.app/)
+## ✨ **Key Features**  
+1. **Responsive Design**: Fully responsive for all devices (mobile, tablet, desktop).  
+2. **Dynamic Navbar**: Includes logo, home, classes, sign-in, and user profile dropdown.  
+3. **Student Dashboard**: Private dashboard to manage classes, assignments, and provide feedback.  
+4. **Teacher Dashboard**: Add classes, track progress, manage enrollments, and assign tasks.  
+5. **Admin Dashboard**: Manage teacher requests, user roles, class approvals, and class progress.  
+6. **Private Routes**: Protects pages for logged-in users with JWT authentication.  
+7. **Authentication**: Google and email/password login with JWT authentication.
+8. **CRUD Operations**: Create, read, update, and delete operations for classes, users, and assignments with success/failure notifications.
+9. **Pagination**: Pagination for user lists, classes, and assignments to improve user experience.
+10. **Feedback Section**: Display feedback from teachers with their photos and ratings, collected via a Teacher Evaluation Report.
+11. **Environment Variables**: Firebase and MongoDB credentials are securely stored in environment variables.
 
-## Server Repository:
-[Server Repository - SkillHorizon](https://github.com/Programming-Hero-Web-Course4/b10a12-server-side-Nabilabintaakter)
+## 🛠️ **Pages and Functionalities**  
+- **Home Page**: Public page with featured classes, upcoming events, and banners.  
+- **Classes Page**: Displays a grid of all classes with sorting and filtering options.  
+- **Student Dashboard**: Students can view enrolled classes, assignments, and feedback.
+- **Teacher Dashboard**: Teachers can manage their classes, enrollments, and assignments.
+- **Admin Dashboard**: Manages teacher requests, user roles, and class approvals.  
+- **Login and Register Pages**: Secure login for both students and teachers via email/password or Google authentication.
 
-## Features:
-- **Responsive Design**: Fully responsive on mobile, tablet, and desktop views, including the dashboard.
-- **Dynamic Navbar**: Navbar with a logo, home, all classes, sign-in, and a user profile dropdown when logged in.
-- **Student Dashboard**: Private route for students to manage enrolled classes, assignments, and provide teaching feedback.
-- **Teacher Dashboard**: Enables teachers to add classes, manage enrollments, track class progress, and assign tasks.
-- **Admin Dashboard**: Includes features like managing teacher requests, user roles, class approvals, and seeing class progress.
-- **Private Routes**: Secure and private pages for logged-in users, preventing unauthorized access.
-- **Authentication**: Google sign-in and email/password login for easy access, including JWT for authentication.
-- **CRUD Operations**: Create, read, update, and delete operations for classes, users, and assignments with sweet alerts for success/failure.
-- **Pagination**: Pagination for user lists, classes, and assignments to improve user experience.
-- **Feedback Section**: Display feedback from teachers with their photos and ratings, collected via a Teacher Evaluation Report.
-- **Environment Variables**: Firebase and MongoDB credentials are hidden using environment variables for security.
-- **Tanstack Query**: Used for efficient data fetching and caching for GET requests.
-- **Tanstack Mutation**: Applied for all POST requests for optimized data handling.
-- **React Hook Form**: Efficient form handling for class applications, teacher requests, and student enrollments.
-  
-## Installation
+---
 
-### Prerequisites:
-- Node.js (v16 or above)
-- MongoDB (Local or Atlas)
-- Firebase Account (for authentication)
+## 🖼️ Screenshots
 
+### Home Page:
+<img src="https://i.ibb.co.com/N6j6CtVL/skill.jpg" alt="Home Page Screenshot" width="100%" />
+
+### All Classes Page:
+<img src="https://i.ibb.co.com/Rph7x30N/skill-2.jpg" alt="All Classes Page Screenshot" width="100%" />
+
+---
+
+## 🚀 **Technologies Used**
+
+- **Frontend**: 
+  - **React** (18.3.1) for building the user interface.
+  - **React Router DOM** (6.28.2) for handling navigation.
+  - **Tailwind CSS** (3.4.17) for utility-first CSS styling.
+  - **DaisyUI** (4.12.23) for component library based on Tailwind.
+  - **React Query** (5.64.2) for data fetching, caching, and synchronization.
+  - **React Hook Form** (7.54.2) for form management and validation.
+  - **React Hot Toast** (2.5.1) for showing toast notifications.
+  - **React Icons** (5.4.0) for using icons in your application.
+  - **Swiper** (11.2.1) for creating modern carousels/sliders.
+  - **React Paginate** (8.2.0) for paginating lists of data.
+  - **React Awesome Reveal** (4.3.1) for animations and scroll effects.
+  - **SweetAlert2** (11.15.10) for beautiful alerts.
+  - **Moment.js** (2.30.1) for parsing, validating, and manipulating dates.
+
+- **Backend**:
+  - **Node.js** for building the server-side logic.
+  - **Express.js** for routing and handling HTTP requests.
+  - **MongoDB** with **Mongoose** for storing data in a NoSQL database.
+  - **Firebase** (11.2.0) for user authentication (Google, email/password).
+  - **JWT Authentication** for securing API endpoints.
+
+- **Deployment**:
+  - **Vercel** for hosting the frontend application.
+  - **Firebase Hosting** for deploying static files and serverless functions.
+  - **MongoDB Atlas** for cloud-hosted MongoDB databases.
+
+
+---
+
+## 🛠️ **Frontend Setup**
+
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/Nabilabintaakter/SkillHorizon-client.git
+    cd SkillHorizon-client
+    ```
+
+2. Install dependencies:
+    ```bash
+    npm install
+    ```
+
+3. Start the development server:
+    ```bash
+    npm start
+    ```
+
+4. Open your browser and go to `http://localhost:5173`.
+
+---
+
+## 🖥️ **Backend Setup**
+
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/Nabilabintaakter/SkillHorizon-server.git
+    cd SkillHorizon-server
+    ```
+
+2. Install dependencies:
+    ```bash
+    npm install
+    ```
+
+3. Set up your environment variables (Firebase and MongoDB credentials):
+    ```bash
+    touch .env
+    nano .env
+    ```
+    Add the following inside `.env`:
+    ```bash
+    MONGO_URI=your_mongodb_connection_string
+    JWT_SECRET=your_jwt_secret_key
+    FIREBASE_SECRET=your_firebase_secret
+    ```
+
+4. Start the development server:
+    ```bash
+    npm run dev
+    ```
+
+5. The backend will be accessible at `http://localhost:5000`.
+
+---
+
+## **Live API**
+- **API Documentation**: [SkillHorizon API](https://b10-a12-skill-horizon-server.vercel.app/)
+- **Backend Repository**: [SkillHorizon Server](https://github.com/Nabilabintaakter/SkillHorizon-server)
