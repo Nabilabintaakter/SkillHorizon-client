@@ -1,5 +1,5 @@
 # **SkillHorizon - EduManage**
-
+<img src="https://i.ibb.co.com/N6j6CtVL/skill.jpg" alt="Home Page Screenshot" width="100%" />
 **SkillHorizon** is a full-stack MERN (MongoDB, Express.js, React, Node.js) application aimed at improving educational institution and tutor-student interactions. It streamlines skill learning, class management, and enhances user experience through dynamic features.
 
 ## 🌐 **Live Website**  
@@ -29,16 +29,6 @@
 - **Teacher Dashboard**: Teachers can manage their classes, enrollments, and assignments.
 - **Admin Dashboard**: Manages teacher requests, user roles, and class approvals.  
 - **Login and Register Pages**: Secure login for both students and teachers via email/password or Google authentication.
-
----
-
-## 🖼️ Screenshots
-
-### Home Page:
-<img src="https://i.ibb.co.com/N6j6CtVL/skill.jpg" alt="Home Page Screenshot" width="100%" />
-
-### All Classes Page:
-<img src="https://i.ibb.co.com/Rph7x30N/skill-2.jpg" alt="All Classes Page Screenshot" width="100%" />
 
 ---
 
