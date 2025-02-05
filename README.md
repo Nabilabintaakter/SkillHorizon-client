@@ -1,5 +1,5 @@
 # **SkillHorizon - EduManage**
-<img src="https://i.ibb.co.com/JwgyHQ1m/Screenshot-165.png" alt="Home Page Screenshot" width="100%" />
+<img src="https://i.ibb.co.com/Mx9tZGz8/Screenshot-10.jpg" alt="Home Page Screenshot" width="100%" />
 
 **SkillHorizon** is a full-stack MERN (MongoDB, Express.js, React, Node.js) web application designed to enhance communication between educational institutions, teachers, and students. It serves as an interactive platform where students can improve their skills, enroll in courses, submit assignments, and receive feedback, while teachers can efficiently manage their classes, assignments, and student progress.  
 
