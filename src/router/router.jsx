@@ -26,6 +26,7 @@ import EnrollClassDetails from "../Pages/DashboardPages/Student/EnrollClassDetai
 import AssignmentSubmissions from "../Pages/DashboardPages/Teacher/AssignmentSubmissions";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import About from "../Pages/About/About";
+import Contact from "../Pages/Contact/Contact";
 
 const router = createBrowserRouter([
   {
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
       {
         path: "/about",
         element: <About></About>,
+      },
+      {
+        path: "/contact",
+        element: <Contact></Contact>,
       },
     ]
   },

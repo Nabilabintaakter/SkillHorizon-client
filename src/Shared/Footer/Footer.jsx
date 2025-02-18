@@ -73,7 +73,7 @@ const Footer = () => {
                             </a>
                         </div>
                         <ul className="text-gray-400 mt-4 space-y-2">
-                            <li><span className="font-semibold">Call Us:</span> +880-1711-xxxxxx</li>
+                            <li><span className="font-semibold">Call Us:</span> +009 3067 321</li>
                             <li><span className="font-semibold">Address:</span> Dhanmondi 27, Dhaka, Bangladesh</li>
                             <li><span className="font-semibold">Mail Us:</span> support@skillhorizon.com</li>
                         </ul>

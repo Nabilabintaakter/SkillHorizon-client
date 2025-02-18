@@ -58,10 +58,10 @@ const Navbar = () => {
                     ` hover:text-[#139196] transition-all duration-500 ${isActive ? 'text-[#139196] font-bold' : 'font-semibold'
                     }`
                 }>
-                About
+                About Us
             </NavLink>
         </li>
-        <li>
+        {user && <li>
             <NavLink
                 onClick={scrollToTop}
                 to="/teachOnSkill"
@@ -70,6 +70,17 @@ const Navbar = () => {
                     }`
                 }>
                 Teach on SkillHorizon
+            </NavLink>
+        </li>}
+        <li>
+            <NavLink
+                onClick={scrollToTop}
+                to="/contact"
+                className={({ isActive }) =>
+                    ` hover:text-[#139196] transition-all duration-500 ${isActive ? 'text-[#139196] font-bold' : 'font-semibold'
+                    }`
+                }>
+                Contact
             </NavLink>
         </li>
     </>
