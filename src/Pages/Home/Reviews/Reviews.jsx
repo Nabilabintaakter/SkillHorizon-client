@@ -6,7 +6,7 @@ import ReviewSlider from './REviewSlider';
 
 const Reviews = () => {
     return (
-        <div className="mb-12 md:mb-16 lg:mb-20 ">
+        <div className="bg-white dark:bg-[#282834] ">
             <Container>
                 <div className='flex flex-col md:flex-row gap-0 md:gap-10'>
                     {/* left section */}
@@ -14,7 +14,7 @@ const Reviews = () => {
                     {/* right section */}
                     <div className='md:w-1/2 mt-0 md:mt-8 lg:mt-12'>
                         <div>
-                            <div className='text-black text-2xl lg:text-4xl font-bold w-full mx-auto flex flex-col items-center'>
+                            <div className='text-black dark:text-white text-2xl lg:text-3xl xl:text-4xl font-bold w-full mx-auto flex flex-col items-center'>
                                 <h1 className=''>Our Students are Our Pride.</h1>
                                 <h1>See What They Say About Us</h1>
                             </div>

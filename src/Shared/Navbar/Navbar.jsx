@@ -5,6 +5,7 @@ import { Link, NavLink, useNavigate } from 'react-router-dom';
 import Container from '../Container/Container';
 import { MdOutlineLogout } from 'react-icons/md';
 import useAuth from '../../hooks/useAuth';
+import DarkModeToggle from '../DarkModeToggle/DarkModeToggle';
 
 const Navbar = () => {
     const { user, signingOut } = useAuth();
@@ -31,7 +32,7 @@ const Navbar = () => {
                 onClick={scrollToTop}
                 to="/"
                 className={({ isActive }) =>
-                    ` hover:text-[#139196] transition-all duration-500 ${isActive ? 'text-[#139196] font-bold' : 'font-semibold'
+                    ` hover:text-[#139196] dark:hover:text-[#66BE80] transition-all duration-500 ${isActive ? 'text-[#139196] dark:text-[#66BE80] font-bold' : 'font-semibold'
                     }`
                 }
             >
@@ -44,7 +45,7 @@ const Navbar = () => {
                 onClick={scrollToTop}
                 to="/allClasses"
                 className={({ isActive }) =>
-                    ` hover:text-[#139196] transition-all duration-500 ${isActive ? 'text-[#139196] font-bold' : 'font-semibold'
+                    ` hover:text-[#139196] dark:hover:text-[#66BE80] transition-all duration-500 ${isActive ? 'text-[#139196] dark:text-[#66BE80] font-bold' : 'font-semibold'
                     }`
                 }>
                 All Classes
@@ -55,7 +56,7 @@ const Navbar = () => {
                 onClick={scrollToTop}
                 to="/about"
                 className={({ isActive }) =>
-                    ` hover:text-[#139196] transition-all duration-500 ${isActive ? 'text-[#139196] font-bold' : 'font-semibold'
+                    ` hover:text-[#139196] dark:hover:text-[#66BE80] transition-all duration-500 ${isActive ? 'text-[#139196] dark:text-[#66BE80] font-bold' : 'font-semibold'
                     }`
                 }>
                 About Us
@@ -66,7 +67,7 @@ const Navbar = () => {
                 onClick={scrollToTop}
                 to="/teachOnSkill"
                 className={({ isActive }) =>
-                    ` hover:text-[#139196] transition-all duration-500 ${isActive ? 'text-[#139196] font-bold' : 'font-semibold'
+                    ` hover:text-[#139196] dark:hover:text-[#66BE80] transition-all duration-500 ${isActive ? 'text-[#139196] dark:text-[#66BE80] font-bold' : 'font-semibold'
                     }`
                 }>
                 Teach on SkillHorizon
@@ -77,7 +78,7 @@ const Navbar = () => {
                 onClick={scrollToTop}
                 to="/contact"
                 className={({ isActive }) =>
-                    ` hover:text-[#139196] transition-all duration-500 ${isActive ? 'text-[#139196] font-bold' : 'font-semibold'
+                    ` hover:text-[#139196] dark:hover:text-[#66BE80] transition-all duration-500 ${isActive ? 'text-[#139196] dark:text-[#66BE80] font-bold' : 'font-semibold'
                     }`
                 }>
                 Contact
@@ -85,7 +86,7 @@ const Navbar = () => {
         </li>
     </>
     return (
-        <div className='bg-white text-black fixed top-0 bg-white/70 backdrop-blur-md z-50 w-full'>
+        <div className='bg-white dark:bg-[#282834] text-black fixed top-0 bg-white/70 backdrop-blur-md z-50 w-full'>
             <Container>
                 <div className="navbar mx-auto w-full p-0 ">
                     <div className="navbar-start">
@@ -99,20 +100,21 @@ const Navbar = () => {
                                 {links}
                             </ul>
                         </div>
-                        <Link to={'/'} className='flex'>
+                        <Link to={'/'} className='flex bg-white px-2 rounded-tr-xl rounded-bl-xl'>
                             <img className=' h-10 md:h-14' src={logo} alt="" />
                             <img className='w-20 md:w-28 h-10 md:h-14' src={text} alt="" />
                         </Link>
                     </div>
-                    <div className="navbar-center hidden lg:flex">
+                    <div className="navbar-center hidden lg:flex dark:text-white">
                         <ul className="flex items-center gap-8">
                             {links}
                         </ul>
                     </div>
                     <div className="navbar-end flex justify-end items-center">
+                        <div className='mr-3'><DarkModeToggle></DarkModeToggle></div>
                         {
                             user ?
-                                <div className="dropdown dropdown-end flex justify-end items-center">
+                                <div className=" dropdown dropdown-end flex justify-end items-center">
                                     <div tabIndex={0} role="button" className=" avatar">
                                         <div className="w-10 rounded-full bg-[#128F9D] p-[1px]">
                                             <img

@@ -24,7 +24,7 @@ const AllClasses = () => {
     });
 
     const [currentPage, setCurrentPage] = useState(0);
-    const itemsPerPage = 10;
+    const itemsPerPage = 12;
 
     // Pagination logic
     const offset = currentPage * itemsPerPage;
@@ -42,22 +42,22 @@ const AllClasses = () => {
     if (isLoading) return <LoadingSpinner></LoadingSpinner>;
 
     return (
-        <div className='py-5 min-h-screen md:pb-10'>
+        <div className='bg-white dark:bg-[#282834] py-5 min-h-screen md:pb-10'>
             <Container>
                 <Heading subtitle={'All Classes'} title={'Unlock New Possibilities with Our Expert-Led Classes'} />
                 <div className='-mt-5 mb-5'>
-                    <p className='text-gray-600'>
-                        Discover All <span className='text-black text-xl'>{classes.length}</span> Classes Available for You
+                    <p className='text-gray-600 dark:text-gray-300'>
+                        Discover All <span className='text-black dark:text-white text-xl'>{classes.length}</span> Classes Available for You
                     </p>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
                     {
                         currentClasses.length > 0 ?
                             currentClasses.map((classItem, index) => (
                                 <Fade delay={index * 0.8}>
                                     <div
                                         key={index}
-                                        className="relative bg-white rounded-md overflow-hidden flex flex-col justify-between group hover:bg-gradient-to-br hover:from-[#66BE80] hover:to-[#139196] transition duration-500 ease-out h-[335px] md:h-[350px]"
+                                        className="relative bg-white dark:bg-[#383844] rounded-md overflow-hidden flex flex-col justify-between group hover:bg-gradient-to-br hover:from-[#66BE80] hover:to-[#139196] transition duration-500 ease-out h-[335px] md:h-[350px]"
                                     >
                                         {/* Image */}
                                         <img
@@ -67,10 +67,10 @@ const AllClasses = () => {
                                         />
 
                                         {/* Content */}
-                                        <div className="py-3 mt-2 group-hover:p-5 flex-grow">
+                                        <div className="py-3 dark:px-4 mt-2 group-hover:p-5 flex-grow">
                                             {/* Title & Description */}
                                             <div className="group-hover:text-white transition duration-300 group-hover:absolute md:group-hover:top-20 group-hover:top-24 ">
-                                                <h3 className="group-hover:leading-loose md:group-hover:leading-tight group-hover:pr-5 text-lg font-medium group-hover:font-bold text-black group-hover:text-white ">
+                                                <h3 className="group-hover:leading-loose md:group-hover:leading-tight group-hover:pr-5 text-lg font-medium group-hover:font-bold text-black dark:text-white group-hover:text-white ">
                                                     {classItem.title}
                                                 </h3>
                                             </div>
@@ -81,10 +81,10 @@ const AllClasses = () => {
 
                                             {/* teacher, price */}
                                             <div className="group-hover:hidden mt-3">
-                                                <div className="text-gray-700 flex items-center gap-3">
+                                                <div className="text-gray-700 dark:text-gray-400 flex items-center gap-3">
                                                     <FaUserCircle className="text-2xl text-[#229df0]" />
                                                     <p>By </p>
-                                                    <span className='text-black'>{classItem.name}</span>
+                                                    <span className='text-black dark:text-white'>{classItem.name}</span>
                                                 </div>
                                                 <div className="mt-3 text-2xl font-bold text-[#139196]">
                                                     <small className='text-gray-400 font-normal line-through mr-2 text-base'>$1000</small>
@@ -136,8 +136,8 @@ const AllClasses = () => {
 
                 {/* Pagination and Showing range */}
                 <div className="mt-10 flex justify-between items-center">
-                    <p className="text-gray-800">
-                        Showing <span className="text-black text-xl">{startItem}</span>-<span className="text-black text-xl">{endItem}</span> of <span className="text-black text-xl">{classes.length}</span> classes
+                    <p className="text-gray-800 dark:text-gray-300">
+                        Showing <span className="text-black dark:text-white text-xl">{startItem}</span>-<span className="text-black dark:text-white text-xl">{endItem}</span> of <span className="text-black dark:text-white text-xl">{classes.length}</span> classes
                     </p>
                     <ReactPaginate
                         previousLabel={'← Previous'}

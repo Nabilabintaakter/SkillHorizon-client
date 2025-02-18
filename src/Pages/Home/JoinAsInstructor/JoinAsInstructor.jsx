@@ -6,7 +6,7 @@ import { Zoom } from "react-awesome-reveal";
 
 const JoinAsInstructor = () => {
     return (
-        <div className="my-16 md:my-20 ">
+        <div className="bg-white dark:bg-[#282834] py-16 md:py-20 ">
             <Container>
                 <div className="flex flex-col md:flex-row items-center gap-6 md:gap-10">
                     {/* Left Section */}
@@ -23,10 +23,10 @@ const JoinAsInstructor = () => {
                     </div>
                     {/* Right Section */}
                     <div className="md:w-1/2">
-                        <h2 className="text-black text-2xl  lg:text-4xl font-bold mb-2 lg:mb-4 lg:w-[90%]">
+                        <h2 className="text-black dark:text-white text-2xl  lg:text-4xl font-bold mb-2 lg:mb-4 lg:w-[90%]">
                             Become an Instructor Today and Start Teaching
                         </h2>
-                        <p className="text-gray-600 lg:text-lg lg:leading-relaxed mb-3 lg:mb-6">
+                        <p className="text-gray-600 dark:text-gray-300 lg:text-lg lg:leading-relaxed mb-3 lg:mb-6">
                             Instructors from around the world teach millions of students on SkillHorizon.
                             We provide the tools and skills to teach what you love. Join us and
                             achieve your goals while inspiring the next generation of learners.

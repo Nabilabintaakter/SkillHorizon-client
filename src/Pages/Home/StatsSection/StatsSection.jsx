@@ -34,7 +34,7 @@ const StatsSection = () => {
     });
 
     return (
-        <div className="my-12 md:my-16">
+        <div className="bg-white dark:bg-[#282834] py-12 md:py-16">
             <Container>
                 <Heading subtitle="Our Impact in Numbers" title="Celebrating milestones of growth and success" />
                 <div className="flex justify-center items-center">

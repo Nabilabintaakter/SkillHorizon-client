@@ -8,7 +8,7 @@ const LoadingSpinner = ({ smallHeight }) => {
       flex 
       flex-col 
       justify-center 
-      items-center `}
+      items-center bg-white dark:bg-[#282834]`}
     >
       <ScaleLoader size={100} color='#3AA2AC' />
     </div>

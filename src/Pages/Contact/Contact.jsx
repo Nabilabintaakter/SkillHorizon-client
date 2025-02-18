@@ -6,11 +6,11 @@ import { Fade } from 'react-awesome-reveal';
 
 const Contact = () => {
     return (
-        <div className="py-5 md:py-10 bg-white">
+        <div className="py-5 md:py-10 bg-white dark:bg-[#282834]">
             <Container>
                 <Heading title={'Contact Us'} />
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-8 mt-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-5 mt-8">
                     <div className="bg-[#EBF5FB] rounded-lg shadow-md p-6 lg:p-10 flex justify-center items-center border-t-4 border-[#2196F3] hover:-translate-y-[6px]  transition-transform duration-700 ease-out">
                         <div className='flex gap-4 items-center'>
                             <div className="text-xl lg:text-3xl text-[#2196F3] p-4 bg-white rounded-full mb-4">
@@ -53,7 +53,7 @@ const Contact = () => {
                     <Fade triggerOnce>
                         <div className='text-center mb-8 md:mb-12'>
                             <p className='text-[#0886A0] mb-3 font-medium'>Contact Us</p>
-                            <h1 className='text-black text-2xl md:text-3xl lg:text-4xl font-bold w-[90%]  mx-auto'>Send Us Message Anytime</h1>
+                            <h1 className='text-black dark:text-white text-2xl md:text-3xl lg:text-4xl font-bold w-[90%]  mx-auto'>Send Us Message Anytime</h1>
                         </div>
                     </Fade>
                     <form action="https://api.web3forms.com/submit" method="POST" className=" rounded-md">

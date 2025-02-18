@@ -1,42 +1,47 @@
 import { FaFacebookF, FaInstagram, FaTwitter, FaLinkedinIn } from 'react-icons/fa';
-import logo from '../../assets/Logo .png';
+import logo from '../../assets/l-1.png';
+import text from '../../assets/l-2.png';
 import Container from '../Container/Container';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
     return (
-        <footer className="bg-[#282834] pt-10 pb-5 text-white">
+        <footer className="bg-[#282834] dark:bg-white pt-10 pb-5 text-white dark:text-[#282834]">
             <Container>
                 <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {/* Logo and Description */}
                     <div>
-                        <img className="w-48" src={logo} alt="SkillHorizon Logo" />
+                        <Link to={'/'} className='flex py-2 bg-white px-2 rounded-tr-2xl rounded-bl-2xl w-fit'>
+                            <img className='h-16 lg:h-20' src={logo} alt="" />
+                            <img className='w-32 lg:w-36 h-16 lg:h-20' src={text} alt="" />
+                        </Link>
                         <p className="text-gray-400 mt-4">
                             Discover limitless learning opportunities and sharpen your skills in web development, AI, cybersecurity, and more.
                         </p>
                     </div>
 
                     {/* Quick Link */}
-                    <div>
+                    <div className='lg:mt-2'>
                         <h3 className="text-lg font-semibold">Quick Link</h3>
                         <ul className="text-gray-400 mt-4 space-y-2">
-                            <li><a href="/allClasses" className="hover:text-blue-500">Courses</a></li>
-                            <li><a href="" className="hover:text-blue-500">Featured Courses</a></li>
-                            <li><a href="" className="hover:text-blue-500">Terms & Conditions</a></li>
+                            <li><a href="/allClasses" className="hover:text-[#139196]">Courses</a></li>
+                            <li><a href="" className="hover:text-[#139196]">Featured Courses</a></li>
+                            <li><a href="" className="hover:text-[#139196]">Terms & Conditions</a></li>
                         </ul>
                     </div>
 
                     {/* Help Center */}
-                    <div>
+                    <div className='lg:mt-2'>
                         <h3 className="text-lg font-semibold">Help Center</h3>
                         <ul className="text-gray-400 mt-4 space-y-2">
-                            <li><a href="" className="hover:text-blue-500">Support</a></li>
-                            <li><a href="" className="hover:text-blue-500">Get Help</a></li>
-                            <li><a href="" className="hover:text-blue-500">Privacy Policy</a></li>
+                            <li><a href="" className="hover:text-[#139196]">Support</a></li>
+                            <li><a href="" className="hover:text-[#139196]">Get Help</a></li>
+                            <li><a href="/privacyPolicy" className="hover:text-[#139196]">Privacy Policy</a></li>
                         </ul>
                     </div>
 
                     {/* Contact Info */}
-                    <div>
+                    <div className='lg:mt-2'>
                         <h3 className="text-lg font-semibold">Contact Info</h3>
                         <div className="flex space-x-6 mt-2">
                             <a
@@ -86,7 +91,7 @@ const Footer = () => {
 
                     <p className="text-gray-400">
                         &copy; SkillHorizon 2025. All Rights Reserved. Powered by{' '}
-                        <a target="_blank" href="https://github.com/Nabilabintaakter" className="text-blue-500 hover:underline">Nabila Binta Akter</a>.
+                        <a target="_blank" href="https://github.com/Nabilabintaakter" className="text-[#139196] hover:underline">Nabila Binta Akter</a>.
                     </p>
                 </div>
             </Container>

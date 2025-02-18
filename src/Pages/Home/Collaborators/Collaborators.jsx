@@ -50,7 +50,7 @@ const Collaborators = () => {
     ];
 
     return (
-        <div className="my-12 md:my-16">
+        <div className="bg-white dark:bg-[#282834] py-12 md:py-16">
             <Container>
                 <div className=" text-center">
                     <Heading subtitle={'Trusted Partners'} title={'Empowering Learning Together with Renowned Platforms'}></Heading>
@@ -62,7 +62,7 @@ const Collaborators = () => {
                                 <div
                                 
                                 key={index}
-                                    className={`relative group ${collaborator.bgColor} shadow-md rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 bg-opacity-15`}
+                                    className={`relative group ${collaborator.bgColor} shadow-md rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 bg-opacity-15 dark:bg-opacity-50`}
                                 >
                                     
                                     <div className="flex justify-center items-center p-8">

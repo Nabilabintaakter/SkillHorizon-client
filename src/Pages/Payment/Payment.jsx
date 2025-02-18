@@ -53,31 +53,33 @@ const Payment = () => {
     const price = classData?.price || 0;
 
     return (
-        <Container>
-            <div className="flex justify-center items-center min-h-[calc(100vh-64px)]">
-                <div className="w-full max-w-md">
-                    <h2 className="text-center text-2xl lg:text-3xl font-semibold mb-4">
-                        Complete Your Payment
-                    </h2>
-                    <div className="bg-gray-50 rounded border p-4">
-                        <div className="flex justify-between text-xl md:text-2xl font-semibold">
-                            <p>Total</p>
-                            <p className="text-xl md:text-2xl text-[#139196] font-bold">${price.toFixed(2)}</p>
+        <div className='bg-white dark:bg-[#282834]'>
+            <Container>
+                <div className="flex justify-center items-center min-h-[calc(100vh-64px)]">
+                    <div className="w-full max-w-md">
+                        <h2 className="text-center dark:text-white text-2xl lg:text-3xl font-semibold mb-4">
+                            Complete Your Payment
+                        </h2>
+                        <div className="bg-gray-50 rounded border p-4">
+                            <div className="flex justify-between text-xl md:text-2xl font-semibold">
+                                <p>Total</p>
+                                <p className="text-xl md:text-2xl text-[#139196] font-bold">${price.toFixed(2)}</p>
+                            </div>
+                            <small className="line-through text-gray-500 mb-4 flex justify-end">$1000</small>
+                            {clientSecret ? (
+                                <Elements stripe={stripePromise} options={{ clientSecret }}>
+                                    <CheckoutForm classData={classData} clientSecret={clientSecret} />
+                                </Elements>
+                            ) : (
+                                <p className="text-gray-500 text-center mt-4">
+                                    Preparing payment, please wait...
+                                </p>
+                            )}
                         </div>
-                        <small className="line-through text-gray-500 mb-4 flex justify-end">$1000</small>
-                        {clientSecret ? (
-                            <Elements stripe={stripePromise} options={{ clientSecret }}>
-                                <CheckoutForm classData={classData} clientSecret={clientSecret} />
-                            </Elements>
-                        ) : (
-                            <p className="text-gray-500 text-center mt-4">
-                                Preparing payment, please wait...
-                            </p>
-                        )}
                     </div>
                 </div>
-            </div>
-        </Container>
+            </Container>
+        </div>
     );
 };
 

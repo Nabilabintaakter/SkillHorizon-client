@@ -22,7 +22,7 @@ const categories = [
 
 const Categories = () => {
     return (
-        <div className="my-12 md:my-16">
+        <div className="bg-white dark:bg-[#282834] py-12 md:py-16 ">
             <Container>
                 <Heading subtitle={'Top Categories'} title={'Our Top Categories'}></Heading>
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5 ">
@@ -30,15 +30,15 @@ const Categories = () => {
                         <Zoom triggerOnce delay={index * 0.2}>
                             <div
                                 key={index}
-                                className="flex justify-between items-center p-4 sm:px-6 xl:px-8 rounded-md border-[1px] hover:-translate-y-1 transition-all duration-500  hover:bg-[#128F9D] hover:border-[#28dff3] group"
+                                className="flex justify-between items-center p-4 sm:px-6 xl:px-8 rounded-md border-[1px] dark:border-gray-600 hover:-translate-y-1 transition-all duration-500  hover:bg-[#128F9D] hover:border-[#28dff3] group"
                             >
-                                <h3 className="text-black text-sm md:text-xl lg:text-base font-medium group-hover:text-white transition-all duration-500 ease-in-out">{category.name}</h3>
+                                <h3 className="text-black dark:text-white text-sm md:text-xl lg:text-base font-medium group-hover:text-white transition-all duration-500 ease-in-out">{category.name}</h3>
                                 <div className="">{category.icon}</div>
                             </div>
                         </Zoom>
                     ))}
                 </div>
-                <Link to='/allClasses' className="flex justify-center gap-2 mt-5 md:mt-10">Browse All  <span className="flex items-center gap-1 text-[#0C8C9A]">Categories <FaArrowRight></FaArrowRight></span></Link>
+                <Link to='/allClasses' className="flex justify-center gap-2 mt-5 md:mt-10 dark:text-white">Browse All  <span className="flex items-center gap-1 text-[#0C8C9A] dark:text-[#66BE80]">Categories <FaArrowRight></FaArrowRight></span></Link>
             </Container>
         </div>
     );

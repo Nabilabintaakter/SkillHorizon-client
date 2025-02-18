@@ -27,6 +27,7 @@ import AssignmentSubmissions from "../Pages/DashboardPages/Teacher/AssignmentSub
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import About from "../Pages/About/About";
 import Contact from "../Pages/Contact/Contact";
+import PrivacyPolicy from "../Pages/PrivacyPolicy/PrivacyPolicy";
 
 const router = createBrowserRouter([
   {
@@ -69,6 +70,10 @@ const router = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact></Contact>,
+      },
+      {
+        path: "/privacyPolicy",
+        element: <PrivacyPolicy></PrivacyPolicy>,
       },
     ]
   },

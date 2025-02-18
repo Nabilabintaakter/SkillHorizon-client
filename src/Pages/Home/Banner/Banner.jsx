@@ -26,7 +26,7 @@ export default function Banner() {
                     {/* slide-1 */}
                     <SwiperSlide>
                         <div className=' flex flex-col gap-8 md:flex-row justify-between items-center py-14'>
-                            <div className='flex flex-col justify-center items-center md:items-start w-full md:w-1/2 text-white space-y-4'>
+                            <div className='flex flex-col justify-center items-center md:items-start w-full md:w-1/2 text-white dark:text-black space-y-4'>
                                 <h1 className='text-center md:text-left text-3xl md:text-4xl lg:text-5xl xl:text-[52px] font-bold '>Unlock Your Potential with Expert-Led Online Courses</h1>
                                 <p className='text-center md:text-left xl:text-lg'>Discover a wide range of <span className='text-[#FEC400]'>high-quality</span> courses designed to enhance your <span className='text-[#FEC400]'>skills</span> and knowledge. Join thousands of learners worldwide and grow with new content added regularly!</p>
                                 <Link to={'/allClasses'} className=' text-black rounded-[5px] bg-[#F0BF79] font-medium hover:text-[#39A2AD] cursor-pointer px-5 py-2 md:py-[14px] flex gap-2 items-center'>Get Started Today <RiRewindStartMiniFill className='text-2xl font-bold' /></Link>
@@ -39,7 +39,7 @@ export default function Banner() {
                     {/* slide-2 */}
                     <SwiperSlide>
                         <div className=' flex flex-col gap-8 md:flex-row justify-between items-center py-14'>
-                            <div className='flex flex-col justify-center items-center md:items-start w-full md:w-1/2 text-white space-y-4'>
+                            <div className='flex flex-col justify-center items-center md:items-start w-full md:w-1/2 text-white dark:text-black space-y-4'>
                                 <h1 className='text-center md:text-left text-3xl md:text-4xl lg:text-5xl xl:text-[52px] font-bold '>Master the Skills to Shape Your Future</h1>
                                 <p className='text-center md:text-left xl:text-lg'>Explore expertly curated <span className='text-[#FEC400]'>courses</span> across diverse fields. Build your <span className='text-[#FEC400]'>career</span> and personal growth with guidance from top educators worldwide!</p>
                                 <Link to={'/allClasses'} className=' text-black rounded-[5px] bg-[#F0BF79] font-medium hover:text-[#39A2AD]  cursor-pointer px-5 py-2 md:py-[14px] flex gap-2 items-center'>Explore Courses <RiRewindStartMiniFill className='text-2xl font-bold' /></Link>
@@ -52,7 +52,7 @@ export default function Banner() {
                     {/* slide-3 */}
                     <SwiperSlide>
                         <div className=' flex flex-col gap-8 md:flex-row justify-between items-center py-14'>
-                            <div className='flex flex-col justify-center items-center md:items-start w-full md:w-1/2 text-white space-y-4'>
+                            <div className='flex flex-col justify-center items-center md:items-start w-full md:w-1/2 text-white dark:text-black space-y-4'>
                                 <h1 className='text-center md:text-left text-3xl md:text-4xl lg:text-5xl xl:text-[52px] font-bold '>Learn Anytime, Anywhere at Your Pace</h1>
                                 <p className='text-center md:text-left xl:text-lg'>Access a library of online <span className='text-[#FEC400]'>courses</span> tailored to your goals. Achieve your <span className='text-[#FEC400]'>dreams</span> with flexible learning opportunities and interactive lessons!</p>
                                 <Link to={'/allClasses'} className=' text-black rounded-[5px] bg-[#F0BF79] font-medium hover:text-[#39A2AD]  cursor-pointer px-5 py-2 md:py-[14px] flex gap-2 items-center'>Start Learning Now <RiRewindStartMiniFill className='text-2xl font-bold' /></Link>
