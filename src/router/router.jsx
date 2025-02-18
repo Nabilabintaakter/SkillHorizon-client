@@ -28,6 +28,7 @@ import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import About from "../Pages/About/About";
 import Contact from "../Pages/Contact/Contact";
 import PrivacyPolicy from "../Pages/PrivacyPolicy/PrivacyPolicy";
+import FAQ from "../Pages/FAQ/FAQ";
 
 const router = createBrowserRouter([
   {
@@ -74,6 +75,10 @@ const router = createBrowserRouter([
       {
         path: "/privacyPolicy",
         element: <PrivacyPolicy></PrivacyPolicy>,
+      },
+      {
+        path: "/faq",
+        element: <FAQ></FAQ>,
       },
     ]
   },
