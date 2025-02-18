@@ -25,6 +25,7 @@ import MyClassAssignment from "../Pages/DashboardPages/Teacher/MyClassAssignment
 import EnrollClassDetails from "../Pages/DashboardPages/Student/EnrollClassDetails";
 import AssignmentSubmissions from "../Pages/DashboardPages/Teacher/AssignmentSubmissions";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
+import About from "../Pages/About/About";
 
 const router = createBrowserRouter([
   {
@@ -59,6 +60,10 @@ const router = createBrowserRouter([
       {
         path: "/signUp",
         element: <SignUp></SignUp>,
+      },
+      {
+        path: "/about",
+        element: <About></About>,
       },
     ]
   },

@@ -53,6 +53,17 @@ const Navbar = () => {
         <li>
             <NavLink
                 onClick={scrollToTop}
+                to="/about"
+                className={({ isActive }) =>
+                    ` hover:text-[#139196] transition-all duration-500 ${isActive ? 'text-[#139196] font-bold' : 'font-semibold'
+                    }`
+                }>
+                About
+            </NavLink>
+        </li>
+        <li>
+            <NavLink
+                onClick={scrollToTop}
                 to="/teachOnSkill"
                 className={({ isActive }) =>
                     ` hover:text-[#139196] transition-all duration-500 ${isActive ? 'text-[#139196] font-bold' : 'font-semibold'
@@ -83,7 +94,7 @@ const Navbar = () => {
                         </Link>
                     </div>
                     <div className="navbar-center hidden lg:flex">
-                        <ul className="flex items-center gap-10">
+                        <ul className="flex items-center gap-8">
                             {links}
                         </ul>
                     </div>
