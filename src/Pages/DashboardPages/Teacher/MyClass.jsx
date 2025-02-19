@@ -84,7 +84,7 @@ const MyClass = () => {
         <div className="bg-white dark:bg-[#282834] container mx-auto py-4 md:py-8 px-4 lg:px-5 xl:px-9 pb-10">
             <Zoom tr>
                 <div className="text-center mb-8">
-                    <h1 className='text-black mb-3 text-2xl md:text-3xl lg:text-4xl font-bold w-full mx-auto'>Manage Your Classes</h1>
+                    <h1 className='text-black dark:text-white mb-3 text-2xl md:text-3xl lg:text-4xl font-bold w-full mx-auto'>Manage Your Classes</h1>
                     <p className='text-[#0886A0]  font-medium'>View, Update, and Delete Your Added Classes Seamlessly</p>
                 </div>  </Zoom><div className='my-5'>
                     <p className='text-gray-600 dark:text-gray-200'>
