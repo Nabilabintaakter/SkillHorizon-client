@@ -125,5 +125,5 @@ This platform makes learning and class management easier for both students and t
 ---
 
 ## **Live API**
-- **API Documentation**: [SkillHorizon API](https://b10-a12-skill-horizon-server.vercel.app/)
+- **API Documentation**: [SkillHorizon API](http://localhost:5000/)
 - **Backend Repository**: [SkillHorizon Server](https://github.com/Nabilabintaakter/SkillHorizon-server)

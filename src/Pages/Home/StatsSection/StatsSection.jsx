@@ -43,7 +43,7 @@ const StatsSection = () => {
                         <div className="mt-6 sm:mt-0 flex flex-col gap-4">
                             {/* Card for Total Users */}
                             <Slide direction="up" triggerOnce delay={0.1}>
-                                <div className="bg-white p-3 md:p-5 rounded-lg border border-gray-300 hover:shadow-2xl transition duration-300 hover:border-blue-400 hover:-translate-y-1">
+                                <div className="bg-white p-3 md:p-5 rounded-lg border border-gray-300 hover:shadow-2xl transition duration-300 hover:border-[#139196] hover:-translate-y-1">
                                     <h3 className="text-xl lg:text-2xl font-semibold text-gray-700 md:mb-2">
                                         Total Users
                                     </h3>
@@ -56,7 +56,7 @@ const StatsSection = () => {
 
                             {/* Card for Total Classes */}
                             <Slide direction="up" triggerOnce delay={0.2}>
-                                <div className="bg-white p-3 md:p-5 rounded-lg border border-gray-300 hover:shadow-2xl transition duration-300 hover:border-blue-400 hover:-translate-y-1">
+                                <div className="bg-white p-3 md:p-5 rounded-lg border border-gray-300 hover:shadow-2xl transition duration-300 hover:border-[#139196] hover:-translate-y-1">
                                     <h3 className="text-xl lg:text-2xl font-semibold text-gray-700 md:mb-2">
                                         Total Classes
                                     </h3>
@@ -69,7 +69,7 @@ const StatsSection = () => {
 
                             {/* Card for Total Enrollments */}
                             <Slide direction="up" triggerOnce delay={0.3}>
-                                <div className="bg-white p-3 md:p-5 rounded-lg border border-gray-300 hover:shadow-2xl transition duration-300 hover:border-blue-400 hover:-translate-y-1">
+                                <div className="bg-white p-3 md:p-5 rounded-lg border border-gray-300 hover:shadow-2xl transition duration-300 hover:border-[#139196] hover:-translate-y-1">
                                     <h3 className="text-xl lg:text-2xl font-semibold text-gray-700 md:mb-2">
                                         Total Enrollments
                                     </h3>

@@ -10,17 +10,19 @@ import Heading from '../../../Shared/Heading/Heading';
 import { Fade } from 'react-awesome-reveal';
 
 const AllClasses = () => {
+    const [sort, setSort] = useState('');
     useEffect(() => {
         document.title = 'All Classes | SkillHorizon';
     }, []);
 
     const axiosPublic = useAxiosPublic();
     const { data: classes = [], isLoading } = useQuery({
-        queryKey: ['classes'],
+        queryKey: ['classes',sort],
         queryFn: async () => {
-            const { data } = await axiosPublic(`/all-classes`)
+            const { data } = await axiosPublic(`/all-classes?sort=${sort}`)
             return data;
         },
+        keepPreviousData: true,
     });
 
     const [currentPage, setCurrentPage] = useState(0);
@@ -45,10 +47,25 @@ const AllClasses = () => {
         <div className='bg-white dark:bg-[#282834] py-5 min-h-screen md:pb-10'>
             <Container>
                 <Heading subtitle={'All Classes'} title={'Unlock New Possibilities with Our Expert-Led Classes'} />
-                <div className='-mt-5 mb-5'>
+                <div className='mt-10 mb-5 md:mb-7'>
                     <p className='text-gray-600 dark:text-gray-300'>
                         Discover All <span className='text-black dark:text-white text-xl'>{classes.length}</span> Classes Available for You
                     </p>
+                    {/* Sort by Price */}
+                    <div className="flex flex-row flex-wrap justify-end items-center gap-5 -mt-4 lg:-mt-12 mb-3">
+                        <div>
+                            <select
+                                name="sort"
+                                id="sort"
+                                className="btn btn-sm md:btn-md text-left border-[1px] hover:bg-[#F2F0EF] rounded-md hover:border-gray-600 bg-[#F2F0EF] mt-5 md:mt-0"
+                                onChange={(e) => setSort(e.target.value)}
+                            >
+                                <option value="">Sort By</option>
+                                <option value="asc">Price: Low to High</option>
+                                <option value="dsc">Price: High to Low</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
                     {
