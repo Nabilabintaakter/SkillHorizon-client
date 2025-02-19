@@ -91,12 +91,12 @@ const Navbar = () => {
                 <div className="navbar mx-auto w-full p-0 ">
                     <div className="navbar-start">
                         <div className="dropdown">
-                            <div tabIndex={0} role="button" className="bg-white p-1 mr-2 lg:hidden">
-                                <AiOutlineMenuFold className='text-3xl text-[#128F9D]' />
+                            <div tabIndex={0} role="button" className="p-1 mr-2 lg:hidden">
+                                <AiOutlineMenuFold className='text-3xl text-[#128F9D] dark:text-white' />
                             </div>
                             <ul
                                 tabIndex={0}
-                                className="menu menu-sm dropdown-content bg-white text-black rounded-box z-[1] mt-4 w-52 p-2 shadow">
+                                className="menu menu-sm dropdown-content bg-white dark:bg-[#282834] text-black dark:text-white rounded-box z-[1] mt-4 w-52 p-2 shadow">
                                 {links}
                             </ul>
                         </div>
@@ -114,7 +114,7 @@ const Navbar = () => {
                         <div className='mr-3'><DarkModeToggle></DarkModeToggle></div>
                         {
                             user ?
-                                <div className=" dropdown dropdown-end flex justify-end items-center">
+                                <div className="dropdown dropdown-end flex justify-end items-center">
                                     <div tabIndex={0} role="button" className=" avatar">
                                         <div className="w-10 rounded-full bg-[#128F9D] p-[1px]">
                                             <img

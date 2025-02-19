@@ -5,19 +5,19 @@ import { Link } from 'react-router-dom';
 
 const WhyUs = () => {
     return (
-        <section className="py-12 bg-white dark:bg-[#282834]/95">
+        <section className="py-12 md:pb-16 lg:pb-20 bg-white dark:bg-[#282834]/95">
             <Container>
                 <Slide triggerOnce>
-                    <div className='mb-8'>
-                        <h1 className='text-black dark:text-white text-2xl md:text-3xl lg:text-4xl font-bold'>Why Us?</h1>
+                    <div className='mb-5 md:mb-8'>
+                        <h1 className='text-black text-center lg:text-left dark:text-white text-2xl md:text-3xl lg:text-4xl font-bold'>Why Us?</h1>
                     </div>
                 </Slide>
-                <div className="flex flex-col-reverse lg:flex-row gap-8 mt-8">
+                <div className="flex flex-col-reverse lg:flex-row gap-8 md:mt-8">
                     <div className='lg:w-1/2'>
                         <p className="text-lg text-gray-800 dark:text-gray-300">
                             At SkillHorizon, we're dedicated to providing a comprehensive and engaging learning experience.  We understand the challenges faced by both students and educators in today's dynamic educational landscape, and we've designed our platform to address these challenges head-on.
                         </p>
-                        <ul className="list-disc pl-6 mt-4 text-gray-800 dark:text-gray-200 lg:space-y-3">
+                        <ul className="list-disc pl-6 mt-4 text-gray-800 dark:text-gray-200 xl:space-y-3">
                             <li><strong>Personalized Learning:</strong> Tailored courses to match your skill level and learning goals.</li>
                             <li><strong>Expert Instructors:</strong> Learn from experienced educators and industry professionals.</li>
                             <li><strong>Interactive Platform:</strong> Engaging tools and resources to enhance your learning.</li>
@@ -28,8 +28,8 @@ const WhyUs = () => {
                             Get Started Today
                         </Link>
                     </div>
-                    <div className='lg:w-1/2'>
-                        <img src={demoImage} alt="SkillHorizon Demo" className="rounded-lg shadow-md" />
+                    <div className='lg:w-1/2 '>
+                        <img src={demoImage} alt="SkillHorizon Demo" className="rounded-lg shadow-md h-[300px] md:h-[350px] lg:h-[400px] w-full object-cover" />
                     </div>
                 </div>
             </Container>

@@ -81,8 +81,8 @@ const Details = () => {
 
                         {/* Pay Button */}
                         <Link to={`/payment/${classData._id}`} className='mt-6 py-3 px-6 bg-gradient-to-br from-[#66BE80] to-[#139196] text-white hover:bg-bg-gradient-to-br hover:from-[#139196] hover:to-[#139196] cursor-pointer rounded-md btn border-none transition duration-300 flex items-center justify-center gap-3 shadow-md'>
-                            <FaMoneyBillWave className="text-white text-xl" /> Pay Now
-                        </Link>
+                            <FaMoneyBillWave className="text-white text-xl" /> Enroll Now
+!                        </Link>
                     </div>
                 </div>
 

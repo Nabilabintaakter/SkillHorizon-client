@@ -129,7 +129,7 @@ const MostEnrolledCourses = () => {
                                                 }
                                                 className="bg-[#F0BF79] text-black hover:bg-[#139196] hover:text-white cursor-pointer btn btn-md border-none rounded-md transition text-base"
                                             >
-                                                <FaEnvelope className="mb-[2px] text-base" /> Enroll Now !
+                                                <FaEnvelope className="mb-[2px] text-base" /> View Details
                                             </button>
                                         </Link>
                                     </div>
