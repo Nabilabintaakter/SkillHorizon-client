@@ -30,6 +30,7 @@ import Contact from "../Pages/Contact/Contact";
 import PrivacyPolicy from "../Pages/PrivacyPolicy/PrivacyPolicy";
 import FAQ from "../Pages/FAQ/FAQ";
 import TermsAndConditions from "../Pages/TermsAndConditions/TermsAndConditions";
+import Overview from "../Pages/DashboardPages/Common/Overview";
 
 const router = createBrowserRouter([
   {
@@ -195,6 +196,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <Profile></Profile>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: 'overview',
+        element: (
+          <PrivateRoute>
+            <Overview></Overview>
           </PrivateRoute>
         ),
       },

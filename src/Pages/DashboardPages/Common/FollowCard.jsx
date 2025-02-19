@@ -6,7 +6,7 @@ const FollowCard = () => {
 
   return (
     <div className="flex flex-col p-6 border border-gray-300 rounded-lg bg-white w-fit shadow-md">
-      <div className="flex gap-12 text-center">
+      <div className="flex gap-12 text-center justify-center">
         <div>
           <b className="text-xl text-[#139196]">150</b><br />
           <span className="text-sm text-gray-600">Follower</span>

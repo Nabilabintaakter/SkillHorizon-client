@@ -120,10 +120,10 @@ This platform makes learning and class management easier for both students and t
     npm run dev
     ```
 
-5. The backend will be accessible at `http://localhost:5000`.
+5. The backend will be accessible at `https://b10-a12-skill-horizon-server.vercel.app`.
 
 ---
 
 ## **Live API**
-- **API Documentation**: [SkillHorizon API](http://localhost:5000/)
+- **API Documentation**: [SkillHorizon API](https://b10-a12-skill-horizon-server.vercel.app/)
 - **Backend Repository**: [SkillHorizon Server](https://github.com/Nabilabintaakter/SkillHorizon-server)

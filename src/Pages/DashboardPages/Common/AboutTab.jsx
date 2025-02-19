@@ -2,7 +2,7 @@ import React from 'react';
 
 const AboutTab = ({ name, email }) => {
   return (
-    <div className="p-6 lg:ml-4 bg-white rounded-lg shadow-md">
+    <div className="mt-4 md:mt-0 p-6 lg:ml-4 bg-white rounded-lg shadow-md">
       <h3 className="text-2xl font-semibold mb-4 text-[#139196]">About Me</h3>
       <p className="text-gray-700 leading-relaxed">
         I'm a passionate and creative web developer with a strong focus on front-end technologies and user experience. I enjoy building intuitive and visually appealing websites and web applications. My goal is to create digital experiences that are not only functional but also engaging and enjoyable for users.  I'm constantly learning and exploring new technologies to stay up-to-date with the ever-evolving web development landscape.

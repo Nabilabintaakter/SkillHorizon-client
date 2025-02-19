@@ -99,6 +99,11 @@ const Sidebar = () => {
                         label="Profile"
                         address="/dashboard/profile"
                     />
+                    <MenuItem
+                        icon={IoMdSettings}
+                        label="Overview"
+                        address="/dashboard/overview"
+                    />
                     <button
                         onClick={handleSignOutFromDashboard}
                         className="flex w-full items-center px-4 py-2 mt-5 text-red-600 hover:bg-red-100 hover:text-red-600 transition-colors duration-300 transform rounded-lg"
