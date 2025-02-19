@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { GrLogout } from 'react-icons/gr';
 import { IoMdSettings } from "react-icons/io";
+import { GrOverview } from "react-icons/gr";
 import { AiOutlineBars } from 'react-icons/ai';
 import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../assets/l-1.png';
@@ -61,12 +62,12 @@ const Sidebar = () => {
 
             {/* Sidebar */}
             <div
-                className={`z-10 md:fixed flex flex-col justify-between overflow-x-hidden bg-[#D7F5EB] text-[#009478] w-60 md:w-64 space-y-6 px-2 py-4 absolute inset-y-0 left-0 transform ${isActive ? '-translate-x-full' : ''
+                className={`z-10 md:fixed flex flex-col justify-between overflow-x-hidden bg-[#D7F5EB] text-[#009478] w-60 md:w-64 space-y-6 absolute inset-y-0 left-0 transform ${isActive ? '-translate-x-full' : ''
                     } md:translate-x-0 transition duration-300 ease-in-out shadow-lg`}
             >
-                <div>
+                <div className=''>
                     <div
-                        className="w-full hidden md:flex px-4 py-2 rounded-lg justify-center items-center bg-white mx-auto"
+                        className="w-full hidden md:flex px-4 py-2 justify-center items-center bg-white mx-auto"
                         style={{
                             boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.3), 0px 4px 4px rgba(255, 255, 255, 0.2)',
                         }}
@@ -81,7 +82,7 @@ const Sidebar = () => {
                         </Link>
                     </div>
                     {/* Nav Items */}
-                    <div className="flex flex-col justify-between flex-1 mt-9 md:mt-5">
+                    <div className="flex flex-col justify-between flex-1 mt-20 md:mt-5">
                         <nav>
                             {/* Menu Items */}
                             {role === 'Student' && <StudentMenu />}
@@ -100,13 +101,13 @@ const Sidebar = () => {
                         address="/dashboard/profile"
                     />
                     <MenuItem
-                        icon={IoMdSettings}
+                        icon={GrOverview}
                         label="Overview"
                         address="/dashboard/overview"
                     />
                     <button
                         onClick={handleSignOutFromDashboard}
-                        className="flex w-full items-center px-4 py-2 mt-5 text-red-600 hover:bg-red-100 hover:text-red-600 transition-colors duration-300 transform rounded-lg"
+                        className="flex w-full items-center px-4 py-2 my-5  text-red-600 hover:bg-red-100 hover:text-red-600 transition-colors duration-300 transform rounded-lg"
                     >
                         <GrLogout className="w-5 h-5" />
                         <span className="mx-4 font-medium">Logout</span>

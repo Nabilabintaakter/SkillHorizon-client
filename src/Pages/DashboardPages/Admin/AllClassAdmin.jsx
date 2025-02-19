@@ -91,16 +91,16 @@ const AllClassAdmin = () => {
     if (isLoading) return <LoadingSpinner />;
 
     return (
-        <div className="container mx-auto py-4 md:py-8 px-4 lg:px-5 xl:px-9">
+        <div className="bg-white dark:bg-[#282834] container mx-auto py-4 md:py-8 px-4 lg:px-5 xl:px-9">
             <Zoom triggerOnce>
                 <div className="text-center mb-8">
-                    <h1 className="text-black mb-3 text-2xl md:text-3xl lg:text-4xl font-bold w-full mx-auto">Manage All Classes</h1>
+                    <h1 className="text-black dark:text-white mb-3 text-2xl md:text-3xl lg:text-4xl font-bold w-full mx-auto">Manage All Classes</h1>
                     <p className="text-[#0886A0] font-medium">Review, Approve, or Reject Classes and Track Progress</p>
                 </div>
             </Zoom>
             <div className="my-5 md:my-3">
-                <p className="text-gray-600">
-                    A total of <span className="text-black text-xl">{classes.length}</span> class requests have been submitted by teachers for your review.
+                <p className="text-gray-600 dark:text-gray-200">
+                    A total of <span className="text-black dark:text-white text-xl">{classes.length}</span> class requests have been submitted by teachers for your review.
                 </p>
             </div>
             <div className="overflow-x-auto">
@@ -154,9 +154,9 @@ const AllClassAdmin = () => {
                     </tbody>
                 </table>
             </div>
-            <div className="mt-10 flex justify-between items-center">
-                <p className="text-gray-800 text-sm md:text-base">
-                    Showing <span className="text-black text-sm md:text-xl">{startItem}</span>-<span className="text-black text-sm md:text-xl">{endItem}</span> of <span className="text-black text-sm md:text-xl">{classes.length}</span> classes
+            <div className="mt-10 flex flex-col md:flex-row gap-5 md:justify-between items-center">
+                <p className="text-gray-800 dark:text-gray-200 text-sm md:text-base">
+                    Showing <span className="text-black dark:text-white text-sm md:text-xl">{startItem}</span>-<span className="text-black dark:text-white text-sm md:text-xl">{endItem}</span> of <span className="text-black dark:text-white text-sm md:text-xl">{classes.length}</span> classes
                 </p>
                 <ReactPaginate
                     previousLabel={"← Previous"}

@@ -81,14 +81,14 @@ const MyClass = () => {
         });
     };
     return (
-        <div className="container mx-auto py-4 md:py-8 px-4 lg:px-5 xl:px-9 pb-10">
+        <div className="bg-white dark:bg-[#282834] container mx-auto py-4 md:py-8 px-4 lg:px-5 xl:px-9 pb-10">
             <Zoom tr>
                 <div className="text-center mb-8">
                     <h1 className='text-black mb-3 text-2xl md:text-3xl lg:text-4xl font-bold w-full mx-auto'>Manage Your Classes</h1>
                     <p className='text-[#0886A0]  font-medium'>View, Update, and Delete Your Added Classes Seamlessly</p>
                 </div>  </Zoom><div className='my-5'>
-                    <p className='text-gray-600'>
-                        You've added <span className='text-black text-xl'>{classes.length}</span> classes. You can now update, delete, or view the details of approved classes.
+                    <p className='text-gray-600 dark:text-gray-200'>
+                        You've added <span className='text-black dark:text-white text-xl'>{classes.length}</span> classes. You can now update, delete, or view the details of approved classes.
                     </p>
                 </div>
           
@@ -177,12 +177,12 @@ const MyClass = () => {
                             </div>
                         )) :
                         (
-                            <div className="col-span-full text-center py-16 flex flex-col items-center bg-[#fef2f2] rounded-lg shadow-md">
+                            <div className="col-span-full text-center py-16 flex flex-col items-center bg-[#fef2f2] dark:bg-[#282834] rounded-lg shadow-md">
                                 <FaThList className="text-6xl text-[#D32F2F] mb-6" />
-                                <p className="text-red-600 text-2xl font-semibold mb-3">
+                                <p className="text-red-600 text-2xl font-semibold mb-3 dark:text-white">
                                     No Classes Available!
                                 </p>
-                                <p className="text-gray-500 text-md mb-6 xl:w-[40%] mx-auto px-5">
+                                <p className="text-gray-500 dark:text-gray-200 text-md mb-6 xl:w-[40%] mx-auto px-5">
                                     It seems you haven't added any classes yet. Start adding your classes to manage them here.
                                 </p>
                             </div>
@@ -190,9 +190,9 @@ const MyClass = () => {
                 }
             </div>
             {/* Pagination and Showing range */}
-            {classes?.length > 0 && <div className="mt-10 flex justify-between items-center">
-                <p className="text-gray-800">
-                    Showing <span className="text-black text-xl">{startItem}</span>-<span className="text-black text-xl">{endItem}</span> of <span className="text-black text-xl">{classes.length}</span> classes
+            {classes?.length > 0 && <div className="mt-10 flex flex-col md:flex-row gap-5 md:justify-between items-center">
+                <p className="text-gray-800 dark:text-gray-200">
+                    Showing <span className="text-black dark:text-white text-xl">{startItem}</span>-<span className="text-black dark:text-white text-xl">{endItem}</span> of <span className="text-black dark:text-white text-xl">{classes.length}</span> classes
                 </p>
                 <ReactPaginate
                     previousLabel={'← Previous'}

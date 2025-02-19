@@ -83,10 +83,10 @@ const TeacherRequest = () => {
     if (isLoading) return <LoadingSpinner />;
 
     return (
-        <div className="container mx-auto py-4 md:py-8 px-4 lg:px-5 xl:px-9">
+        <div className="bg-white dark:bg-[#282834] container mx-auto py-4 md:py-8 px-4 lg:px-5 xl:px-9">
             <Zoom triggerOnce>
                 <div className="text-center mb-8">
-                    <h1 className="text-black mb-3 text-2xl md:text-3xl lg:text-4xl font-bold w-full mx-auto">
+                    <h1 className="text-black dark:text-white mb-3 text-2xl md:text-3xl lg:text-4xl font-bold w-full mx-auto">
                         Manage Teacher Requests
                     </h1>
                     <p className="text-[#0886A0] font-medium">
@@ -95,8 +95,8 @@ const TeacherRequest = () => {
                 </div>
             </Zoom>
             <div className="my-5 md:my-3">
-                <p className="text-gray-600">
-                    A total of <span className="text-black text-xl">{teachers.length}</span> users have requested to become teachers on your platform.
+                <p className="text-gray-600 dark:text-gray-200">
+                    A total of <span className="text-black dark:text-white text-xl">{teachers.length}</span> users have requested to become teachers on your platform.
                 </p>
             </div>
             <div className="overflow-x-auto">
@@ -163,9 +163,9 @@ const TeacherRequest = () => {
                 </table>
             </div>
             {/* Pagination */}
-            <div className="mt-10 flex justify-between items-center">
-                <p className="text-gray-800 text-sm md:text-base">
-                    Showing <span className="text-black text-sm md:text-xl">{startItem}</span>-<span className="text-black text-sm md:text-xl">{endItem}</span> of <span className="text-black text-sm md:text-xl">{teachers.length}</span> teachers
+            <div className="mt-10 flex flex-col md:flex-row gap-5 md:justify-between items-center">
+                <p className="text-gray-800 dark:text-gray-200 text-sm md:text-base">
+                    Showing <span className="text-black dark:text-white text-sm md:text-xl">{startItem}</span>-<span className="text-black  dark:text-white text-sm md:text-xl">{endItem}</span> of <span className="text-black dark:text-white text-sm md:text-xl">{teachers.length}</span> teachers
                 </p>
                 {/* Full pagination for larger screens */}
                 <div className="hidden sm:flex">

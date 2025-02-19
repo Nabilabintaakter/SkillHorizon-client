@@ -79,10 +79,10 @@ const Users = () => {
   if (isLoading) return <LoadingSpinner />;
 
   return (
-    <div className="container mx-auto py-4 md:py-8 px-4 lg:px-5 xl:px-9">
+    <div className="bg-white dark:bg-[#282834] container mx-auto py-4 md:py-8 px-4 lg:px-5 xl:px-9">
       <Zoom triggerOnce>
         <div className="text-center mb-8">
-          <h1 className="text-black mb-3 text-2xl md:text-3xl lg:text-4xl font-bold w-full mx-auto">
+          <h1 className="text-black dark:text-white mb-3 text-2xl md:text-3xl lg:text-4xl font-bold w-full mx-auto">
             User Management Panel
           </h1>
           <p className="text-[#0886A0] font-medium">
@@ -91,8 +91,8 @@ const Users = () => {
         </div>
       </Zoom>
       <div className="my-5 md:my-3">
-        <p className="text-gray-600">
-          A total of <span className="text-black text-xl">{users.length}</span> users are currently registered on your platform.
+        <p className="text-gray-600 dark:text-gray-200">
+          A total of <span className="text-black dark:text-white text-xl">{users.length}</span> users are currently registered on your platform.
         </p>
       </div>
 
@@ -162,11 +162,11 @@ const Users = () => {
         </table>
       </div>
       {/* Pagination and Showing range */}
-      <div className="mt-10 flex justify-between items-center">
-        <p className="text-gray-800 text-sm md:text-base">
-          Showing <span className="text-black text-sm md:text-xl">{startItem}</span>-
-          <span className="text-black text-sm md:text-xl">{endItem}</span> of{" "}
-          <span className="text-black text-sm md:text-xl">{users.length}</span> users
+      <div className="mt-10 flex flex-col md:flex-row gap-5 md:justify-between items-center">
+        <p className="text-gray-800 dark:text-gray-200 text-sm md:text-base">
+          Showing <span className="text-black dark:text-white text-sm md:text-xl">{startItem}</span>-
+          <span className="text-black dark:text-white text-sm md:text-xl">{endItem}</span> of{" "}
+          <span className="text-black dark:text-white text-sm md:text-xl">{users.length}</span> users
         </p>
         <ReactPaginate
           previousLabel={"← Previous"}

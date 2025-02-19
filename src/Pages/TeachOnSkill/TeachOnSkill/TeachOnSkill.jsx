@@ -12,10 +12,12 @@ import { MdPendingActions, MdVerified } from "react-icons/md";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import { useEffect } from "react";
 import { Fade, Zoom } from "react-awesome-reveal";
+import useAxiosSecure from "../../../hooks/useAxiosSecure";
 
 const TeachOnSkill = () => {
     const { user } = useAuth();
     const axiosPublic = useAxiosPublic()
+    const axiosSecure= useAxiosSecure()
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     useEffect(() => {
         document.title = 'Teach On SkillHorizon | SkillHorizon';

@@ -26,11 +26,11 @@ const Profile = () => {
     if (isLoading) return <LoadingSpinner></LoadingSpinner>
 
     return (
-        <div className="bg-[#E6EBEE] min-h-screen py-8">
+        <div className="bg-[#E6EBEE] dark:bg-[#282834] min-h-screen py-8">
             <div className="container mx-auto px-4">
                 <Zoom triggerOnce>
                     <div className="text-center mb-8">
-                        <h1 className='text-black text-2xl mb-3 md:text-3xl lg:text-4xl font-bold w-full mx-auto'>Welcome to Your Dashboard</h1>
+                        <h1 className='text-black dark:text-white text-2xl mb-3 md:text-3xl lg:text-4xl font-bold w-full mx-auto'>Welcome to Your Dashboard</h1>
                         <p className='text-[#0886A0]  font-medium'>Your Personalized Profile Overview</p>
                     </div>
                 </Zoom>
