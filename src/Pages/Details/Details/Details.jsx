@@ -1,18 +1,18 @@
 
 import { Link, useParams } from 'react-router-dom';
 import Container from '../../../Shared/Container/Container';
-import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import LoadingSpinner from '../../../Shared/LoadingSpinner/LoadingSpinner';
 import { FaChalkboardTeacher, FaEnvelope, FaDollarSign, FaUserGraduate, FaInfoCircle, FaMoneyBillWave } from 'react-icons/fa';
 import React, { useEffect } from 'react';
+import useAxiosPublic from '../../../hooks/useAxiosPublic';
 const Details = () => {
     const { id } = useParams()
-    const axiosSecure = useAxiosSecure();
+    const axiosPublic = useAxiosPublic();
     const { data: classData = [], isLoading } = useQuery({
         queryKey: ['class'],
         queryFn: async () => {
-            const { data } = await axiosSecure(`/class/${id}`)
+            const { data } = await axiosPublic(`/class/${id}`)
             return data
         },
     })

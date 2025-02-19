@@ -65,7 +65,7 @@ export default function Banner() {
                                         </div>
                                     </div>
                                     <div className="text-sm md:text-lg flex items-center gap-1">
-                                    {users?.length-1}+ People already trusted us. <Link className='flex items-center gap-1 text-[#FEC400]' to={'/allClasses'}>
+                                    {users?.length-1}+ People already trusted us. <Link className='items-center hidden md:flex gap-1 text-[#FEC400]' to={'/allClasses'}>
                                             View Courses <FaArrowRight /></Link>
                                     </div>
                                 </div>
@@ -101,7 +101,7 @@ export default function Banner() {
                                         </div>
                                     </div>
                                     <div className="text-sm md:text-lg flex items-center gap-1">
-                                    {users?.length-1}+ People already trusted us. <Link className='flex items-center gap-1 text-[#FEC400]' to={'/allClasses'}>
+                                    {users?.length-1}+ People already trusted us. <Link className='hidden md:flex items-center gap-1 text-[#FEC400]' to={'/allClasses'}>
                                             View Courses <FaArrowRight /></Link>
                                     </div>
                                 </div>
@@ -137,7 +137,7 @@ export default function Banner() {
                                         </div>
                                     </div>
                                     <div className="text-sm md:text-lg flex items-center gap-1">
-                                    {users?.length-1}+ People already trusted us. <Link className='flex items-center gap-1 text-[#FEC400]' to={'/allClasses'}>
+                                    {users?.length-1}+ People already trusted us. <Link className='hidden md:flex items-center gap-1 text-[#FEC400]' to={'/allClasses'}>
                                             View Courses <FaArrowRight /></Link>
                                     </div>
                                 </div>

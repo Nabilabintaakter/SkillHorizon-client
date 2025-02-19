@@ -34,9 +34,9 @@ const FeaturesSection = () => {
                 <Heading subtitle={'Our Features'} title={'Why You Should Choose Our Platform'}></Heading>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-8 lg:gap-5">
                     {features.map((feature, index) => (
-                        <Fade  duration={1000} delay={index * 0.2}>
+                        <Fade  key={index} duration={1000} delay={index * 0.2}>
                             <div
-                                key={index}
+                               
                                 className="bg-white rounded-3xl p-6 py-8 xl:py-10 text-center hover:-translate-y-[6px]  transition-transform duration-700 ease-out"
                             >
                                 <div className="mb-4 md:mb-7">{feature.icon}</div>

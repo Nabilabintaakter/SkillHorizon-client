@@ -27,10 +27,10 @@ const Categories = () => {
                 <Heading subtitle={'Top Categories'} title={'Our Top Categories'}></Heading>
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5 ">
                     {categories.map((category, index) => (
-                        <Zoom triggerOnce delay={index * 0.2}>
+                        <Zoom key={index} triggerOnce delay={index * 0.2}>
                             <div
-                                key={index}
-                                className="flex justify-between items-center p-4 sm:px-6 xl:px-8 rounded-md border-[1px] dark:border-gray-600 hover:-translate-y-1 transition-all duration-500  hover:bg-[#128F9D] hover:border-[#28dff3] group"
+                                
+                                className="flex justify-between items-center h-[60px] p-4 sm:px-6 xl:px-8 rounded-md border-[1px] dark:border-gray-600 hover:-translate-y-1 transition-all duration-500  hover:bg-[#128F9D] hover:border-[#28dff3] group"
                             >
                                 <h3 className="text-black dark:text-white text-sm md:text-xl lg:text-base font-medium group-hover:text-white transition-all duration-500 ease-in-out">{category.name}</h3>
                                 <div className="">{category.icon}</div>

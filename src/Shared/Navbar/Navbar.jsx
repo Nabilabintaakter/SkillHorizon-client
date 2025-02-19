@@ -143,7 +143,7 @@ const Navbar = () => {
                                     </ul>
                                 </div>
                                 :
-                                <Link to='/login' className=" text-white rounded-[5px] bg-gradient-to-br from-[#66BE80] to-[#139196]  font-medium hover:bg-gradient-to-br hover:from-[#139196] hover:to-[#139196] cursor-pointer px-5 md:px-6 py-2 md:py-3 flex justify-center items-center duration-1000 ease-in-out transition-all">Login Now</Link>
+                                <Link to='/login' className=" text-white rounded-[5px] bg-gradient-to-br from-[#66BE80] to-[#139196]  font-medium hover:bg-gradient-to-br hover:from-[#139196] hover:to-[#139196] cursor-pointer text-xs md:text-base px-3 sm:px-5 md:px-6 py-2 md:py-3 flex justify-center items-center duration-1000 ease-in-out transition-all">Login Now</Link>
                         }
                     </div>
                 </div>

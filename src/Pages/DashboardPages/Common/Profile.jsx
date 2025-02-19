@@ -8,6 +8,7 @@ import useAxiosSecure from '../../../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import LoadingSpinner from '../../../Shared/LoadingSpinner/LoadingSpinner';
 import { Fade, Zoom } from 'react-awesome-reveal';
+import ProfileCard from './ProfileCard';
 
 const Profile = () => {
     const { user } = useAuth();
@@ -25,7 +26,7 @@ const Profile = () => {
     if (isLoading) return <LoadingSpinner></LoadingSpinner>
 
     return (
-        <div className="bg-gradient-to-r from-blue-50 to-blue-100 min-h-screen py-8">
+        <div className="bg-[#E6EBEE] min-h-screen py-8">
             <div className="container mx-auto px-4">
                 <Zoom triggerOnce>
                     <div className="text-center mb-8">
@@ -35,15 +36,15 @@ const Profile = () => {
                 </Zoom>
 
                 <Fade delay={10} triggerOnce>
-                    <div className="bg-white rounded-xl shadow-lg mx-auto max-w-lg overflow-hidden relative">
+                    <div className="bg-white rounded-lg shadow-lg mx-auto overflow-hidden relative p-3">
                         <div className="relative">
                             <img
                                 src={cover}
                                 alt="Cover"
-                                className="w-full h-44 object-cover"
+                                className="w-full h-44 object-cover rounded-lg"
                             />
                             <div className="absolute left-3 md:left-6 -bottom-9 z-1">
-                                <div className="w-36 h-36 rounded-full overflow-hidden p-1 bg-white">
+                                <div className="w-24 h-24 rounded-full overflow-hidden p-1 bg-white">
                                     <img
                                         src={userData[0]?.image || userImg}
                                         alt="Profile"
@@ -52,26 +53,26 @@ const Profile = () => {
                                 </div>
                             </div>
                         </div>
-
-                        <div className="p-5 mt-4">
+                        <div className="pt-5 mt-4">
                             <div className="flex flex-col">
                                 <h1 className="text-2xl font-semibold mt-4 text-gray-800">
                                     {userData[0]?.name || 'Anonymous'}
                                 </h1>
-                                <div className="flex items-center">
+                                <div className="flex items-center mt-3">
                                     <MdEmail className="text-gray-500 mr-2" />
                                     <p className=" text-gray-500">
                                         {userData[0]?.email || 'No Email Available'}
                                     </p>
-                                </div>
-                                <div className="flex items-center">
+                                    <div className="flex items-center pl-5">
                                     <MdPhone className="text-gray-500 mr-2" />
                                     <p className=" text-gray-500">
                                         {userData[0]?.phone || '12345678910'}
                                     </p>
                                 </div>
+                                </div>
+                                
                             </div>
-                            <div className="mt-6 absolute bottom-[112px] right-2 ">
+                            <div className="mt-6 absolute left-64 bottom-[50px]">
                                 <button
                                     className={`flex items-center px-4 py-1 text-white rounded-full text-sm font-medium shadow-lg cursor-default ${userData[0]?.role === "Admin"
                                         ? "bg-gradient-to-r from-green-400 to-green-600"
@@ -90,6 +91,7 @@ const Profile = () => {
                         </div>
                     </div>
                 </Fade>
+                <ProfileCard name={userData[0]?.name} email={userData[0]?.email}></ProfileCard>
             </div>
         </div>
     );

@@ -56,12 +56,13 @@ const Collaborators = () => {
                     <Heading subtitle={'Trusted Partners'} title={'Empowering Learning Together with Renowned Platforms'}></Heading>
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
                         {collaborators.map((collaborator, index) => (
-                            <Slide  
+                            <Slide 
+                            key={index} 
                                 triggerOnce 
                             >
                                 <div
                                 
-                                key={index}
+                                
                                     className={`relative group ${collaborator.bgColor} shadow-md rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 bg-opacity-15 dark:bg-opacity-50`}
                                 >
                                     

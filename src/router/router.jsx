@@ -47,7 +47,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/class/:id",
-        element: <PrivateRoute><Details></Details></PrivateRoute>,
+        element: <Details></Details>,
       },
       {
         path: "/payment/:id",
